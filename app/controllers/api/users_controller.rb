@@ -7,6 +7,7 @@ class Api::UsersController < ApplicationController
       render :show
     else 
       render json: @user.errors.full_messages, status: 401
+    end 
   end 
 
   def update 
@@ -15,7 +16,7 @@ class Api::UsersController < ApplicationController
     if @user && @user.update(user_params)
       render :show 
     elsif !@user 
-      render json: ['could not locate user'], status: 400 
+      render json:  ['could not locate user'], status: 404
     else
       render json: @user.errors.full_messages, status: 401 
     end 
@@ -35,7 +36,7 @@ class Api::UsersController < ApplicationController
       @user.destroy
       render :show 
     else
-      render ['could not locate user']
+      render  ['could not locate user'], status: 404 
     end 
   end 
 
