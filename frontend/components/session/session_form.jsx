@@ -1,5 +1,5 @@
 import React from 'react'; 
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class SessionForm extends React.Component {
   constructor(props) {
@@ -26,15 +26,16 @@ class SessionForm extends React.Component {
   render() {
 
     return (
-      <div>
-        <header>
-          <nav>
-            <NavLink to='/'>Home</NavLink>
-          </nav>
+      <div className='session-form-container'>
+        <header className='session-header'>
+            <Link className='session-logo-link' to='/' >
+              <img className='session-logo' src={window.Logo} />
+              <div className='session-logo-text'>QuickSilver </div>
+            </Link>
         </header>
-        <div className="session-form" >
+        <div className='session-form-body' >
           <RenderErrors errors={this.props.errors} /> 
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSubmit} className='session-form'>
             <label>email:
               <input
                 type="text"

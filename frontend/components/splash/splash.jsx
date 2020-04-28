@@ -33,6 +33,10 @@ const splash = () => {
         <img src={window.Hermes} />
       </div>
     </main>
+      <div className='splash-footer'>
+        <a href='https://www.linkedin.com/in/steven-touba-262197bb/' target='_blank'><i className='fab fa-linkedin'></i></a>
+        <a href='https://github.com/steventouba' target='_blank'><i className='fab fa-github-square'></i></a>
+      </div>
     </div>
   )
 }

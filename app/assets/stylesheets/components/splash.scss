@@ -53,4 +53,35 @@
 .splash-main { 
   display: flex;
   justify-content: space-between;
+  padding: 5%;
 };
+
+.splash-main-left { 
+  width: 40%;
+  margin-right: 10px;
+}
+
+.splash-main-left :first-child { 
+  font-size: 14px;
+}
+.splash-main-left :last-child { 
+  font-size: 20px;
+}
+.splash-main-left h1 { 
+  font-size: 50px;
+}
+
+.splash-footer { 
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  width: 100%; 
+  bottom: 0;
+  border-top: 1px solid  #062474;
+};
+.splash-footer > a { 
+  font-size: 40px;
+  margin: 5px 20px;
+  color: #062474;
+
+}
