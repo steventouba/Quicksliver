@@ -1,0 +1,6 @@
+node_modules/
+bundle.js* 
+/public/assests 
+log/development.log
+tmp/cache/bootsnap-load-path-cache
+tmp/development_secret.txt
