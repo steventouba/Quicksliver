@@ -36,7 +36,7 @@ class Api::UsersController < ApplicationController
       @user.destroy
       render :show 
     else
-      render  ['could not locate user'], status: 404 
+      render  json: ['could not locate user'], status: 404 
     end 
   end 
 
