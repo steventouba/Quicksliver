@@ -20,6 +20,24 @@ class User < ApplicationRecord
 
   attr_reader :password
 
+  has_many :messages, 
+    foreign_key: :author_id, 
+    class_name: :Message, 
+    dependent: :destroy 
+
+  has_many :authored_channels, 
+    foreign_key: :creator_id, 
+    class_name: :Channel 
+  
+  has_many :channel_memberships, 
+    foreign_key: :user_id, 
+    class_name: :ChannelMembership, 
+    dependent: :destroy 
+  
+  has_many :subscribed_channels, 
+    through: :channel_memberships, 
+    source: :channels 
+
   def self.find_user_by_credentials(email, password) 
     user = User.find_by(email: email)
 

@@ -20,7 +20,7 @@ class SessionForm extends React.Component {
     e.preventDefault();
     const user = Object.assign({}, this.state)
     this.props.processForm(user)
-      .then(() => this.props.history.push('/main'))
+      .then(() => this.props.history.push('/main'));
   }
 
   render() {
@@ -37,7 +37,7 @@ class SessionForm extends React.Component {
           <RenderErrors errors={this.props.errors} /> 
           <form onSubmit={this.handleSubmit} className='session-form'>
             <label>email:
-              <input
+              <input className='session-input'
                 type="text"
                 value={this.state.email}
                 onChange={this.handleInput("email")}
@@ -45,7 +45,7 @@ class SessionForm extends React.Component {
               />
             </label>
             <label>password:
-              <input
+              <input className='session-input'
                 type="password"
                 value={this.state.password}
                 onChange={this.handleInput("password")}
@@ -56,7 +56,7 @@ class SessionForm extends React.Component {
               this.props.formType === 'signup' &&
                 <>
                   <label>Username:
-                    <input
+                    <input className='session-input'
                       type="text"
                       value={this.state.username}
                       onChange={this.handleInput("username")}
@@ -64,7 +64,7 @@ class SessionForm extends React.Component {
                     />
                   </label>
                   <label>Phone Number:
-                    <input
+                    <input className='session-input'
                       type="text"
                       value={this.state.phoneNumber}
                       onChange={this.handleInput("phoneNumber")}
@@ -73,7 +73,9 @@ class SessionForm extends React.Component {
                   </label>
                 </>    
               }
-              <button onClick={this.handleSubmit}>{this.props.formType}</button>
+              <button className='session-button' 
+                onClick={this.handleSubmit}>{this.props.formType}
+              </button>
           </form>
         </div>
       </div>
