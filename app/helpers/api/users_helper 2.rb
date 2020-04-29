@@ -1,0 +1,4 @@
+module Api::UsersHelper
+
+
+end
