@@ -103,9 +103,9 @@ const RenderErrors = ({errors, clearErrors}) => {
     </ul>
   } 
 
-  // useEffect(() => {
-  //   return () => { clearErrors()}
-  // }, [])
+  useEffect(() => {
+    return () => { clearErrors()}
+  }, [])
 
   return (
     flag
