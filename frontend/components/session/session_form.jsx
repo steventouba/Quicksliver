@@ -35,39 +35,42 @@ class SessionForm extends React.Component {
         <div className='session-form-body' >
           <RenderErrors errors={this.props.errors} /> 
           <form onSubmit={this.handleSubmit} className='session-form'>
-            <label>email:
+            <h3>Log into Mount Olympus</h3>
+            <p>mount-olympus.quicksilver.com</p>
+            <p>Enter your <b>email address</b> and <b>password</b>.</p>
+            <label>
               <input className='session-input'
                 type="text"
                 value={this.state.email}
                 onChange={this.handleInput("email")}
-                placeholder="Enter email"
+                placeholder="you@example.com"
               />
             </label>
-            <label>password:
+            <label>
               <input className='session-input'
                 type="password"
                 value={this.state.password}
                 onChange={this.handleInput("password")}
-                placeholder="Enter password"
+                placeholder="password"
               />
             </label>
             {
               this.props.formType === 'signup' &&
                 <>
-                  <label>Username:
+                  <label>
                     <input className='session-input'
                       type="text"
                       value={this.state.username}
                       onChange={this.handleInput("username")}
-                      placeholder="Enter a username"
+                      placeholder="username"
                     />
                   </label>
-                  <label>Phone Number:
+                  <label>
                     <input className='session-input'
                       type="text"
                       value={this.state.phoneNumber}
                       onChange={this.handleInput("phoneNumber")}
-                      placeholder="Optional"
+                      placeholder="phone number optional"
                     />
                   </label>
                 </>    
@@ -76,6 +79,10 @@ class SessionForm extends React.Component {
                 onClick={this.handleSubmit}>{this.props.formType}
               </button>
           </form>
+        </div>
+        <div className='splash-footer'>
+          <a href='https://www.linkedin.com/in/steven-touba-262197bb/' target='_blank'><i className='fab fa-linkedin'></i></a>
+          <a href='https://github.com/steventouba' target='_blank'><i className='fab fa-github-square'></i></a>
         </div>
       </div>
     )

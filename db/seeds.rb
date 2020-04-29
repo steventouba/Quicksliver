@@ -50,7 +50,7 @@ Messages = Message.create([
   {body: 'I believe you have my stapler.', author_id: 1, channel_id: 5},
   {body: '...', author_id: 7, channel_id: 5},
   {body: 'I believe you have my stapler.', author_id: 1, channel_id: 5},
-  {body: 'Can\'t help you there, mad case of the plague going through hades, we\'re  locked down', author_id: 7, channel_id: 5},
+  {body: 'Can\'t help you there, bad case of the plague going through hades, we\'re  locked down', author_id: 7, channel_id: 5},
   {body: 'I believe you have my stapler.', author_id: 1, channel_id: 5},
   {body: 'right...', author_id: 7, channel_id: 5},
   {body: 'Hello Hades', author_id: 2, channel_id: 4},
