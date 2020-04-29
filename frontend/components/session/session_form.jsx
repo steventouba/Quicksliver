@@ -1,4 +1,4 @@
-import React from 'react'; 
+import React, { useEffect } from 'react'; 
 import { Link } from 'react-router-dom';
 
 class SessionForm extends React.Component {
@@ -7,6 +7,7 @@ class SessionForm extends React.Component {
     this.state = this.props.form; 
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.submitDemoUser = this.submitDemoUser.bind(this); 
   }
 
   handleInput(type) {
@@ -22,8 +23,12 @@ class SessionForm extends React.Component {
     this.props.processForm(user)
   }
 
-  render() {
+  submitDemoUser(e) { 
+    e.preventDefault() 
+    this.props.demoLogIn()
+  }
 
+  render() {
     return (
       <div className='session-form-container'>
         <header className='session-header'>
@@ -31,9 +36,10 @@ class SessionForm extends React.Component {
               <img className='session-logo' src={window.Logo} />
               <div className='session-logo-text'>QuickSilver </div>
             </Link>
+            <button onClick={this.submitDemoUser}>DemoUser</button>
         </header>
         <div className='session-form-body' >
-          <RenderErrors errors={this.props.errors} /> 
+          <RenderErrors errors={this.props.errors} clearErrors={this.props.clearErrors}/> 
           <form onSubmit={this.handleSubmit} className='session-form'>
             <h3>Log into Mount Olympus</h3>
             <p>mount-olympus.quicksilver.com</p>
@@ -89,13 +95,17 @@ class SessionForm extends React.Component {
   }
 }
 
-const RenderErrors = ({errors}) => { 
+const RenderErrors = ({errors, clearErrors}) => { 
   let flag = null; 
   if (errors.length > 0) {
     flag = <ul>
       {errors.map((error, idx) => <li key={idx}>{error}</li>)}
     </ul>
   } 
+
+  // useEffect(() => {
+  //   return () => { clearErrors()}
+  // }, [])
 
   return (
     flag

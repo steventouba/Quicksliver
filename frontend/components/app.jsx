@@ -7,6 +7,7 @@ import MainChannelContainer from './channel/main_channel_container';
 import splash from './splash/splash';
 
 const App = () => (
+  
   <div className='app-body'>
     <Switch>
       <ProtectedRoute path='/main' component={MainChannelContainer} /> 
