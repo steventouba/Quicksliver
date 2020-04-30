@@ -2,7 +2,10 @@ import { connect } from "react-redux";
 import { logOut } from '../../actions/session_actions';
 import MainChannel from "./main_channel";
 
-const mapStateToProps = state => ({});
+const mapStateToProps = ({entities}) => ({
+  
+  channels: Object.values(entities.channels)
+});
 
 const MapDispatchToProps = (dispatch) => {
   return {

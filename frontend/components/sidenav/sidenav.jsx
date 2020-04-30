@@ -18,7 +18,6 @@ class Sidenav extends React.Component {
         <div className='sidebar-header'>
           <button onClick={this.handleClick}>Logout</button>
         </div>
-        <p>Sidebar will go here</p>
       </div>
     )
   }

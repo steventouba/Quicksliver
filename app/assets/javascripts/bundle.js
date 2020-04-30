@@ -268,9 +268,13 @@ var MainChannel = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(MainChannel);
 
   function MainChannel(props) {
+    var _this;
+
     _classCallCheck(this, MainChannel);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    debugger;
+    return _this;
   }
 
   _createClass(MainChannel, [{
@@ -315,8 +319,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var mapStateToProps = function mapStateToProps(state) {
-  return {};
+var mapStateToProps = function mapStateToProps(_ref) {
+  var entities = _ref.entities;
+  return {
+    channels: Object.values(entities.channels)
+  };
 };
 
 var MapDispatchToProps = function MapDispatchToProps(dispatch) {
