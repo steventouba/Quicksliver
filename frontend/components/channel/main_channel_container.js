@@ -1,11 +1,13 @@
 import { connect } from "react-redux";
 import { logOut } from '../../actions/session_actions';
 import MainChannel from "./main_channel";
+import chatsSelector from "../../reducers/chats_selector";
 
-const mapStateToProps = ({entities}) => ({
-  
-  channels: Object.values(entities.channels)
-});
+const mapStateToProps = ({entities}) => {
+  return {
+    chats: chatsSelector(entities.channels)
+  }
+};
 
 const MapDispatchToProps = (dispatch) => {
   return {

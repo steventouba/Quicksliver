@@ -1,8 +1,8 @@
 class Api::ChannelsController < ApplicationController
 
   def index 
-    if params[:userId]
-     @channels = current_user.subscribed_channels
+    if params[:user_id] != 'undefined'
+     @channels = selected_user.subscribed_channels
     else 
       @channels = Channel.all
     end 
@@ -10,11 +10,11 @@ class Api::ChannelsController < ApplicationController
   end 
 
   def show  
-    @channel = current_user.subscribed_channels.find_by(id: params[:channel][:id])
+    @channel = selected_user.subscribed_channels.find_by(id: params[:channel][:id])
     if @channel
       render :show 
     else 
-      render json: ['could not locate user'], status: 404 
+      render json: ['could not locate channel'], status: 404 
     end 
   end
 
@@ -34,6 +34,11 @@ class Api::ChannelsController < ApplicationController
    else 
     render json: ['unathorized'], status: 404 
    end 
+  end 
+
+  private 
+  def selected_user
+    User.find_by(id: params[:user_id])
   end 
 
 end

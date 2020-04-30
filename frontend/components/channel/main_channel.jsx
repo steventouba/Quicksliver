@@ -1,5 +1,5 @@
 import React from 'react'; 
-import Sidenav from '../sidenav/sidenav'; 
+import SidenavContainer from '../sidenav/sidenav_container'
 
 class MainChannel extends React.Component { 
   constructor(props) { 
@@ -10,8 +10,7 @@ class MainChannel extends React.Component {
     return (
       <div className='main-channel-container'>
         <div className='main-channel-header'></div>
-        <Sidenav logOut={this.props.logOut} channels={this.props.channels} />
-        {/* <div className='main-channel-sidenav'></div> */}
+        <SidenavContainer />
         <div className='main-channel-message-box'></div>
         <div className='main-channel-profile-box'></div>
         <div className='main-channel-message-field'></div>

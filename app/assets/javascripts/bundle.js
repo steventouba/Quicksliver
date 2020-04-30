@@ -86,6 +86,40 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./frontend/actions/channel_actions.js":
+/*!*********************************************!*\
+  !*** ./frontend/actions/channel_actions.js ***!
+  \*********************************************/
+/*! exports provided: RECEIVE_CHANNELS, fetchUserChannels */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_CHANNELS", function() { return RECEIVE_CHANNELS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUserChannels", function() { return fetchUserChannels; });
+/* harmony import */ var _utils_channel_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/channel_utils */ "./frontend/utils/channel_utils.js");
+
+var RECEIVE_CHANNELS = 'RECEIVE_CHANNELS';
+
+var receiveChannels = function receiveChannels(channels) {
+  return {
+    type: RECEIVE_CHANNELS,
+    channels: channels
+  };
+};
+
+var fetchUserChannels = function fetchUserChannels() {
+  return function (dispatch) {
+    return _utils_channel_utils__WEBPACK_IMPORTED_MODULE_0__["fetchUserChannels"]().then(function (channels) {
+      return dispatch(receiveChannels(channels));
+    }, function (errors) {
+      return dispatch(receiveErrors(errors.responseJSON));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/session_actions.js":
 /*!*********************************************!*\
   !*** ./frontend/actions/session_actions.js ***!
@@ -236,7 +270,7 @@ var App = function App() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _sidenav_sidenav__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../sidenav/sidenav */ "./frontend/components/sidenav/sidenav.jsx");
+/* harmony import */ var _sidenav_sidenav_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../sidenav/sidenav_container */ "./frontend/components/sidenav/sidenav_container.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -268,13 +302,9 @@ var MainChannel = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(MainChannel);
 
   function MainChannel(props) {
-    var _this;
-
     _classCallCheck(this, MainChannel);
 
-    _this = _super.call(this, props);
-    debugger;
-    return _this;
+    return _super.call(this, props);
   }
 
   _createClass(MainChannel, [{
@@ -284,9 +314,7 @@ var MainChannel = /*#__PURE__*/function (_React$Component) {
         className: "main-channel-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "main-channel-header"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_sidenav_sidenav__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        logOut: this.props.logOut
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_sidenav_sidenav_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "main-channel-message-box"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "main-channel-profile-box"
@@ -315,6 +343,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
 /* harmony import */ var _main_channel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./main_channel */ "./frontend/components/channel/main_channel.jsx");
+/* harmony import */ var _reducers_chats_selector__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../reducers/chats_selector */ "./frontend/reducers/chats_selector.js");
+
 
 
 
@@ -322,7 +352,7 @@ __webpack_require__.r(__webpack_exports__);
 var mapStateToProps = function mapStateToProps(_ref) {
   var entities = _ref.entities;
   return {
-    channels: Object.values(entities.channels)
+    chats: Object(_reducers_chats_selector__WEBPACK_IMPORTED_MODULE_3__["default"])(entities.channels)
   };
 };
 
@@ -692,22 +722,95 @@ var Sidenav = /*#__PURE__*/function (_React$Component) {
       this.props.logOut();
     }
   }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchUserChannels(this.props.currentUser.id);
+    }
+  }, {
     key: "render",
     value: function render() {
+      var chats = this.props.chats;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "main-channel-sidenav"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "sidebar-header"
+        className: "sidenav-header"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.handleClick
-      }, "Logout")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Sidebar will go here"));
+      }, "Logout")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sidenav-channels"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Headers, {
+        channels: chats.channels
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sidenav-directmessages"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Headers, {
+        channels: chats.directMessages
+      })));
     }
   }]);
 
   return Sidenav;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
+var Headers = function Headers(_ref) {
+  var channels = _ref.channels;
+  var elements;
+
+  try {
+    elements = channels.map(function (channel) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        key: channel.id
+      }, channel.name);
+    });
+  } catch (error) {
+    elements = null;
+  }
+
+  return elements;
+};
+
 /* harmony default export */ __webpack_exports__["default"] = (Sidenav);
+
+/***/ }),
+
+/***/ "./frontend/components/sidenav/sidenav_container.js":
+/*!**********************************************************!*\
+  !*** ./frontend/components/sidenav/sidenav_container.js ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
+/* harmony import */ var _sidenav__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./sidenav */ "./frontend/components/sidenav/sidenav.jsx");
+/* harmony import */ var _reducers_chats_selector__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../reducers/chats_selector */ "./frontend/reducers/chats_selector.js");
+/* harmony import */ var _actions_channel_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/channel_actions */ "./frontend/actions/channel_actions.js");
+
+
+
+
+
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    chats: Object(_reducers_chats_selector__WEBPACK_IMPORTED_MODULE_3__["default"])(state.entities.channels),
+    currentUser: state.session.currentUser
+  };
+};
+
+var MapDispatchToProps = function MapDispatchToProps(dispatch) {
+  return {
+    logOut: function logOut() {
+      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_1__["logOut"])());
+    },
+    fetchUserChannels: function fetchUserChannels() {
+      return dispatch(Object(_actions_channel_actions__WEBPACK_IMPORTED_MODULE_4__["fetchUserChannels"])());
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, MapDispatchToProps)(_sidenav__WEBPACK_IMPORTED_MODULE_2__["default"]));
 
 /***/ }),
 
@@ -793,7 +896,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./actions/session_actions */ "./frontend/actions/session_actions.js");
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store/store */ "./frontend/store/store.js");
 /* harmony import */ var _components_root__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/root */ "./frontend/components/root.jsx");
+/* harmony import */ var _actions_channel_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./actions/channel_actions */ "./frontend/actions/channel_actions.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -811,7 +916,7 @@ document.addEventListener("DOMContentLoaded", function () {
         users: _defineProperty({}, window.currentUser.id, window.currentUser)
       },
       session: {
-        currentUser: window.currentUser.id
+        currentUser: window.currentUser
       }
     };
     store = Object(_store_store__WEBPACK_IMPORTED_MODULE_4__["default"])(preloadedState);
@@ -822,6 +927,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   window.utils = _utils_session_utils__WEBPACK_IMPORTED_MODULE_2__;
+  window.fetchUserChannels = _actions_channel_actions__WEBPACK_IMPORTED_MODULE_6__["fetchUserChannels"];
   window.getState = store.getState;
   window.dispatch = store.dispatch;
   window.logOut = _actions_session_actions__WEBPACK_IMPORTED_MODULE_3__["logOut"]; //Testing End 
@@ -842,13 +948,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/session_actions */ "./frontend/actions/session_actions.js");
+/* harmony import */ var _actions_channel_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/channel_actions */ "./frontend/actions/channel_actions.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//import { RECEIVE_CURRENT_USER } from "../actions/session_actions";
 
 
 var channelsReducer = function channelsReducer() {
@@ -857,8 +964,8 @@ var channelsReducer = function channelsReducer() {
   Object.freeze(state);
 
   switch (action.type) {
-    case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_USER"]:
-      return _objectSpread({}, action.user.channels);
+    case _actions_channel_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CHANNELS"]:
+      return _objectSpread({}, action.channels);
 
     default:
       return state;
@@ -866,6 +973,35 @@ var channelsReducer = function channelsReducer() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (channelsReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/chats_selector.js":
+/*!*********************************************!*\
+  !*** ./frontend/reducers/chats_selector.js ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var chatsSelector = function chatsSelector(chats) {
+  var directMessages = [];
+  var channels = [];
+  Object.values(chats).map(function (chat) {
+    if (chat.channelType === 0) {
+      channels.push(chat);
+    } else {
+      directMessages.push(chat);
+    }
+  });
+  return {
+    channels: channels,
+    directMessages: directMessages
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (chatsSelector);
 
 /***/ }),
 
@@ -997,7 +1133,7 @@ var sessionsReducer = function sessionsReducer() {
   switch (action.type) {
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_USER"]:
       return {
-        currentUser: action.user.id
+        currentUser: action.user
       };
 
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["LOGOUT_CURRENT_USER"]:
@@ -1073,6 +1209,25 @@ var configureStore = function configureStore() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);
+
+/***/ }),
+
+/***/ "./frontend/utils/channel_utils.js":
+/*!*****************************************!*\
+  !*** ./frontend/utils/channel_utils.js ***!
+  \*****************************************/
+/*! exports provided: fetchUserChannels */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUserChannels", function() { return fetchUserChannels; });
+var fetchUserChannels = function fetchUserChannels(userId) {
+  return $.ajax({
+    url: "/api/users/".concat(userId, "/channels"),
+    method: 'GET'
+  });
+};
 
 /***/ }),
 
