@@ -13,6 +13,7 @@ export const RECEIVE_ERRORS = 'RECEIVE_ERRORS';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS'
 
 //user action creater 
+debugger 
 const receiveCurrentUser = (user) => ({
   type: RECEIVE_CURRENT_USER, 
   user 

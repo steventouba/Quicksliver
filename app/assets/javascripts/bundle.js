@@ -112,6 +112,8 @@ var LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
 var RECEIVE_ERRORS = 'RECEIVE_ERRORS';
 var CLEAR_ERRORS = 'CLEAR_ERRORS'; //user action creater 
 
+debugger;
+
 var receiveCurrentUser = function receiveCurrentUser(user) {
   return {
     type: RECEIVE_CURRENT_USER,

@@ -10568,3 +10568,144 @@ Completed 200 OK in 9ms (Views: 0.2ms | ActiveRecord: 3.7ms)
   [1m[36mChannel Load (0.5ms)[0m  [1m[34mSELECT  "channels".* FROM "channels" INNER JOIN "channel_memberships" ON "channels"."id" = "channel_memberships"."channel_id" WHERE "channel_memberships"."user_id" = $1 AND "channels"."id" = $2 LIMIT $3[0m  [["user_id", 1], ["id", 9], ["LIMIT", 1]]
   [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
   [1m[36mChannel Load (0.4ms)[0m  [1m[34mSELECT  "channels".* FROM "channels" INNER JOIN "channel_memberships" ON "channels"."id" = "channel_memberships"."channel_id" WHERE "channel_memberships"."user_id" = $1 AND "channels"."id" = $2 LIMIT $3[0m  [["user_id", 1], ["id", 9], ["LIMIT", 1]]
+Started GET "/" for ::1 at 2020-04-29 18:13:17 -0700
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  Rendered static_pages/root.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 1116ms (Views: 1113.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/api/session" for ::1 at 2020-04-29 18:13:28 -0700
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"email"=>"hades@hades.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (6.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "hades@hades.com"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:42
+  Rendering api/users/show.json.jbuilder
+  Rendered api/users/show.json.jbuilder (0.7ms)
+Completed 500 Internal Server Error in 260ms (ActiveRecord: 21.0ms)
+
+
+
+SyntaxError - syntax error, unexpected ':', expecting keyword_end
+...annel, :id, :name, :creator_id: :channel_type, :id_private
+...                              ^
+/Users/steventouba/Desktop/Quicksilver/app/views/api/users/show.json.jbuilder:9: syntax error, unexpected keyword_end, expecting end-of-input:
+  app/views/api/users/show.json.jbuilder:6:in `'
+  app/controllers/api/sessions_controller.rb:14:in `create'
+
+Started GET "/" for ::1 at 2020-04-29 18:14:05 -0700
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  Rendered static_pages/root.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 32ms (Views: 29.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/api/session" for ::1 at 2020-04-29 18:14:11 -0700
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"email"=>"hades@hades.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "hades@hades.com"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:42
+  Rendering api/users/show.json.jbuilder
+  Rendered api/users/show.json.jbuilder (0.7ms)
+Completed 500 Internal Server Error in 223ms (ActiveRecord: 0.3ms)
+
+
+
+SyntaxError - syntax error, unexpected ':', expecting keyword_end
+...annel, :id, :name, :creator_id: :channel_type, :id_private
+...                              ^
+/Users/steventouba/Desktop/Quicksilver/app/views/api/users/show.json.jbuilder:9: syntax error, unexpected keyword_end, expecting end-of-input:
+  app/views/api/users/show.json.jbuilder:6:in `'
+  app/controllers/api/sessions_controller.rb:14:in `create'
+
+Started GET "/" for ::1 at 2020-04-29 18:15:13 -0700
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  Rendered static_pages/root.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 34ms (Views: 31.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/api/session" for ::1 at 2020-04-29 18:15:18 -0700
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"email"=>"hades@hades.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "hades@hades.com"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:42
+  Rendering api/users/show.json.jbuilder
+  [1m[36mChannel Load (8.5ms)[0m  [1m[34mSELECT "channels".* FROM "channels" INNER JOIN "channel_memberships" ON "channels"."id" = "channel_memberships"."channel_id" WHERE "channel_memberships"."user_id" = $1[0m  [["user_id", 7]]
+  ↳ app/views/api/users/show.json.jbuilder:4
+  Rendered api/users/show.json.jbuilder (63.3ms)
+Completed 500 Internal Server Error in 287ms (ActiveRecord: 14.0ms)
+
+
+
+ActionView::Template::Error - undefined method `set!' for #<Channel:0x00007f94c2763e38>:
+  app/controllers/api/sessions_controller.rb:14:in `create'
+
+Started GET "/" for ::1 at 2020-04-29 18:16:37 -0700
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  Rendered static_pages/root.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 31ms (Views: 28.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/api/session" for ::1 at 2020-04-29 18:16:42 -0700
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"email"=>"hades@hades.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "hades@hades.com"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:42
+  Rendering api/users/show.json.jbuilder
+  [1m[36mChannel Load (0.5ms)[0m  [1m[34mSELECT "channels".* FROM "channels" INNER JOIN "channel_memberships" ON "channels"."id" = "channel_memberships"."channel_id" WHERE "channel_memberships"."user_id" = $1[0m  [["user_id", 7]]
+  ↳ app/views/api/users/show.json.jbuilder:4
+  Rendered api/users/show.json.jbuilder (4.4ms)
+Completed 500 Internal Server Error in 223ms (ActiveRecord: 0.9ms)
+
+
+
+ActionView::Template::Error - undefined method `id' for nil:NilClass:
+  app/controllers/api/sessions_controller.rb:14:in `create'
+
+Started GET "/" for ::1 at 2020-04-29 18:19:15 -0700
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  Rendered static_pages/root.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 33ms (Views: 31.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/api/session" for ::1 at 2020-04-29 18:19:22 -0700
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"email"=>"hades@hades.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "hades@hades.com"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:42
+  Rendering api/users/show.json.jbuilder
+  [1m[36mChannel Load (0.5ms)[0m  [1m[34mSELECT "channels".* FROM "channels" INNER JOIN "channel_memberships" ON "channels"."id" = "channel_memberships"."channel_id" WHERE "channel_memberships"."user_id" = $1[0m  [["user_id", 7]]
+  ↳ app/views/api/users/show.json.jbuilder:4
+  Rendered api/users/show.json.jbuilder (17.0ms)
+Completed 500 Internal Server Error in 238ms (ActiveRecord: 0.8ms)
+
+
+
+ActionView::Template::Error - undefined method `id_private' for #<Channel:0x00007f94c21d8ba8>
+Did you mean?  is_private
+               is_private?
+               is_private=:
+  app/controllers/api/sessions_controller.rb:14:in `create'
+
+Started GET "/" for ::1 at 2020-04-29 18:20:06 -0700
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  Rendered static_pages/root.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 31ms (Views: 30.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/api/session" for ::1 at 2020-04-29 18:20:11 -0700
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"email"=>"hades@hades.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "hades@hades.com"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:42
+  Rendering api/users/show.json.jbuilder
+  [1m[36mChannel Load (0.5ms)[0m  [1m[34mSELECT "channels".* FROM "channels" INNER JOIN "channel_memberships" ON "channels"."id" = "channel_memberships"."channel_id" WHERE "channel_memberships"."user_id" = $1[0m  [["user_id", 7]]
+  ↳ app/views/api/users/show.json.jbuilder:4
+  Rendered api/users/show.json.jbuilder (2.5ms)
+Completed 200 OK in 223ms (Views: 7.3ms | ActiveRecord: 0.9ms)
+
+
