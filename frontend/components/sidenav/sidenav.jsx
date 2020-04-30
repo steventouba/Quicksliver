@@ -41,8 +41,8 @@ const Headers = ({channels, userId }) => {
   
   try {
     elements = channels.map(channel => (
-      <Link to={`/main/${userId}/${channel.id}`}>
-        <div key={channel.id}>
+      <Link key={channel.id} to={`/main/${userId}/${channel.id}`}>
+        <div>
           {channel.name}
         </div>
       </Link>

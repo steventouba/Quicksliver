@@ -20,14 +20,13 @@ const MapDispatchToProps = (dispatch) => {
 };
 
 const GetId = (props) => {
-  debugger
   useEffect(
     () => {
       props.history.replace(`/main/${props.userId}`)
     }
     , []
   )
-    return (< MainChannel />)
+   return (< MainChannel />)
 }
 
 
