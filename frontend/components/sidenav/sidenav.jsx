@@ -1,4 +1,6 @@
 import React from 'react'; 
+import { Link } from 'react-router-dom';
+
 
 
 class Sidenav extends React.Component { 
@@ -27,14 +29,14 @@ class Sidenav extends React.Component {
           <Headers channels={chats.channels}  userId={this.props.currentUser.id}/> 
         </div>
         <div className='sidenav-directmessages'>
-          <Headers channels={chats.directMessages} /> 
+          <Headers channels={chats.directMessages} userId={this.props.currentUser.id}/> 
         </div>
       </div>
     )
   }
 }
 
-const Headers = ({channels, userId}) => { 
+const Headers = ({channels, userId }) => { 
   let elements; 
   
   try {

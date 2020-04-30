@@ -13992,3 +13992,120 @@ Processing by Api::ChannelsController#index as JSON
 Completed 200 OK in 23ms (Views: 21.0ms | ActiveRecord: 0.9ms)
 
 
+Started GET "/" for ::1 at 2020-04-30 14:56:47 -0700
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "purSVPOH7iSRwPG1ImF97g"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9
+  Rendered api/users/_user.json.jbuilder (0.5ms)
+  Rendered static_pages/root.html.erb within layouts/application (6.8ms)
+Completed 200 OK in 420ms (Views: 414.8ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/api/users/undefined/channels" for ::1 at 2020-04-30 14:56:48 -0700
+Processing by Api::ChannelsController#index as JSON
+  Parameters: {"user_id"=>"undefined"}
+  Rendering api/channels/index.json.jbuilder
+  [1m[36mChannel Load (3.5ms)[0m  [1m[34mSELECT "channels".* FROM "channels"[0m
+  ↳ app/views/api/channels/index.json.jbuilder:1
+  Rendered api/channels/index.json.jbuilder (6.0ms)
+Completed 200 OK in 21ms (Views: 17.3ms | ActiveRecord: 3.5ms)
+
+
+Started DELETE "/api/session" for ::1 at 2020-04-30 14:56:50 -0700
+Processing by Api::SessionsController#destroy as JSON
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "purSVPOH7iSRwPG1ImF97g"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:62
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["email", "hades@hades.com"], ["id", 7], ["LIMIT", 1]]
+  ↳ app/models/user.rb:62
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."session_token" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["session_token", "Xo1ow549ZyN689_6cnpgIw"], ["id", 7], ["LIMIT", 1]]
+  ↳ app/models/user.rb:62
+  [1m[36mUser Update (1.0ms)[0m  [1m[33mUPDATE "users" SET "session_token" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["session_token", "Xo1ow549ZyN689_6cnpgIw"], ["updated_at", "2020-04-30 21:56:50.261681"], ["id", 7]]
+  ↳ app/models/user.rb:62
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user.rb:62
+Completed 200 OK in 6ms (Views: 0.1ms | ActiveRecord: 2.4ms)
+
+
+Started POST "/api/session" for ::1 at 2020-04-30 14:56:55 -0700
+Processing by Api::SessionsController#create as JSON
+  Parameters: {"user"=>{"email"=>"hades@hades.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "hades@hades.com"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:42
+  Rendering api/users/show.json.jbuilder
+  Rendered api/users/show.json.jbuilder (0.4ms)
+Completed 200 OK in 242ms (Views: 8.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/api/users/undefined/channels" for ::1 at 2020-04-30 14:56:56 -0700
+Processing by Api::ChannelsController#index as JSON
+  Parameters: {"user_id"=>"undefined"}
+  Rendering api/channels/index.json.jbuilder
+  [1m[36mChannel Load (0.3ms)[0m  [1m[34mSELECT "channels".* FROM "channels"[0m
+  ↳ app/views/api/channels/index.json.jbuilder:1
+  Rendered api/channels/index.json.jbuilder (1.8ms)
+Completed 200 OK in 14ms (Views: 13.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/" for ::1 at 2020-04-30 14:57:31 -0700
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "Xo1ow549ZyN689_6cnpgIw"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9
+  Rendered api/users/_user.json.jbuilder (1.2ms)
+  Rendered static_pages/root.html.erb within layouts/application (8.7ms)
+Completed 200 OK in 77ms (Views: 71.9ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/api/users/undefined/channels" for ::1 at 2020-04-30 14:57:36 -0700
+Processing by Api::ChannelsController#index as JSON
+  Parameters: {"user_id"=>"undefined"}
+  Rendering api/channels/index.json.jbuilder
+  [1m[36mChannel Load (0.6ms)[0m  [1m[34mSELECT "channels".* FROM "channels"[0m
+  ↳ app/views/api/channels/index.json.jbuilder:1
+  Rendered api/channels/index.json.jbuilder (2.7ms)
+Completed 200 OK in 19ms (Views: 17.4ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for ::1 at 2020-04-30 14:58:50 -0700
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "Xo1ow549ZyN689_6cnpgIw"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9
+  Rendered api/users/_user.json.jbuilder (0.6ms)
+  Rendered static_pages/root.html.erb within layouts/application (5.7ms)
+Completed 200 OK in 384ms (Views: 381.4ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/api/users/undefined/channels" for ::1 at 2020-04-30 14:58:51 -0700
+Processing by Api::ChannelsController#index as JSON
+  Parameters: {"user_id"=>"undefined"}
+  Rendering api/channels/index.json.jbuilder
+  [1m[36mChannel Load (0.6ms)[0m  [1m[34mSELECT "channels".* FROM "channels"[0m
+  ↳ app/views/api/channels/index.json.jbuilder:1
+  Rendered api/channels/index.json.jbuilder (2.8ms)
+Completed 200 OK in 20ms (Views: 19.5ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/" for ::1 at 2020-04-30 15:02:13 -0700
+Processing by StaticPagesController#root as HTML
+  Rendering static_pages/root.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "Xo1ow549ZyN689_6cnpgIw"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:9
+  Rendered api/users/_user.json.jbuilder (0.9ms)
+  Rendered static_pages/root.html.erb within layouts/application (5.3ms)
+Completed 200 OK in 366ms (Views: 363.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/api/users/undefined/channels" for ::1 at 2020-04-30 15:02:13 -0700
+Processing by Api::ChannelsController#index as JSON
+  Parameters: {"user_id"=>"undefined"}
+  Rendering api/channels/index.json.jbuilder
+  [1m[36mChannel Load (1.1ms)[0m  [1m[34mSELECT "channels".* FROM "channels"[0m
+  ↳ app/views/api/channels/index.json.jbuilder:1
+  Rendered api/channels/index.json.jbuilder (3.4ms)
+Completed 200 OK in 17ms (Views: 15.0ms | ActiveRecord: 1.1ms)
+
+
