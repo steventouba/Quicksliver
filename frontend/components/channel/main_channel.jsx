@@ -5,6 +5,7 @@ import MainChannelShow from './main_channel_show';
 class MainChannel extends React.Component { 
   constructor(props) { 
     super(props)
+    debugger
   }
 
   render() { 

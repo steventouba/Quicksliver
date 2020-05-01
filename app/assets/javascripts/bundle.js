@@ -228,9 +228,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _session_signup_form_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./session/signup_form_container */ "./frontend/components/session/signup_form_container.js");
 /* harmony import */ var _channel_main_channel_container_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./channel/main_channel_container.jsx */ "./frontend/components/channel/main_channel_container.jsx");
 /* harmony import */ var _channel_main_channel__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./channel/main_channel */ "./frontend/components/channel/main_channel.jsx");
-/* harmony import */ var _channel_test__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./channel/test */ "./frontend/components/channel/test.jsx");
-/* harmony import */ var _splash_splash__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./splash/splash */ "./frontend/components/splash/splash.jsx");
-
+/* harmony import */ var _splash_splash__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./splash/splash */ "./frontend/components/splash/splash.jsx");
 
 
 
@@ -244,15 +242,11 @@ var App = function App() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "app-body"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_utils__WEBPACK_IMPORTED_MODULE_2__["ProtectedRoute"], {
-    exact: true,
     path: "/main/:userId/:channelId",
-    component: _channel_test__WEBPACK_IMPORTED_MODULE_7__["default"]
+    component: _channel_main_channel__WEBPACK_IMPORTED_MODULE_6__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_utils__WEBPACK_IMPORTED_MODULE_2__["ProtectedRoute"], {
     path: "/main",
     component: _channel_main_channel_container_jsx__WEBPACK_IMPORTED_MODULE_5__["default"]
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_utils__WEBPACK_IMPORTED_MODULE_2__["ProtectedRoute"], {
-    path: "/main/:userId",
-    component: _channel_main_channel__WEBPACK_IMPORTED_MODULE_6__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_utils__WEBPACK_IMPORTED_MODULE_2__["AuthRoute"], {
     path: "/signup",
     component: _session_signup_form_container__WEBPACK_IMPORTED_MODULE_4__["default"]
@@ -262,7 +256,7 @@ var App = function App() {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/",
-    component: _splash_splash__WEBPACK_IMPORTED_MODULE_8__["default"]
+    component: _splash_splash__WEBPACK_IMPORTED_MODULE_7__["default"]
   })));
 };
 
@@ -315,9 +309,13 @@ var MainChannel = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(MainChannel);
 
   function MainChannel(props) {
+    var _this;
+
     _classCallCheck(this, MainChannel);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    debugger;
+    return _this;
   }
 
   _createClass(MainChannel, [{
@@ -457,39 +455,6 @@ var MainChannelShow = /*#__PURE__*/function (_React$Component) {
 
 ;
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(MainChannelShow));
-
-/***/ }),
-
-/***/ "./frontend/components/channel/test.jsx":
-/*!**********************************************!*\
-  !*** ./frontend/components/channel/test.jsx ***!
-  \**********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _sidenav_sidenav_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../sidenav/sidenav_container */ "./frontend/components/sidenav/sidenav_container.js");
-/* harmony import */ var _main_channel_show__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./main_channel_show */ "./frontend/components/channel/main_channel_show.jsx");
-
-
-
-
-var Test = function Test() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "main-channel-container"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "This a test"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "main-channel-header"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_sidenav_sidenav_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_main_channel_show__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "main-channel-profile-box"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "main-channel-message-field"
-  }));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Test);
 
 /***/ }),
 

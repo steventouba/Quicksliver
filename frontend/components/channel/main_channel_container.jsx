@@ -5,7 +5,6 @@ import MainChannel from "./main_channel";
 import chatsSelector from "../../reducers/chats_selector";
 
 const mapStateToProps = ({entities, session}) => {
-
   return {
     chats: chatsSelector(entities.channels),
     userId: session.currentUser.id
