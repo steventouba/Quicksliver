@@ -5,6 +5,7 @@ import {logOut} from './actions/session_actions';
 import configureStore from './store/store'; 
 import Root from './components/root'; 
 import {fetchUserChannels} from './actions/channel_actions';
+import { fetchMessages } from './actions/message_actions';
 
 
 document.addEventListener("DOMContentLoaded", () => { 
@@ -29,6 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.fetchUserChannels = fetchUserChannels
   window.getState = store.getState; 
   window.dispatch = store.dispatch; 
+  window.fetchMessages = fetchMessages
   window.logOut = logOut
   //Testing End 
 

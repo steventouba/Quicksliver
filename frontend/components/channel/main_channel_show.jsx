@@ -1,20 +1,34 @@
 import React from 'react'; 
-import { withRouter } from 'react-router-dom';
+import SidenavContainer from '../sidenav/sidenav_container';
+
 
 class MainChannelShow extends React.Component { 
-  constructor(props){ 
-    super(props)
-    debugger
-  }
+  // constructor(props){ 
+  //   super(props)
+  //   this.state = this.props.messages ;
+  //   debugger
+  // }
 
 
   render() { 
-
     return(
-      <div className='main-channel-message-box'>Hello from Main Show</div>
+      <RenderMessages fetchMessages={this.props.fetchMessages} channelId={this.props.channelId} /> 
     )
   }
 }; 
 
-export default withRouter(MainChannelShow); 
+const RenderMessages = (props) => {   
+  //let messages = props.fetchMessages(props.channelId)
+  return(
+    <div className='main-channel-container'>
+      <div className='main-channel-header'></div>
+      <SidenavContainer />
+  <div className='main-channel-profile-box'>Test{props.channelId}</div>
+      <div className='main-channel-message-field'></div>
+    </div>
+  )
+
+}
+
+export default RenderMessages; 
 

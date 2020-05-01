@@ -26,7 +26,6 @@ class SessionForm extends React.Component {
   submitDemoUser(e) { 
     e.preventDefault() 
     this.props.demoLogIn()
-    debugger
   }
 
   render() {
