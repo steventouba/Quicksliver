@@ -1,6 +1,6 @@
-html, head, header, body, h1, h2, h3, h4, h5, h6, main, nav, aside,
+head, header, body, h1, h2, h3, h4, h5, h6, main, nav, aside,
 div, span, img, strong, section, figcaption, footer, button,
-menu, ul, ol, input, a {
+menu, ul, ol, input, a, form, p {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -9,4 +9,21 @@ menu, ul, ol, input, a {
     background: transparent;
     font-family: Slack-Circular-Pro,"Helvetica Neue",Helvetica,"Segoe UI",Tahoma,Arial,sans-serif;
     text-decoration: none;
+}
+
+html { 
+    height: 100%;
+}
+
+body, #root {
+    width: 100%;
+    height: 100%;
+}
+
+.app-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
 }

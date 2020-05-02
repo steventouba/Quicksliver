@@ -1,0 +1,43 @@
+.main-channel-container {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: auto  2fr; 
+  grid-template-rows: auto 1fr auto ;
+  background-color: grey;
+}
+
+.main-channel-header { 
+  grid-column: 1 / 5;
+  grid-row: 1;
+  height: 30px;
+  border-bottom: 1px black solid;
+}
+.main-channel-sidenav { 
+  grid-column: 1 /2;
+  grid-row: 2 / 5;
+  min-width: 200px;
+  max-width: 250px;
+  overflow-y: auto;
+  border-right: 1px solid black;
+}
+.main-channel-message-input { 
+  grid-column: 2 / 5;
+  grid-row: 4;
+  height: 50px;
+  margin-bottom: 10px;
+  border-top: 1px black solid;
+}
+
+.main-channel-message-list { 
+  grid-column: 2 / 5;
+  overflow-y: auto;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.message-list-item { 
+  padding: 5px 10px;
+}
+

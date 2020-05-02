@@ -1,9 +1,13 @@
 .splash-header {
   display: flex;
+  position: fixed;
+  top: 0;
+  width: 100%;
   justify-content: space-between;
   align-items: center;
   border-bottom: #062474 1px solid;
   padding: 5px 25px;
+  background: white;
 };
 
 .splash-right-nav { 
@@ -53,6 +57,7 @@
 .splash-main { 
   display: flex;
   justify-content: space-between;
+  margin-top: 5%;
   padding: 5%;
 };
 
@@ -62,10 +67,10 @@
 }
 
 .splash-main-left :first-child { 
-  font-size: 14px;
+  font-size: 24px;
 }
 .splash-main-left :last-child { 
-  font-size: 20px;
+  font-size: 24px;
 }
 .splash-main-left h1 { 
   font-size: 50px;
@@ -77,11 +82,12 @@
   position: fixed;
   width: 100%; 
   bottom: 0;
+  background-color: white;
   border-top: 1px solid  #062474;
 };
+
 .splash-footer > a { 
   font-size: 40px;
   margin: 5px 20px;
   color: #062474;
-
 }
