@@ -5,7 +5,7 @@ import MessageList from '../messages/message_list';
 class ChannelShow extends React.Component { 
   constructor(props) { 
     super(props) 
-    debugger
+    this.state = {...props.messages};
   }
 
   componentDidMount () { 
@@ -15,14 +15,17 @@ class ChannelShow extends React.Component {
   componentDidUpdate(prevprops) { 
     if (prevprops.channelId !== this.props.channelId) { 
       this.props.fetchMessages(this.props.channelId)
+      this.setState({...this.props.messages})
     }
   }
 
   render() { 
     return (
-      <div>
-        <SidenavContainer />
-        <MessageList messages={this.props.messages} /> 
+      <div className='main-channel-container'>
+        <div className='main-channel-header'>Header</div>
+        <SidenavContainer className='main-channel-sidenav' />
+        <MessageList  messages={this.props.messages} /> 
+        <div className='main-channel-message-input'>message input</div>
       </div>
     )
   }

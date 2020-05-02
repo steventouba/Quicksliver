@@ -1,24 +1,29 @@
 import React from 'react'; 
 
 class MessageList extends React.Component {
-  
-  componentDidUpdate() {
+  constructor(props) {
+    super(props)
+    this.state = {messages:[...props.messages]}
     debugger
+  }  
+
+  componentWillUnmount() { 
+  debugger
   }
 
-  render () { 
+  render () {
     const messages = this.props.messages.map(message => (
-      <div>
+      <div key={message.id}>
         {message.body}
       </div>
     ))
-    
+
     return (
-      messages
+      <div className='main-channel-message-list'>
+        {messages}
+      </div>
     )
   }
+}
 
-} 
-  
-
-export default MessageList; 
+export default MessageList
