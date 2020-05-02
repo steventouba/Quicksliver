@@ -520,6 +520,7 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var messages = this.props.messages.map(function (message) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "message-list-item",
           key: message.id
         }, message.body);
       });

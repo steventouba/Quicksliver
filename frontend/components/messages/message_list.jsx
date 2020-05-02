@@ -13,7 +13,7 @@ class MessageList extends React.Component {
 
   render () {
     const messages = this.props.messages.map(message => (
-      <div key={message.id}>
+      <div className ='message-list-item' key={message.id}>
         {message.body}
       </div>
     ))
