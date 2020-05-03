@@ -1,5 +1,5 @@
 import { RECEIVE_CURRENT_USER } from "../actions/session_actions";
-
+import {RECEIVE_CHANNEL_MEMBERSHIPS} from '../actions/channel_memberships_actions';
 
 
 const channelMembershipsReducer = (state={}, action) => { 

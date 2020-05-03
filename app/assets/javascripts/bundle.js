@@ -1394,6 +1394,8 @@ document.addEventListener("DOMContentLoaded", function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/session_actions */ "./frontend/actions/session_actions.js");
+/* harmony import */ var _actions_channel_memberships_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/channel_memberships_actions */ "./frontend/actions/channel_memberships_actions.js");
+
 
 
 var channelMembershipsReducer = function channelMembershipsReducer() {
@@ -1406,7 +1408,7 @@ var channelMembershipsReducer = function channelMembershipsReducer() {
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_USER"]:
       return action.user.memberships;
 
-    case RECEIVE_CHANNEL_MEMBERSHIPS:
+    case _actions_channel_memberships_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_CHANNEL_MEMBERSHIPS"]:
       return action.memberships;
 
     default:
