@@ -1171,12 +1171,12 @@ var Sidenav = /*#__PURE__*/function (_React$Component) {
         onClick: this.handleClick
       }, "Logout")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "sidenav-channels"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Headers, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Channels"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ChannelHeaders, {
         channels: chats.channels,
         userId: this.props.currentUser.id
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "sidenav-directmessages"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Headers, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Direct messages"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(DirectMessageHeaders, {
         channels: chats.directMessages,
         userId: this.props.currentUser.id
       })));
@@ -1186,9 +1186,28 @@ var Sidenav = /*#__PURE__*/function (_React$Component) {
   return Sidenav;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-var Headers = function Headers(_ref) {
+var ChannelHeaders = function ChannelHeaders(_ref) {
   var channels = _ref.channels,
       userId = _ref.userId;
+  var elements;
+
+  try {
+    elements = channels.map(function (channel) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        key: channel.id,
+        to: "/main/channels/".concat(channel.id)
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "#", channel.name));
+    });
+  } catch (error) {
+    elements = null;
+  }
+
+  return elements;
+};
+
+var DirectMessageHeaders = function DirectMessageHeaders(_ref2) {
+  var channels = _ref2.channels,
+      userId = _ref2.userId;
   var elements;
 
   try {

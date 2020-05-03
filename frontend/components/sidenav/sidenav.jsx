@@ -25,17 +25,39 @@ class Sidenav extends React.Component {
           <button onClick={this.handleClick}>Logout</button>
         </div>
         <div className='sidenav-channels'>
-          <Headers channels={chats.channels}  userId={this.props.currentUser.id}/> 
+          <div>Channels</div>
+          <ChannelHeaders channels={chats.channels}  userId={this.props.currentUser.id}/> 
         </div>
         <div className='sidenav-directmessages'>
-          <Headers channels={chats.directMessages} userId={this.props.currentUser.id}/> 
+          <div>Direct messages</div>
+          <DirectMessageHeaders channels={chats.directMessages} userId={this.props.currentUser.id}/> 
         </div>
       </div>
     )
   }
 }
 
-const Headers = ({channels, userId }) => { 
+const ChannelHeaders = ({channels, userId }) => { 
+  let elements; 
+  
+  try {
+    elements = channels.map(channel => (
+      <Link key={channel.id} to={`/main/channels/${channel.id}`}>
+        <div>
+          #{channel.name}
+        </div>
+      </Link>
+    ))
+  } catch (error) {
+    elements = null
+  }
+
+  return (
+    elements
+  )
+}
+
+const DirectMessageHeaders = ({channels, userId }) => { 
   let elements; 
   
   try {
