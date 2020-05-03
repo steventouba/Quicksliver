@@ -14,6 +14,7 @@ class Sidenav extends React.Component {
 
   componentDidMount() { 
     this.props.fetchUserChannels(this.props.currentUser.id)
+    this.props.fetchChannelMemberships(this.props.currentUser.id)
   }
 
   render() { 

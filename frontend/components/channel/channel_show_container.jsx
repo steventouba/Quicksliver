@@ -2,20 +2,23 @@ import { connect } from "react-redux";
 import React from 'react';
 import ChannelShow from "./channel_show";
 import { fetchMessages } from "../../actions/message_actions";
-
+import { fetchUserChannels } from "../../actions/channel_actions";
 
 const mapStateToProps = (state, ownProps) => { 
 
+  debugger
   return {
     channelId: ownProps.match.params.channelId, 
-    messages: Object.values(state.entities.messages)
+    channels: state.entities.channels,
+    currentUser: state.session.currentUser
   }
 }; 
 
 const mapDispatchToProps = (dispatch) => {
 
   return {
-    fetchMessages: (channelId) => dispatch(fetchMessages(channelId))
+    fetchMessages: (channelId) => dispatch(fetchMessages(channelId)), 
+    fetchUserChannels: (currentUserId) => fetchUserChannels(currentUserId)
   }
 }
 
