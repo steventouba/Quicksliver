@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import Listener from './listener'
 
 const mapStateToProps = (state) => { 
-  debugger
+
   return(
     {
       channels: Object.values(state.entities.channels)

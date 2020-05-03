@@ -6,7 +6,6 @@ import { fetchUserChannels } from "../../actions/channel_actions";
 
 const mapStateToProps = (state, ownProps) => { 
 
-  debugger
   return {
     channelId: ownProps.match.params.channelId, 
     channels: state.entities.channels,
@@ -17,7 +16,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
 
   return {
-    fetchMessages: (channelId) => dispatch(fetchMessages(channelId)), 
+    fetchMessages: () => dispatch(fetchMessages()), 
     fetchUserChannels: (currentUserId) => fetchUserChannels(currentUserId)
   }
 }

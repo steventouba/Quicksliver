@@ -3,13 +3,15 @@ import React from 'react';
 class MessageList extends React.Component {
   constructor(props) {
     super(props)
-    //this.state = {messages:[...props.messages]}
-    debugger
+    this.state = {
+      messages:[...props.messages], 
+      currentChannel: props.currentChannel
+    }
   }  
 
-  // componentDidMount() { 
- 
-  // }
+  componentDidMount() { 
+    this.props.fetchMessages()
+  }
   
   // componentDidUpdate() { 
    
@@ -20,19 +22,20 @@ class MessageList extends React.Component {
 
   
   render () {
-    // const messages = this.props.messages.map(message => (
-    //   <div className ='message-list-item' key={message.id}>
-    //     {message.body}
-    //   </div>
-    // ))
-    return ( 
-      <div></div>
+    let messages = []; 
+    this.props.messages.map(message => {
+      if (parseInt(this.props.currentChannel) === message.channelId) {
+        messages.push(<div className ='message-list-item' key={message.id}>
+          {message.body}
+        </div>)
+      }
+    })
+  debugger
+    return (
+      <div className='main-channel-message-list'>
+        {messages}
+      </div>
     )
-    // return (
-    //   <div className='main-channel-message-list'>
-    //     {messages}
-    //   </div>
-    // )
   }
 }
 
