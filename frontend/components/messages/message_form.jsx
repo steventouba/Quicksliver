@@ -5,7 +5,8 @@ class MessageForm extends React.Component {
     super(props)
     debugger
     this.state = { 
-      body: "" 
+      body: "" , 
+      channelId: props.currentChannel
     }
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -16,7 +17,7 @@ class MessageForm extends React.Component {
 
   handleSubmit() {
     event.preventDefault();
-    App.cable.subscriptions.subscriptions[0].speak({ message: this.state.body });
+    App.cable.subscriptions.subscriptions[0].speak({ message: this.state });
     this.setState({ body: "" });
   }
 

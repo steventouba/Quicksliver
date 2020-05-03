@@ -10,24 +10,20 @@ class Listener extends React.Component {
   }
 
   createSubscriptions() { 
-    debugger
+  
     this.props.channels.map(channel => (
       App.cable.subscriptions.create(
         {channel: 'ChatChannel', room: channel.id}, 
         { 
-          connected: () => console.log(`connected to ${channel.id}`)
-        },
-        { 
-          disconnected: () => console.log(`disconnected from ${channel.id}`)
-        }, 
-        { 
           received: data => { 
             let messagePayload = { 
-              message: { 
-                [data.message.id]: data.message
-              }
+              [data.message.id]: data.message
             }
+         //debugger
             this.props.receiveMessage(messagePayload)
+          },
+          speak: function(data) { 
+            return this.perform('speak', data)
           }
         }
       )

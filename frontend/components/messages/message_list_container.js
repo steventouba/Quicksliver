@@ -4,7 +4,6 @@ import MessageList from "./message_list";
 import { withRouter } from "react-router-dom";
 
 const mapStateToProps = (state, ownProps) => {
-  debugger
   return {
     messages: Object.values(state.entities.messages) || undefined, 
     currentChannel: ownProps.match.params.channelId

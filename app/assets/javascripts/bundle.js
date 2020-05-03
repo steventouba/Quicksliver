@@ -414,7 +414,7 @@ var ChannelShow = /*#__PURE__*/function (_React$Component) {
         className: "main-channel-header"
       }, "Header"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_sidenav_sidenav_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
         className: "main-channel-sidenav"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_messages_message_list_container__WEBPACK_IMPORTED_MODULE_5__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_messages_message_form__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_listener_listener_container__WEBPACK_IMPORTED_MODULE_4__["default"], null));
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_messages_message_list_container__WEBPACK_IMPORTED_MODULE_5__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_listener_listener_container__WEBPACK_IMPORTED_MODULE_4__["default"], null));
     }
   }]);
 
@@ -542,26 +542,19 @@ var Listener = /*#__PURE__*/function (_React$Component) {
     value: function createSubscriptions() {
       var _this = this;
 
-      debugger;
       this.props.channels.map(function (channel) {
         return App.cable.subscriptions.create({
           channel: 'ChatChannel',
           room: channel.id
         }, {
-          connected: function connected() {
-            return console.log("connected to ".concat(channel.id));
-          }
-        }, {
-          disconnected: function disconnected() {
-            return console.log("disconnected from ".concat(channel.id));
-          }
-        }, {
           received: function received(data) {
-            var messagePayload = {
-              message: _defineProperty({}, data.message.id, data.message)
-            };
+            var messagePayload = _defineProperty({}, data.message.id, data.message); //debugger
+
 
             _this.props.receiveMessage(messagePayload);
+          },
+          speak: function speak(data) {
+            return this.perform('speak', data);
           }
         });
       });
@@ -666,7 +659,8 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     debugger;
     _this.state = {
-      body: ""
+      body: "",
+      channelId: props.currentChannel
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     return _this;
@@ -686,7 +680,7 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
     value: function handleSubmit() {
       event.preventDefault();
       App.cable.subscriptions.subscriptions[0].speak({
-        message: this.state.body
+        message: this.state
       });
       this.setState({
         body: ""
@@ -724,6 +718,7 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _message_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./message_form */ "./frontend/components/messages/message_form.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
@@ -760,6 +755,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var MessageList = /*#__PURE__*/function (_React$Component) {
   _inherits(MessageList, _React$Component);
 
@@ -775,6 +771,7 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
       messages: _toConsumableArray(props.messages),
       currentChannel: props.currentChannel
     };
+    debugger;
     return _this;
   }
 
@@ -782,9 +779,12 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.fetchMessages();
-    } // componentDidUpdate() { 
-    // }
-    // componentWillUnmount() { 
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      debugger;
+    } // componentWillUnmount() { 
     //   null
     // }
 
@@ -805,7 +805,9 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
       debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "main-channel-message-list"
-      }, messages);
+      }, messages, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_message_form__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        currentChannel: this.props.currentChannel
+      }));
     }
   }]);
 
@@ -835,7 +837,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-  debugger;
   return {
     messages: Object.values(state.entities.messages) || undefined,
     currentChannel: ownProps.match.params.channelId

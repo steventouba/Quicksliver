@@ -1,4 +1,5 @@
 import React from 'react'; 
+import MessageForm from './message_form'; 
 
 class MessageList extends React.Component {
   constructor(props) {
@@ -7,15 +8,16 @@ class MessageList extends React.Component {
       messages:[...props.messages], 
       currentChannel: props.currentChannel
     }
+    debugger
   }  
 
   componentDidMount() { 
     this.props.fetchMessages()
   }
   
-  // componentDidUpdate() { 
-   
-  // }
+  componentDidUpdate(prevProps) { 
+   debugger
+  }
   // componentWillUnmount() { 
   //   null
   // }
@@ -34,6 +36,7 @@ class MessageList extends React.Component {
     return (
       <div className='main-channel-message-list'>
         {messages}
+        <MessageForm currentChannel={this.props.currentChannel} />
       </div>
     )
   }

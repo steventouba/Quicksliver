@@ -29,7 +29,7 @@ class ChannelShow extends React.Component {
         <SidenavContainer className='main-channel-sidenav' />
         {/* <MessageList  messages={this.props.messages} channelId={this.props.channelId} currentUser={this.props.currentUser} />  */}
         <MessageListContainer /> 
-        <MessageForm  />
+        {/* <MessageForm  /> */}
         <ListenerContainer /> 
       </div>
     )

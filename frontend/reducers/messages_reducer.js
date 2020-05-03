@@ -5,7 +5,6 @@ import {
 
 const messagesReducer = (state={}, action) => {
   Object.freeze(state); 
-
   switch (action.type) {
     case RECEIVE_MESSAGES:
       return {...action.messages}
