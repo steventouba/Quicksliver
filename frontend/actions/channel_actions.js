@@ -10,7 +10,6 @@ const receiveChannels = (channels) => ({
 
 
 
-
 export const fetchUserChannels = () => dispatch => ChannelUtils.fetchUserChannels()
   .then(
     channels => dispatch(receiveChannels(channels)), 
