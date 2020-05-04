@@ -30,9 +30,9 @@ class MessageForm extends React.Component {
   render() {
     debugger
     return (
-      <div>
+      <div className='main-channel-message-input'>
         <form onSubmit={this.handleSubmit}>
-          <input
+          <input className='message-input'
             type="text"
             value={this.state.body}
             onChange={this.update("body")}

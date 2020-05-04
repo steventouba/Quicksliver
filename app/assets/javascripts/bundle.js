@@ -696,9 +696,12 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       debugger;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "main-channel-message-input"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "message-input",
         type: "text",
         value: this.state.body,
         onChange: this.update("body"),
@@ -1245,12 +1248,20 @@ var Sidenav = /*#__PURE__*/function (_React$Component) {
         onClick: this.handleClick
       }, "Logout")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "sidenav-channels"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Channels"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ChannelHeaders, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "channel-header"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "channel-item-gutter"
+      }), "Channels"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ChannelHeaders, {
         channels: chats.channels,
         userId: this.props.currentUser.id
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "sidenav-directmessages"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Direct messages"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(DirectMessageHeaders, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "directmessage-header"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "channel-item-gutter"
+      }), "Direct messages"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(DirectMessageHeaders, {
         channels: chats.directMessages,
         userId: this.props.currentUser.id
       })));
@@ -1270,7 +1281,11 @@ var ChannelHeaders = function ChannelHeaders(_ref) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         key: channel.id,
         to: "/main/channels/".concat(channel.id)
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "#", channel.name));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "channel-item"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "channel-item-gutter"
+      }), "# ", channel.name));
     });
   } catch (error) {
     elements = null;
@@ -1289,7 +1304,11 @@ var DirectMessageHeaders = function DirectMessageHeaders(_ref2) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         key: channel.id,
         to: "/main/channels/".concat(channel.id)
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, channel.name));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "channel-item"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "channel-item-gutter"
+      }), channel.name));
     });
   } catch (error) {
     elements = null;

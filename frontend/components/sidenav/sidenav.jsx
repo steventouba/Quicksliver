@@ -25,11 +25,17 @@ class Sidenav extends React.Component {
           <button onClick={this.handleClick}>Logout</button>
         </div>
         <div className='sidenav-channels'>
-          <div>Channels</div>
+          <div className='channel-header'>
+            <span className='channel-item-gutter'></span>
+            Channels
+          </div>
           <ChannelHeaders channels={chats.channels}  userId={this.props.currentUser.id}/> 
         </div>
         <div className='sidenav-directmessages'>
-          <div>Direct messages</div>
+          <div className='directmessage-header'>
+            <span className='channel-item-gutter'></span>
+            Direct messages
+          </div>
           <DirectMessageHeaders channels={chats.directMessages} userId={this.props.currentUser.id}/> 
         </div>
       </div>
@@ -43,8 +49,9 @@ const ChannelHeaders = ({channels, userId }) => {
   try {
     elements = channels.map(channel => (
       <Link key={channel.id} to={`/main/channels/${channel.id}`}>
-        <div>
-          #{channel.name}
+        <div className='channel-item'>
+          <span className='channel-item-gutter'></span>
+          # {channel.name}
         </div>
       </Link>
     ))
@@ -63,7 +70,8 @@ const DirectMessageHeaders = ({channels, userId }) => {
   try {
     elements = channels.map(channel => (
       <Link key={channel.id} to={`/main/channels/${channel.id}`}>
-        <div>
+        <div className='channel-item'>
+          <span className='channel-item-gutter'></span>
           {channel.name}
         </div>
       </Link>
