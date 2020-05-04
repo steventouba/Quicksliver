@@ -6,7 +6,8 @@ import { withRouter } from "react-router-dom";
 const mapStateToProps = (state, ownProps) => {
   return {
     messages: Object.values(state.entities.messages) || undefined, 
-    currentChannel: ownProps.match.params.channelId
+    currentChannel: ownProps.match.params.channelId, 
+    currentUser: state.session.currentUser
   }
 }
 

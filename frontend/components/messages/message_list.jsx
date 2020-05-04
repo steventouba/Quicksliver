@@ -12,14 +12,18 @@ class MessageList extends React.Component {
 
   componentDidMount() { 
     this.props.fetchMessages()
+    debugger
   }
   
   componentDidUpdate(prevProps) { 
-    // debugger
+    debugger
   //  if (prevProps.messages && prevProps.messages.length < this.props.messages.length) { 
   //    this.setState({messages: [...this.props.messages]})
   //  }
-  this.bottom.current.scrollIntoView()
+    if (prevProps.messages.length > 0) { 
+      
+      this.bottom.current.scrollIntoView()
+    }
   }
   // componentWillUnmount() { 
   //   null
@@ -40,7 +44,7 @@ class MessageList extends React.Component {
     return (
       <div className='main-channel-message-list'>
         {messages}
-        <MessageForm currentChannel={this.props.currentChannel} />
+        <MessageForm currentChannel={this.props.currentChannel} currentUser={this.props.currentUser} />
       </div>
     )
   }

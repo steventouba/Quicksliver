@@ -659,8 +659,9 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     debugger;
     _this.state = {
-      body: "",
-      channelId: props.currentChannel
+      body: "" // channelId: props.currentChannel, 
+      // userId: props.currentUser.id 
+
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     return _this;
@@ -679,8 +680,13 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit() {
       event.preventDefault();
+      var message = {
+        channelId: this.props.currentChannel,
+        body: this.state.body,
+        userId: this.props.currentUser.id
+      };
       App.cable.subscriptions.subscriptions[0].speak({
-        message: this.state
+        message: message
       });
       this.setState({
         body: ""
@@ -689,6 +695,7 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -778,15 +785,18 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.fetchMessages();
+      debugger;
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      // debugger
-      //  if (prevProps.messages && prevProps.messages.length < this.props.messages.length) { 
+      debugger; //  if (prevProps.messages && prevProps.messages.length < this.props.messages.length) { 
       //    this.setState({messages: [...this.props.messages]})
       //  }
-      this.bottom.current.scrollIntoView();
+
+      if (prevProps.messages.length > 0) {
+        this.bottom.current.scrollIntoView();
+      }
     } // componentWillUnmount() { 
     //   null
     // }
@@ -811,7 +821,8 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "main-channel-message-list"
       }, messages, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_message_form__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        currentChannel: this.props.currentChannel
+        currentChannel: this.props.currentChannel,
+        currentUser: this.props.currentUser
       }));
     }
   }]);
@@ -844,7 +855,8 @@ __webpack_require__.r(__webpack_exports__);
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     messages: Object.values(state.entities.messages) || undefined,
-    currentChannel: ownProps.match.params.channelId
+    currentChannel: ownProps.match.params.channelId,
+    currentUser: state.session.currentUser
   };
 };
 
