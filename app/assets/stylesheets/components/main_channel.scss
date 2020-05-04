@@ -47,12 +47,16 @@
   width: 100%;
 }
 .message-list-header { 
+  min-height: 60px;
   height: 60px;
   width: 100%;
   position: fixed;
   border: 1px solid rgba($color: lightgray, $alpha: 0.25);
   background-color: #222629;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  //text-align: center;
 }
 
 .main-channel-message-list { 
@@ -61,10 +65,15 @@
   width: auto;
   display: flex;
   flex-direction: column;
-  position: relative;
+  //position: relative;
+}
+
+.spacing-div { 
+  height: 80px;
 }
 
 .message-list-item { 
+  //position: relative;
   padding: 5px 10px;
 }
 

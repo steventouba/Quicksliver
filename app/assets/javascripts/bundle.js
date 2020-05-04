@@ -809,23 +809,22 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
     };
     _this.bottom = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
     return _this;
-  }
+  } // componentDidMount() { 
+  //   //this.props.fetchMessages()
+  //   //this.props.fetchUsers()
+  // }
+  // componentDidUpdate(prevProps) { 
+  //   debugger
+  // //  if (prevProps.messages && prevProps.messages.length < this.props.messages.length) { 
+  // //    this.setState({messages: [...this.props.messages]})
+  // //  }
+  //   if (this.props.currentChannel && this.messages.length > 0) { 
+  //     this.bottom.current.scrollIntoView()
+  //   }
+  // }
+
 
   _createClass(MessageList, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {} //this.props.fetchMessages()
-    //this.props.fetchUsers()
-    // componentDidUpdate(prevProps) { 
-    //   debugger
-    // //  if (prevProps.messages && prevProps.messages.length < this.props.messages.length) { 
-    // //    this.setState({messages: [...this.props.messages]})
-    // //  }
-    //   if (this.props.currentChannel && this.messages.length > 0) { 
-    //     this.bottom.current.scrollIntoView()
-    //   }
-    // }
-
-  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -844,7 +843,7 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
       }
       this.messages = [];
       this.props.messages.map(function (message) {
-        if (parseInt(_this2.props.currentChannel.id) === message.channelId) {
+        if (_this2.props.currentChannel && parseInt(_this2.props.currentChannel.id) === message.channelId) {
           _this2.messages.push(message);
         }
       });
@@ -852,7 +851,9 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
         className: "main-channel-message-list"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "message-list-header"
-      }, this.props.currentChannel.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_message_list_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      }, this.props.currentChannel.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "spacing-div"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_message_list_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
         messages: this.messages,
         users: this.props.users
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_message_form__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -952,29 +953,39 @@ var MessageListItem = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(MessageListItem);
 
   function MessageListItem(props) {
+    var _this;
+
     _classCallCheck(this, MessageListItem);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.bottom = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
+    return _this;
   }
 
   _createClass(MessageListItem, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      this.bottom.current.scrollIntoView();
+    }
+  }, {
     key: "StructureMessages",
     value: function StructureMessages() {
-      var _this = this;
+      var _this2 = this;
 
+      // need to restructure broadcast method to broadcast back message object vs having to manually structure the response
       var messages = null;
       var username = 'test';
 
       if (this.props.users && this.props.messages) {
-        messages = this.props.messages.map(function (message) {
-          var user = _this.props.users[message.authorId];
+        messages = this.props.messages.map(function (message, idx) {
+          var user = _this2.props.users[message.authorId];
           if (user !== undefined) username = user.username;
-          var createdAt = message.createdAt;
+          var createdAt = new Date(message.createdAt).toString();
           var body = message.body;
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "message-list-item",
-            key: message.id
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, createdAt), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, body));
+            key: idx
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "  "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, createdAt), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, body));
         });
       }
 
@@ -983,9 +994,11 @@ var MessageListItem = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      debugger;
       var messages = this.StructureMessages();
-      return messages;
+      debugger;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, messages === null ? "" : messages, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        ref: this.bottom
+      }));
     }
   }]);
 

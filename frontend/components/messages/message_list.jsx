@@ -11,10 +11,10 @@ class MessageList extends React.Component {
     this.bottom = React.createRef();
   }  
 
-  componentDidMount() { 
-    //this.props.fetchMessages()
-    //this.props.fetchUsers()
-  }
+  // componentDidMount() { 
+  //   //this.props.fetchMessages()
+  //   //this.props.fetchUsers()
+  // }
   
   // componentDidUpdate(prevProps) { 
   //   debugger
@@ -41,7 +41,7 @@ class MessageList extends React.Component {
 
     this.messages = []; 
     this.props.messages.map(message => {
-      if (parseInt(this.props.currentChannel.id) === message.channelId) {
+      if ( this.props.currentChannel && parseInt(this.props.currentChannel.id) === message.channelId) {
         this.messages.push(message)
       }
     })
@@ -51,6 +51,7 @@ class MessageList extends React.Component {
           <>
             <div className='main-channel-message-list'>
             <div className='message-list-header'>{this.props.currentChannel.name}</div>
+            <div className='spacing-div'></div>  
             <MessageListItem messages={this.messages} users={this.props.users} /> 
             </div>
             <MessageForm currentChannel={this.props.currentChannel.id} currentUser={this.props.currentUser} />
