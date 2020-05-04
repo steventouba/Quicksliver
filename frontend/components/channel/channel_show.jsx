@@ -11,6 +11,7 @@ class ChannelShow extends React.Component {
   }
 
   componentDidMount () { 
+    this.props.fetchUsers()
     this.props.fetchMessages()
     //this.props.fetchUserChannels(this.props.currentUser.id)
   }

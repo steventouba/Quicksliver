@@ -21,7 +21,7 @@
   min-width: 200px;
   max-width: 250px;
   overflow-y: auto;
-  border-right: 1px solid black;
+  border-right: 1px solid rgba($color: lightgray, $alpha: 0.25);
   display: flex;
   flex-direction: column;
 }
@@ -46,7 +46,14 @@
   background-color: #363636;
   width: 100%;
 }
-
+.message-list-header { 
+  height: 60px;
+  width: 100%;
+  position: fixed;
+  border: 1px solid rgba($color: lightgray, $alpha: 0.25);
+  background-color: #222629;
+  text-align: center;
+}
 
 .main-channel-message-list { 
   grid-column: 2 / 5;
@@ -66,6 +73,9 @@
   grid-row: 4;
   min-height: 50px;
   margin: 10px;
+  display: flex;
+  flex-direction: column;
+  //justify-content: space-evenly;
 }
 
 .message-input { 
@@ -81,4 +91,13 @@
 }
 .message-input:focus { 
   border: 1px solid rgba($color: whitesmoke, $alpha: 0.50);
+}
+
+.message-button > img { 
+  width: 40px;
+  height: 40px;
+}
+
+.message-button { 
+  padding-left: 7px;
 }

@@ -3,7 +3,6 @@ import React from 'react';
 class MessageForm extends React.Component {
   constructor(props) {
     super(props)
-    debugger
     this.state = { 
       body: "" 
       // channelId: props.currentChannel, 
@@ -28,7 +27,6 @@ class MessageForm extends React.Component {
   }
 
   render() {
-    debugger
     return (
       <div className='main-channel-message-input'>
         <form onSubmit={this.handleSubmit}>
@@ -38,7 +36,9 @@ class MessageForm extends React.Component {
             onChange={this.update("body")}
             placeholder='type message here'
           />
-          <button>Submit</button>
+          <button className='message-button'>
+            <img src={window.Logo} />
+          </button>
         </form>
       </div>
     )

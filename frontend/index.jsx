@@ -7,7 +7,6 @@ import Root from './components/root';
 import {fetchUserChannels} from './actions/channel_actions';
 import { fetchMessages } from './actions/message_actions';
 
-
 document.addEventListener("DOMContentLoaded", () => { 
   const root = document.getElementById('root'); 
   let store; 
