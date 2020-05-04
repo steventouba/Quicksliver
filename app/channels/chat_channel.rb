@@ -8,7 +8,7 @@ class ChatChannel < ApplicationCable::Channel
   def speak(data) 
     #debugger
     message = Message.create(author_id: 1, body: data['message']['body'], channel_id: data['message']['channelId'])
-    socket = { message: message}
+    socket = { message: {authorId: message.author_id, body: message.body, channelId: message.channel_id}}
     ChatChannel.broadcast_to("room-#{params["room"]}:messages", socket )
   end 
   

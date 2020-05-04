@@ -396,9 +396,9 @@ var ChannelShow = /*#__PURE__*/function (_React$Component) {
 
   _createClass(ChannelShow, [{
     key: "componentDidMount",
-    value: function componentDidMount() {} //this.props.fetchMessages()
-    //this.props.fetchUserChannels(this.props.currentUser.id)
-    // componentDidUpdate(prevprops) { 
+    value: function componentDidMount() {
+      this.props.fetchMessages(); //this.props.fetchUserChannels(this.props.currentUser.id)
+    } // componentDidUpdate(prevprops) { 
     //   if (prevprops.channelId !== this.props.channelId) { 
     //     this.props.fetchMessages(this.props.channelId)
     //     this.setState({messages: [...this.props.messages]})
@@ -768,10 +768,9 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      messages: _toConsumableArray(props.messages),
-      currentChannel: props.currentChannel
+      messages: _toConsumableArray(props.messages)
     };
-    debugger;
+    _this.bottom = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
     return _this;
   }
 
@@ -783,7 +782,11 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      debugger;
+      // debugger
+      //  if (prevProps.messages && prevProps.messages.length < this.props.messages.length) { 
+      //    this.setState({messages: [...this.props.messages]})
+      //  }
+      this.bottom.current.scrollIntoView();
     } // componentWillUnmount() { 
     //   null
     // }
@@ -798,8 +801,10 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
         if (parseInt(_this2.props.currentChannel) === message.channelId) {
           messages.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "message-list-item",
-            key: message.id
-          }, message.body));
+            key: [message.id]
+          }, message.body, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            ref: _this2.bottom
+          })));
         }
       });
       debugger;

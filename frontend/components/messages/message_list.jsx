@@ -6,9 +6,8 @@ class MessageList extends React.Component {
     super(props)
     this.state = {
       messages:[...props.messages], 
-      currentChannel: props.currentChannel
     }
-    debugger
+    this.bottom = React.createRef();
   }  
 
   componentDidMount() { 
@@ -16,7 +15,11 @@ class MessageList extends React.Component {
   }
   
   componentDidUpdate(prevProps) { 
-   debugger
+    // debugger
+  //  if (prevProps.messages && prevProps.messages.length < this.props.messages.length) { 
+  //    this.setState({messages: [...this.props.messages]})
+  //  }
+  this.bottom.current.scrollIntoView()
   }
   // componentWillUnmount() { 
   //   null
@@ -27,8 +30,9 @@ class MessageList extends React.Component {
     let messages = []; 
     this.props.messages.map(message => {
       if (parseInt(this.props.currentChannel) === message.channelId) {
-        messages.push(<div className ='message-list-item' key={message.id}>
+        messages.push(<div className ='message-list-item' key={[message.id]}>
           {message.body}
+          <div ref={this.bottom}/>
         </div>)
       }
     })
