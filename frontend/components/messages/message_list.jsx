@@ -42,10 +42,12 @@ class MessageList extends React.Component {
     })
   debugger
     return (
-      <div className='main-channel-message-list'>
-        {messages}
+      <>
+        <div className='main-channel-message-list'>
+          {messages}
+        </div>
         <MessageForm currentChannel={this.props.currentChannel} currentUser={this.props.currentUser} />
-      </div>
+      </>
     )
   }
 }
