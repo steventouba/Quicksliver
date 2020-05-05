@@ -36,14 +36,18 @@ class MessageListItem extends React.Component {
         let body = message.body; 
         return (
           <div className='message-list-item' key={idx}>
-            <span>{username}</span>
-            <span>  </span>
+            <span className='image-avatar'>
+              <img src={window.HermesAvatar}/>
+            </span>
+            <span><strong>{username}</strong></span>
+            {/* empty span is being used for spacing */}
+            <span>  </span> 
             <span className='date-tooltip'>{createdAt[0]}
               <span className='date-tooltip-text'>
                 {createdAt[1]}
               </span>
             </span> 
-            <div>{body}</div>
+            <div className='message-body'>{body}</div>
           </div>
         )
       })

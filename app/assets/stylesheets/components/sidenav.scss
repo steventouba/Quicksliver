@@ -18,13 +18,20 @@
   overflow: auto;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
-}
-.header-dropdown-button:hover .header-dropdown-content { 
-  display: block;
   cursor: pointer;
 }
-.header-dropdown-content:hover { 
-   background-color: #363636;
+
+.header-dropdown-button:hover .header-dropdown-content { 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.header-dropdown-content:hover  { 
+  background-color: #363636;
+  cursor: pointer;
 }
 
 .sidenav-channels, .sidenav-directmessages{ 

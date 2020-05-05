@@ -29,12 +29,11 @@ class Sidenav extends React.Component {
                 {this.props.currentUser.username}
               </div>
             </div>
-            <button
-              onClick={this.handleClick}
-              className='header-dropdown-content'
-            >
-              Logout
-            </button>
+            <div className='header-dropdown-content'>
+              <button onClick={this.handleClick}>
+                Logout
+              </button>
+            </div>
           </div>
         </div>
         <div className='sidenav-channels'>

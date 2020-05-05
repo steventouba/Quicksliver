@@ -1,0 +1,67 @@
+.message-list-header { 
+  min-height: 60px;
+  height: 60px;
+  width: 100%;
+  position: fixed;
+  border: 1px solid rgba($color: lightgray, $alpha: 0.25);
+  background-color: #222629;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  //text-align: center;
+}
+
+.spacing-div { 
+  height: 80px;
+}
+
+.message-list-item { 
+  //position: relative;
+  padding: 10px 10px;
+
+}
+
+.message-list-item:hover { 
+  background-color: #363636;
+}
+
+.date-tooltip { 
+  position: relative;
+  display: inline;
+  font-size: 12px;
+  cursor: default;
+}
+
+.date-tooltip .date-tooltip-text { 
+  visibility: hidden;
+  width: 400px;
+  font-size: 14px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px; 
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  margin-top: -200px;
+}
+
+.date-tooltip:hover { 
+  .date-tooltip-text { 
+    visibility: visible;
+    transition: 0.5s all ease;
+    transition-delay: 0.5s;
+  }
+}
+
+.message-body { 
+  font-size: 14px;
+}
+
+.image-avatar img { 
+  width: 40px;
+  height: 40px;
+}
