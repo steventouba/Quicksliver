@@ -558,14 +558,20 @@ var Listener = /*#__PURE__*/function (_React$Component) {
   _createClass(Listener, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.createSubscriptions();
+      var _this = this;
+
+      this.props.fetchChannelMemberships(this.props.currentUser.id);
+      this.props.fetchUserChannels(this.props.currentUser.id).then(function (channels) {
+        return _this.createSubscriptions(channels);
+      });
     }
   }, {
     key: "createSubscriptions",
-    value: function createSubscriptions() {
-      var _this = this;
+    value: function createSubscriptions(channels) {
+      var _this2 = this;
 
-      this.props.channels.map(function (channel) {
+      //debugger
+      Object.values(channels.channels).map(function (channel) {
         return App.cable.subscriptions.create({
           channel: 'ChatChannel',
           room: channel.id
@@ -574,7 +580,7 @@ var Listener = /*#__PURE__*/function (_React$Component) {
             var messagePayload = _defineProperty({}, data.message.id, data.message); //debugger
 
 
-            _this.props.receiveMessage(messagePayload);
+            _this2.props.receiveMessage(messagePayload);
           },
           speak: function speak(data) {
             return this.perform('speak', data);
@@ -609,14 +615,19 @@ var Listener = /*#__PURE__*/function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/message_actions */ "./frontend/actions/message_actions.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _listener__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./listener */ "./frontend/components/listener/listener.jsx");
+/* harmony import */ var _actions_channel_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/channel_actions */ "./frontend/actions/channel_actions.js");
+/* harmony import */ var _actions_channel_memberships_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/channel_memberships_actions */ "./frontend/actions/channel_memberships_actions.js");
+/* harmony import */ var _listener__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./listener */ "./frontend/components/listener/listener.jsx");
+
+
 
 
 
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    channels: Object.values(state.entities.channels)
+    channels: Object.values(state.entities.channels),
+    currentUser: state.session.currentUser
   };
 };
 
@@ -624,11 +635,17 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     receiveMessage: function receiveMessage(message) {
       return dispatch(Object(_actions_message_actions__WEBPACK_IMPORTED_MODULE_0__["receiveMessage"])(message));
+    },
+    fetchUserChannels: function fetchUserChannels(userId) {
+      return dispatch(Object(_actions_channel_actions__WEBPACK_IMPORTED_MODULE_2__["fetchUserChannels"])(userId));
+    },
+    fetchChannelMemberships: function fetchChannelMemberships(userId) {
+      return dispatch(Object(_actions_channel_memberships_actions__WEBPACK_IMPORTED_MODULE_3__["fetchChannelMemberships"])(userId));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(_listener__WEBPACK_IMPORTED_MODULE_2__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(_listener__WEBPACK_IMPORTED_MODULE_4__["default"]));
 
 /***/ }),
 
@@ -1363,13 +1380,11 @@ var Sidenav = /*#__PURE__*/function (_React$Component) {
     value: function handleClick(e) {
       e.preventDefault;
       this.props.logOut();
-    }
-  }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.props.fetchUserChannels(this.props.currentUser.id);
-      this.props.fetchChannelMemberships(this.props.currentUser.id);
-    }
+    } // componentDidMount() { 
+    //   this.props.fetchUserChannels(this.props.currentUser.id)
+    //   this.props.fetchChannelMemberships(this.props.currentUser.id)
+    // }
+
   }, {
     key: "render",
     value: function render() {

@@ -12,10 +12,10 @@ class Sidenav extends React.Component {
     this.props.logOut(); 
   }
 
-  componentDidMount() { 
-    this.props.fetchUserChannels(this.props.currentUser.id)
-    this.props.fetchChannelMemberships(this.props.currentUser.id)
-  }
+  // componentDidMount() { 
+  //   this.props.fetchUserChannels(this.props.currentUser.id)
+  //   this.props.fetchChannelMemberships(this.props.currentUser.id)
+  // }
 
   render() { 
    const chats = this.props.chats;
