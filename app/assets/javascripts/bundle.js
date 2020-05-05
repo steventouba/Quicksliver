@@ -983,6 +983,23 @@ var MessageListItem = /*#__PURE__*/function (_React$Component) {
       this.bottom.current.scrollIntoView();
     }
   }, {
+    key: "formatDate",
+    value: function formatDate(dateTimeString) {
+      var time = new Date(dateTimeString);
+      var hours = time.getHours();
+      var minutes = time.getMinutes();
+      var merides = 'AM';
+
+      if (hours > 12) {
+        hours = hours - 12;
+        merides = 'PM';
+      }
+
+      var abbreviatedTime = hours + ':' + minutes + " ".concat(merides);
+      time = time.toString();
+      return [abbreviatedTime, time];
+    }
+  }, {
     key: "StructureMessages",
     value: function StructureMessages() {
       var _this2 = this;
@@ -995,12 +1012,18 @@ var MessageListItem = /*#__PURE__*/function (_React$Component) {
         messages = this.props.messages.map(function (message, idx) {
           var user = _this2.props.users[message.authorId];
           if (user !== undefined) username = user.username;
-          var createdAt = new Date(message.createdAt).toString();
+
+          var createdAt = _this2.formatDate(message.createdAt);
+
           var body = message.body;
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "message-list-item",
             key: idx
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "  "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, createdAt), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, body));
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "  "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            className: "date-tooltip"
+          }, createdAt[0], /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+            className: "date-tooltip-text"
+          }, createdAt[1])), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, body));
         });
       }
 
@@ -1010,7 +1033,6 @@ var MessageListItem = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       var messages = this.StructureMessages();
-      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, messages === null ? "" : messages, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         ref: this.bottom
       }));
@@ -1391,9 +1413,18 @@ var Sidenav = /*#__PURE__*/function (_React$Component) {
         className: "main-channel-sidenav"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "sidenav-header"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.handleClick
-      }, "Logout")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "header-dropdown-button"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sidenav-header-info"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sidenav-team-info"
+      }, "Mount Olympus ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "\u02C5")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "sidenav-user-info"
+      }, this.props.currentUser.username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.handleClick,
+        className: "header-dropdown-content"
+      }, "Logout"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "sidenav-channels"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "channel-header"
@@ -1465,6 +1496,37 @@ var DirectMessageHeaders = function DirectMessageHeaders(_ref2) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Sidenav);
+{
+  /* <div className='sidenav-header'>
+   <div className='header-dropdown-button'>
+     <div className='sidenav-header-info'>
+       <div className='sidenav-team-info'>Mount Olympus</div>
+       <div className='sidenav-user-info'>
+         {this.props.currentUser.username}
+       </div>
+     </div>
+     <button
+       onClick={this.handleClick}
+       className='header-dropdown-content'
+     >
+       Logout
+     </button>
+   </div>
+  </div> */
+}
+{
+  /* <div className='sidenav-header'>
+   <div className='header-dropdown-button'>
+     {this.props.currentUser.username}
+     <button
+       onClick={this.handleClick}
+       className='header-dropdown-content'
+     >
+       Logout
+             </button>
+   </div>
+  </div> */
+}
 
 /***/ }),
 

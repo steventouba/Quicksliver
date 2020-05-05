@@ -22,7 +22,20 @@ class Sidenav extends React.Component {
     return ( 
       <div className='main-channel-sidenav'>
         <div className='sidenav-header'>
-          <button onClick={this.handleClick}>Logout</button>
+          <div className='header-dropdown-button'>
+            <div className='sidenav-header-info'>
+              <div className='sidenav-team-info'>Mount Olympus <strong>˅</strong></div>
+              <div className='sidenav-user-info'>
+                {this.props.currentUser.username}
+              </div>
+            </div>
+            <button
+              onClick={this.handleClick}
+              className='header-dropdown-content'
+            >
+              Logout
+            </button>
+          </div>
         </div>
         <div className='sidenav-channels'>
           <div className='channel-header'>
@@ -66,7 +79,7 @@ const ChannelHeaders = ({channels, userId }) => {
 
 const DirectMessageHeaders = ({channels, userId }) => { 
   let elements; 
-  
+
   try {
     elements = channels.map(channel => (
       <Link key={channel.id} to={`/main/channels/${channel.id}`}>
@@ -89,3 +102,33 @@ const DirectMessageHeaders = ({channels, userId }) => {
 
 
 export default Sidenav; 
+
+
+{/* <div className='sidenav-header'>
+  <div className='header-dropdown-button'>
+    <div className='sidenav-header-info'>
+      <div className='sidenav-team-info'>Mount Olympus</div>
+      <div className='sidenav-user-info'>
+        {this.props.currentUser.username}
+      </div>
+    </div>
+    <button
+      onClick={this.handleClick}
+      className='header-dropdown-content'
+    >
+      Logout
+    </button>
+  </div>
+</div> */}
+
+{/* <div className='sidenav-header'>
+  <div className='header-dropdown-button'>
+    {this.props.currentUser.username}
+    <button
+      onClick={this.handleClick}
+      className='header-dropdown-content'
+    >
+      Logout
+            </button>
+  </div>
+</div> */}
