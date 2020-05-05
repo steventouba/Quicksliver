@@ -2,8 +2,8 @@ import { connect } from "react-redux";
 import { logOut } from '../../actions/session_actions';
 import Sidenav from './sidenav'; 
 import chatsSelector from "../../reducers/chats_selector";
-import { fetchUserChannels } from "../../actions/channel_actions";
-import { fetchChannelMemberships } from "../../actions/channel_memberships_actions";
+// import { fetchUserChannels } from "../../actions/channel_actions";
+// import { fetchChannelMemberships } from "../../actions/channel_memberships_actions";
 
 const mapStateToProps = (state) => {
   return {
@@ -14,9 +14,9 @@ const mapStateToProps = (state) => {
 
 const MapDispatchToProps = (dispatch) => {
   return {
-    logOut: () => dispatch(logOut()), 
-    fetchUserChannels: (userId) => dispatch(fetchUserChannels(userId)), 
-    fetchChannelMemberships: (userId) => dispatch(fetchChannelMemberships(userId))
+    logOut: () => dispatch(logOut())
+    // fetchUserChannels: (userId) => dispatch(fetchUserChannels(userId)), 
+    // fetchChannelMemberships: (userId) => dispatch(fetchChannelMemberships(userId))
 
   }
 };

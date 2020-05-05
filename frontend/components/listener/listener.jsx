@@ -12,7 +12,6 @@ class Listener extends React.Component {
   }
 
   createSubscriptions(channels) { 
-    //debugger
     Object.values(channels.channels).map(channel => (
       App.cable.subscriptions.create(
         {channel: 'ChatChannel', room: channel.id}, 
@@ -21,7 +20,6 @@ class Listener extends React.Component {
             let messagePayload = { 
               [data.message.id]: data.message
             }
-         //debugger
             this.props.receiveMessage(messagePayload)
           },
           speak: function(data) { 

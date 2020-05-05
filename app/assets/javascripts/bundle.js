@@ -445,7 +445,7 @@ var ChannelShow = /*#__PURE__*/function (_React$Component) {
         className: "main-channel-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "main-channel-header"
-      }, "Header"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_sidenav_sidenav_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_sidenav_sidenav_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
         className: "main-channel-sidenav"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_messages_message_list_container__WEBPACK_IMPORTED_MODULE_5__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_listener_listener_container__WEBPACK_IMPORTED_MODULE_4__["default"], null));
     }
@@ -570,15 +570,13 @@ var Listener = /*#__PURE__*/function (_React$Component) {
     value: function createSubscriptions(channels) {
       var _this2 = this;
 
-      //debugger
       Object.values(channels.channels).map(function (channel) {
         return App.cable.subscriptions.create({
           channel: 'ChatChannel',
           room: channel.id
         }, {
           received: function received(data) {
-            var messagePayload = _defineProperty({}, data.message.id, data.message); //debugger
-
+            var messagePayload = _defineProperty({}, data.message.id, data.message);
 
             _this2.props.receiveMessage(messagePayload);
           },
@@ -1483,14 +1481,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
 /* harmony import */ var _sidenav__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./sidenav */ "./frontend/components/sidenav/sidenav.jsx");
 /* harmony import */ var _reducers_chats_selector__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../reducers/chats_selector */ "./frontend/reducers/chats_selector.js");
-/* harmony import */ var _actions_channel_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/channel_actions */ "./frontend/actions/channel_actions.js");
-/* harmony import */ var _actions_channel_memberships_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/channel_memberships_actions */ "./frontend/actions/channel_memberships_actions.js");
 
 
 
-
-
-
+ // import { fetchUserChannels } from "../../actions/channel_actions";
+// import { fetchChannelMemberships } from "../../actions/channel_memberships_actions";
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
@@ -1503,13 +1498,9 @@ var MapDispatchToProps = function MapDispatchToProps(dispatch) {
   return {
     logOut: function logOut() {
       return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_1__["logOut"])());
-    },
-    fetchUserChannels: function fetchUserChannels(userId) {
-      return dispatch(Object(_actions_channel_actions__WEBPACK_IMPORTED_MODULE_4__["fetchUserChannels"])(userId));
-    },
-    fetchChannelMemberships: function fetchChannelMemberships(userId) {
-      return dispatch(Object(_actions_channel_memberships_actions__WEBPACK_IMPORTED_MODULE_5__["fetchChannelMemberships"])(userId));
-    }
+    } // fetchUserChannels: (userId) => dispatch(fetchUserChannels(userId)), 
+    // fetchChannelMemberships: (userId) => dispatch(fetchChannelMemberships(userId))
+
   };
 };
 

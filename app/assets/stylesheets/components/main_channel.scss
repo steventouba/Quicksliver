@@ -84,7 +84,6 @@
   margin: 10px;
   display: flex;
   flex-direction: column;
-  //justify-content: space-evenly;
 }
 
 .message-input { 
@@ -109,4 +108,6 @@
 
 .message-button { 
   padding-left: 7px;
+  outline: none;
+  cursor: pointer;
 }

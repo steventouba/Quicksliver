@@ -26,7 +26,7 @@ class ChannelShow extends React.Component {
   render() { 
     return (
       <div className='main-channel-container'>
-        <div className='main-channel-header'>Header</div>
+        <div className='main-channel-header'></div>
         <SidenavContainer className='main-channel-sidenav' />
         {/* <MessageList  messages={this.props.messages} channelId={this.props.channelId} currentUser={this.props.currentUser} />  */}
         <MessageListContainer /> 
