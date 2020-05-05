@@ -27,3 +27,23 @@
    background-color: #363636;
 }
 
+.sidenav-channels, .sidenav-directmessages{ 
+  margin: 5px 0;
+}
+
+.channel-header, .directmessage-header { 
+  margin: 10px 0;
+}
+
+.channel-item-gutter { 
+  margin: 5px;
+}
+
+.channel-item { 
+  padding: 3px 0;
+}
+
+.channel-item:hover { 
+  background-color: #363636;
+  width: 100%;
+}

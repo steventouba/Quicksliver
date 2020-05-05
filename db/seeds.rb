@@ -13,12 +13,13 @@ Users = User.create([
   {username: 'Demeter', email: 'demeter@athens.com', phone_number: '555-555-0000', password: 123456 },
   {username: 'Artemis', email: 'artemis@athens.com', password: 123456 },
   {username: 'Dionysus', email: 'dionysus@athens.com', password: 123456 },
-  {username: 'Hades', email: 'hades@hades.com', phone_number: '863-379-6753', password: 123456 }
+  {username: 'Hades', email: 'hades@hades.com', phone_number: '863-379-6753', password: 123456 },
+  {username: 'Hermes', email: 'speedyH@quicksilver.com', phone_number: '929-866-3278', password: 123456 }
 ])
 
 Channels = Channel.create([
-  {name: 'AthensHub', creator_id: 1},
-  {name: 'Olympus', creator_id: 2, channel_type: 0, is_private: true},
+  {name: 'Olympus', creator_id: 2},
+  {name: 'AthensHub', creator_id: 2, channel_type: 0, is_private: true},
   {name: 'TheBros', creator_id: 7, channel_type: 0, is_private: true},
   {name: 'Hades,Zeus', creator_id: 7, channel_type: 1, is_private: true},
   {name: 'Hades,Poseidon', creator_id: 1, channel_type: 1, is_private: true},
@@ -45,7 +46,12 @@ ChannelMemberships = ChannelMembership.create([
 ])
 
 Messages = Message.create([
-  {body: 'Welcome', author_id: 2, channel_id: 1},
+  {body: 'Welcome to the future of communication', author_id: 8, channel_id: 1},
+  {body: 'I got tired of racing around the globe so I outsourced my work and image to a snazzy new tech company. My coworkers are satisfied too, do you realize how ridiculous the budget for scrolls is?', author_id: 8, channel_id: 1},
+  {body: 'Anyways have a look around. When you\'re ready to leave there\'s a logout button under Mount Olympus, just don\'t rile the titans!' , author_id: 8, channel_id: 1},
+  {body: 'If you\'re every curious about when a message was sent, hover over the timestamp to get more enough.' , author_id: 8, channel_id: 1},
+  {body: 'Whelp, I better go make myself useful before I get downsized. The Bobs are here.' , author_id: 8, channel_id: 1},
+  {body: 'This is cool', author_id: 2, channel_id: 1},
   {body: 'Welcome', author_id: 2, channel_id: 2},
   {body: 'I believe you have my stapler.', author_id: 1, channel_id: 5},
   {body: '...', author_id: 7, channel_id: 5},
