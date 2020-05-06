@@ -16,10 +16,22 @@
   height: 80px;
 }
 
-.message-list-item { 
-  //position: relative;
-  padding: 10px 10px;
+.left-gutter-spacing { 
+  width: 10px;
+}
 
+.message-list-item { 
+  display: flex;
+  flex-direction: row;
+  padding: 10px 10px;
+}
+
+.message-avatar > img { 
+  height: 40px;
+  width: 40px;
+}
+.message-content { 
+  margin-left: 5px;
 }
 
 .message-list-item:hover { 

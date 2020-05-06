@@ -35,20 +35,23 @@ class MessageListItem extends React.Component {
         let createdAt = this.formatDate(message.createdAt); 
         let body = message.body; 
         return (
-          <div className='message-list-item' key={idx}>
-            <span className='image-avatar'>
-              <img src={window.HermesAvatar}/>
-            </span>
-            <span><strong>{username}</strong></span>
-            {/* empty span is being used for spacing */}
-            <span>  </span> 
-            <span className='date-tooltip'>{createdAt[0]}
-              <span className='date-tooltip-text'>
-                {createdAt[1]}
+         <div className='message-list-item'>
+           <span className='left-gutter-spacing'></span>
+           <div className='message-avatar'> 
+             <img src={window.HermesAvatar}/>
+           </div>
+           <div className='message-content'>
+              <span><strong>{username}</strong></span>
+              {/* empty span is being used for spacing */}
+              <span>  </span>
+              <span className='date-tooltip'>{createdAt[0]}
+                <span className='date-tooltip-text'>
+                  {createdAt[1]}
+                </span>
               </span>
-            </span> 
-            <div className='message-body'>{body}</div>
-          </div>
+              <div className='message-body'>{body}</div>
+           </div>
+         </div>
         )
       })
     }
@@ -72,3 +75,10 @@ class MessageListItem extends React.Component {
 }
 
 export default MessageListItem; 
+
+// {/* <div className='message-list-item' key={idx}>
+//   <span className='image-avatar'>
+//     <img src={window.HermesAvatar} />
+//   </span>
+ 
+// // </div> */}
