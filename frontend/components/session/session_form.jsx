@@ -36,7 +36,7 @@ class SessionForm extends React.Component {
               <img className='session-logo' src={window.Logo} />
               <div className='session-logo-text'>QuickSilver </div>
             </Link>
-            <button onClick={this.submitDemoUser}>DemoUser</button>
+            <button className='demo-user' onClick={this.submitDemoUser}>DemoUser</button>
         </header>
         <div className='session-form-body' >
           <RenderErrors errors={this.props.errors} clearErrors={this.props.clearErrors}/> 

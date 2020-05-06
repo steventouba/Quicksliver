@@ -92,3 +92,18 @@
   content: '➡';
   font-size: 24px;
 }
+
+.demo-user { 
+  padding: 12px 16px;
+  border: 1px solid #072d91;
+  background-color: #072d91;
+  border-radius: 10px;
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+};
+
+.demo-user:hover { 
+  background-color: darken($color: #072d91, $amount: 7%);
+};

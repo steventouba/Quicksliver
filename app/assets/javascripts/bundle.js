@@ -1070,11 +1070,7 @@ var MessageListItem = /*#__PURE__*/function (_React$Component) {
   return MessageListItem;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (MessageListItem); // {/* <div className='message-list-item' key={idx}>
-//   <span className='image-avatar'>
-//     <img src={window.HermesAvatar} />
-//   </span>
-// // </div> */}
+/* harmony default export */ __webpack_exports__["default"] = (MessageListItem);
 
 /***/ }),
 
@@ -1248,6 +1244,7 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "session-logo-text"
       }, "QuickSilver ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "demo-user",
         onClick: this.submitDemoUser
       }, "DemoUser")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "session-form-body"

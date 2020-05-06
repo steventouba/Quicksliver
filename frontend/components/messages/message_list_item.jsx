@@ -42,6 +42,7 @@ class MessageListItem extends React.Component {
     // need to restructure broadcast method to broadcast back message object vs having to manually structure the response
     let messages = null; 
     let username = 'test'
+
     if (this.props.users && this.props.messages) { 
       messages = this.props.messages.map(message => {
         let user = this.props.users[message.authorId]; 
@@ -91,10 +92,3 @@ class MessageListItem extends React.Component {
 }
 
 export default MessageListItem; 
-
-// {/* <div className='message-list-item' key={idx}>
-//   <span className='image-avatar'>
-//     <img src={window.HermesAvatar} />
-//   </span>
- 
-// // </div> */}
