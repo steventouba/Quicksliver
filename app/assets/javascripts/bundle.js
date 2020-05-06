@@ -1000,6 +1000,24 @@ var MessageListItem = /*#__PURE__*/function (_React$Component) {
       return [abbreviatedTime, time];
     }
   }, {
+    key: "getAvatar",
+    value: function getAvatar(userId) {
+      if (userId === 8) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: window.HermesAvatar
+      });
+      var avatars = [/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "class": "far fa-user"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "class": "fas fa-user-tie"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "class": "fas fa-user-astronaut"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        "class": "fas fa-user-ninja"
+      })];
+      var avatar = avatars[userId % avatars.length];
+      return avatar;
+    }
+  }, {
     key: "StructureMessages",
     value: function StructureMessages() {
       var _this2 = this;
@@ -1009,22 +1027,23 @@ var MessageListItem = /*#__PURE__*/function (_React$Component) {
       var username = 'test';
 
       if (this.props.users && this.props.messages) {
-        messages = this.props.messages.map(function (message, idx) {
+        messages = this.props.messages.map(function (message) {
           var user = _this2.props.users[message.authorId];
           if (user !== undefined) username = user.username;
 
           var createdAt = _this2.formatDate(message.createdAt);
 
           var body = message.body;
+
+          var avatar = _this2.getAvatar(message.authorId);
+
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "message-list-item"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
             className: "left-gutter-spacing"
           }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "message-avatar"
-          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-            src: window.HermesAvatar
-          })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          }, avatar), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "message-content"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "  "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
             className: "date-tooltip"

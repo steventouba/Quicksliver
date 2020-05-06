@@ -24,21 +24,37 @@ class MessageListItem extends React.Component {
     return [abbreviatedTime, time]; 
   }
 
+  getAvatar(userId) { 
+    if (userId === 8) return  <img src={window.HermesAvatar}/> ;
+
+    const avatars = [
+      <i class="far fa-user"></i>, 
+      <i class="fas fa-user-tie"></i>,
+      <i class="fas fa-user-astronaut"></i>,
+      <i class="fas fa-user-ninja"></i>,
+    ]
+
+    let avatar = avatars[userId % avatars.length]
+    return avatar
+  }
+
   StructureMessages() { 
     // need to restructure broadcast method to broadcast back message object vs having to manually structure the response
     let messages = null; 
     let username = 'test'
     if (this.props.users && this.props.messages) { 
-      messages = this.props.messages.map((message, idx) => {
+      messages = this.props.messages.map(message => {
         let user = this.props.users[message.authorId]; 
         if (user !== undefined) username = user.username;  
         let createdAt = this.formatDate(message.createdAt); 
         let body = message.body; 
+        let avatar = this.getAvatar(message.authorId)
+
         return (
          <div className='message-list-item'>
            <span className='left-gutter-spacing'></span>
            <div className='message-avatar'> 
-             <img src={window.HermesAvatar}/>
+              {avatar}
            </div>
            <div className='message-content'>
               <span><strong>{username}</strong></span>
