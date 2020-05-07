@@ -751,7 +751,6 @@ var Listener = /*#__PURE__*/function (_React$Component) {
             channels: this.props.channels[this.props.channels.length - 1]
           }
         };
-        debugger;
         this.createSubscriptions(newChannel);
       }
     }
@@ -760,7 +759,6 @@ var Listener = /*#__PURE__*/function (_React$Component) {
     value: function createSubscriptions(channels) {
       var _this2 = this;
 
-      debugger;
       Object.values(channels.channels).map(function (channel) {
         return App.cable.subscriptions.create({
           channel: 'ChatChannel',
