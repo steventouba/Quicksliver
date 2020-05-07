@@ -4,8 +4,8 @@ Rails.application.routes.draw do
       resources :channels, only: [:index, :show]
       resources :channelmemberships, only: [:index]
     end 
-    resources :channels, only: [:index, :create, :edit, :delete] do 
-    end 
+    resources :channels, only: [:index, :create, :edit, :delete] 
+    resources :channelmemberships, only: [:show]
 
     resources :messages, only: [:index, :post, :delete, :patch]
     resource :session, only: [:create, :destroy]

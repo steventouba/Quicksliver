@@ -2472,15 +2472,22 @@ var configureStore = function configureStore() {
 /*!*****************************************************!*\
   !*** ./frontend/utils/channel_memberships_utils.js ***!
   \*****************************************************/
-/*! exports provided: fetchUserMemberships */
+/*! exports provided: fetchUserMemberships, fetchChannelMembership */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUserMemberships", function() { return fetchUserMemberships; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchChannelMembership", function() { return fetchChannelMembership; });
 var fetchUserMemberships = function fetchUserMemberships(userId) {
   return $.ajax({
     url: "/api/users/".concat(userId, "/channelmemberships"),
+    method: 'GET'
+  });
+};
+var fetchChannelMembership = function fetchChannelMembership(ChannelId) {
+  return $.ajax({
+    url: "/api/users/channelmemberships",
     method: 'GET'
   });
 };

@@ -3,6 +3,7 @@ class Api::UsersController < ApplicationController
   def create 
     @user = User.new(user_params) 
     if @user.save 
+      subscribe_to_global(@user) #when a new user is created they are automatically subscribed to the two global channels 
       login!(@user) 
       render :show
     else 
@@ -41,6 +42,12 @@ class Api::UsersController < ApplicationController
   end 
 
   private 
+
+  def subscribe_to_global(user)
+    ChannelMembership.create({user_id: user.id, channel_id: 1,})
+    ChannelMembership.create({user_id: user.id, channel_id: 2,})
+  end 
+
 
   def selected_user 
     User.find(params[:id])
