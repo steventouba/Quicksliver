@@ -1,5 +1,5 @@
 import { RECEIVE_CURRENT_USER } from "../actions/session_actions";
-import { RECEIVE_CHANNELS } from "../actions/channel_actions";
+import { RECEIVE_CHANNELS, RECEIVE_CHANNEL } from "../actions/channel_actions";
 
 
 const channelsReducer = (state={}, action) => { 
@@ -8,6 +8,8 @@ const channelsReducer = (state={}, action) => {
   switch (action.type) {
     case RECEIVE_CHANNELS:
       return {...action.channels}
+    case RECEIVE_CHANNEL:
+      return {...state, ...action.channel}
     case RECEIVE_CURRENT_USER: 
       return action.user.channels
     default:

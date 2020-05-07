@@ -4,7 +4,7 @@ import * as APIPostUtils from './utils/session_utils';
 import {logOut} from './actions/session_actions';
 import configureStore from './store/store'; 
 import Root from './components/root'; 
-import {fetchUserChannels} from './actions/channel_actions';
+import {fetchUserChannels, createChannel} from './actions/channel_actions';
 import { fetchMessages } from './actions/message_actions';
 
 document.addEventListener("DOMContentLoaded", () => { 
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //Testing Start
   window.utils = APIPostUtils; 
-  window.fetchUserChannels = fetchUserChannels
+  window.createChannel = createChannel; 
   window.getState = store.getState; 
   window.dispatch = store.dispatch; 
   window.fetchMessages = fetchMessages

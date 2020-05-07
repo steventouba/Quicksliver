@@ -19,6 +19,7 @@ class Api::ChannelsController < ApplicationController
   end
 
   def create 
+    debugger 
     @channel = Channel.new(channel_params)
     if @channel.save 
       render '/api/channels/show'
@@ -37,9 +38,13 @@ class Api::ChannelsController < ApplicationController
   end 
 
   private 
+
+  def channel_params 
+    params.require(:channel).permit(:name, :creator_id, :is_private, :channel_type)
+  end 
+
   def selected_user
     User.find_by(id: params[:user_id])
   end 
-
 end
 

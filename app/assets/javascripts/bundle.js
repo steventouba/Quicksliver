@@ -90,16 +90,19 @@
 /*!*********************************************!*\
   !*** ./frontend/actions/channel_actions.js ***!
   \*********************************************/
-/*! exports provided: RECEIVE_CHANNELS, fetchUserChannels */
+/*! exports provided: RECEIVE_CHANNELS, RECEIVE_CHANNEL, fetchUserChannels, createChannel */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_CHANNELS", function() { return RECEIVE_CHANNELS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_CHANNEL", function() { return RECEIVE_CHANNEL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUserChannels", function() { return fetchUserChannels; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createChannel", function() { return createChannel; });
 /* harmony import */ var _utils_channel_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/channel_utils */ "./frontend/utils/channel_utils.js");
 
 var RECEIVE_CHANNELS = 'RECEIVE_CHANNELS';
+var RECEIVE_CHANNEL = 'RECEIVE_CHANNEL';
 
 var receiveChannels = function receiveChannels(channels) {
   return {
@@ -108,10 +111,26 @@ var receiveChannels = function receiveChannels(channels) {
   };
 };
 
+var receiveChannel = function receiveChannel(channel) {
+  return {
+    type: RECEIVE_CHANNEL,
+    channel: channel
+  };
+};
+
 var fetchUserChannels = function fetchUserChannels() {
   return function (dispatch) {
     return _utils_channel_utils__WEBPACK_IMPORTED_MODULE_0__["fetchUserChannels"]().then(function (channels) {
       return dispatch(receiveChannels(channels));
+    }, function (errors) {
+      return dispatch(receiveErrors(errors.responseJSON));
+    });
+  };
+};
+var createChannel = function createChannel(payload) {
+  return function (dispatch) {
+    return _utils_channel_utils__WEBPACK_IMPORTED_MODULE_0__["createChannel"](payload).then(function (channel) {
+      return dispatch(receiveChannel(channel));
     }, function (errors) {
       return dispatch(receiveErrors(errors.responseJSON));
     });
@@ -1972,7 +1991,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   window.utils = _utils_session_utils__WEBPACK_IMPORTED_MODULE_2__;
-  window.fetchUserChannels = _actions_channel_actions__WEBPACK_IMPORTED_MODULE_6__["fetchUserChannels"];
+  window.createChannel = _actions_channel_actions__WEBPACK_IMPORTED_MODULE_6__["createChannel"];
   window.getState = store.getState;
   window.dispatch = store.dispatch;
   window.fetchMessages = _actions_message_actions__WEBPACK_IMPORTED_MODULE_7__["fetchMessages"];
@@ -2048,6 +2067,9 @@ var channelsReducer = function channelsReducer() {
   switch (action.type) {
     case _actions_channel_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_CHANNELS"]:
       return _objectSpread({}, action.channels);
+
+    case _actions_channel_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_CHANNEL"]:
+      return _objectSpread({}, state, {}, action.channel);
 
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_USER"]:
       return action.user.channels;
@@ -2420,16 +2442,26 @@ var fetchUserMemberships = function fetchUserMemberships(userId) {
 /*!*****************************************!*\
   !*** ./frontend/utils/channel_utils.js ***!
   \*****************************************/
-/*! exports provided: fetchUserChannels */
+/*! exports provided: fetchUserChannels, createChannel */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUserChannels", function() { return fetchUserChannels; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createChannel", function() { return createChannel; });
 var fetchUserChannels = function fetchUserChannels(userId) {
   return $.ajax({
     url: "/api/users/".concat(userId, "/channels"),
     method: 'GET'
+  });
+};
+var createChannel = function createChannel(payload) {
+  return $.ajax({
+    url: "/api/channels",
+    method: 'POST',
+    data: {
+      channel: payload
+    }
   });
 };
 

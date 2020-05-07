@@ -5,3 +5,11 @@ export const fetchUserChannels = (userId) => (
     method: 'GET'
   })
 )
+
+export const createChannel = (payload) => (
+  $.ajax({
+    url: `/api/channels`, 
+    method: 'POST',
+    data: {channel: payload}
+  })
+)
