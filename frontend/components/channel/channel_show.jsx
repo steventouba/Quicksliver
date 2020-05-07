@@ -4,6 +4,8 @@ import MessageList from '../messages/message_list';
 import MessageForm from '../messages/message_form';
 import ListenerContainer from '../listener/listener_container';
 import MessageListContainer from '../messages/message_list_container';
+import Modal from '../modal/modal'; 
+
 class ChannelShow extends React.Component { 
   constructor(props) { 
     super(props) 
@@ -33,6 +35,7 @@ class ChannelShow extends React.Component {
         <MessageListContainer /> 
         {/* <MessageForm  /> */}
         <ListenerContainer /> 
+        <Modal />
       </div>
     )
   }

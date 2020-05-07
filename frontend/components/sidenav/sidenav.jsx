@@ -5,6 +5,7 @@ class Sidenav extends React.Component {
   constructor(props) { 
     super(props)
     this.handleClick = this.handleClick.bind(this); 
+    this.openModal = this.openModal.bind(this); 
   }
 
   handleClick(e) { 
@@ -12,10 +13,11 @@ class Sidenav extends React.Component {
     this.props.logOut(); 
   }
 
-  // componentDidMount() { 
-  //   this.props.fetchUserChannels(this.props.currentUser.id)
-  //   this.props.fetchChannelMemberships(this.props.currentUser.id)
-  // }
+  openModal(e) { 
+    debugger
+    e.preventDefault; 
+    this.props.createChannel('createChannel'); 
+  }
 
   render() { 
    const chats = this.props.chats;
@@ -38,15 +40,25 @@ class Sidenav extends React.Component {
         </div>
         <div className='sidenav-channels'>
           <div className='channel-header'>
-            <span className='channel-item-gutter'></span>
-            Channels
+            {/* <span className='channel-item-gutter'></span> */}
+            <div className='channels-div'>
+              Channels
+            </div>
+            <div className='open-channel-modal'>
+              <button onClick={this.openModal}><i class="fas fa-plus"></i></button>
+            </div>
           </div>
           <ChannelHeaders channels={chats.channels}  userId={this.props.currentUser.id}/> 
         </div>
         <div className='sidenav-directmessages'>
           <div className='directmessage-header'>
-            <span className='channel-item-gutter'></span>
-            Direct messages
+            {/* <span className='channel-item-gutter'></span> */}
+            <div className='channels-div'>
+              Direct Messages 
+            </div>
+            <div className='open-channel-modal'>
+              <button onClick={this.openModal}><i class="fas fa-plus"></i></button>
+            </div>
           </div>
           <DirectMessageHeaders channels={chats.directMessages} userId={this.props.currentUser.id}/> 
         </div>

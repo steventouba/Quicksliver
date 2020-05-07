@@ -40,6 +40,23 @@
 
 .channel-header, .directmessage-header { 
   margin: 10px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.channels-div { 
+  margin-left: 10px;
+}
+.open-channel-modal { 
+  cursor: pointer;
+  margin-right: 15px;
+}
+
+.open-channel-modal > button { 
+  cursor: pointer;
+  font-size: 14px;
 }
 
 .channel-item-gutter { 
