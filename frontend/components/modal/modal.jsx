@@ -1,10 +1,10 @@
 import React from 'react'; 
 import { closeModal } from '../../actions/modal_actions'; 
+import { createChannel } from '../../actions/channel_actions'; 
 import { connect } from 'react-redux';
 import ChannelCreateFrom from '../channel/channel_create-form'; 
 
-const Modal = ({modal, closeModal, currentUser}) => { 
-  debugger
+const Modal = ({modal, closeModal, createChannel, currentUser}) => { 
   if (!modal) { 
     return null; 
   }
@@ -14,6 +14,7 @@ const Modal = ({modal, closeModal, currentUser}) => {
     case 'createChannel':
       component = <ChannelCreateFrom 
         currentUserId={currentUser.id}  
+        createChannel={createChannel}
         closeModal={closeModal}
       /> 
       break 
@@ -41,7 +42,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => { 
 
   return { 
-    closeModal: () => dispatch(closeModal())
+    closeModal: () => dispatch(closeModal()), 
+    createChannel: (channel) => dispatch(createChannel(channel))
   }; 
 }
 

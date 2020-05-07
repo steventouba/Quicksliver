@@ -1,4 +1,5 @@
 import React from 'react'; 
+import Switch from '../switch/switch';
 
 
 class ChannelCreateForm extends React.Component { 
@@ -14,7 +15,6 @@ class ChannelCreateForm extends React.Component {
     this.toggleChannelType = this.toggleChannelType.bind(this);
   }
 
-
   handleSubmit() { 
     event.preventDefault(); 
     this.props.createChannel(this.state)
@@ -27,15 +27,19 @@ class ChannelCreateForm extends React.Component {
 
   toggleChannelType () { 
     this.setState((prevState) => ({isPrivate: !prevState.isPrivate}))
-    debugger
   }
   
   render () { 
-    debugger
+
     return ( 
       <div className='channel-create-container'>
         <div className='channel-create-header'>
-          Create a channel 
+          {
+            this.state.isPrivate ? 
+            'Create a private channel' 
+            : 
+            'Create a channel' 
+          }
         </div>
         <div className='channel-create-fluff'>
           Channels are where your team communicates. 
@@ -51,6 +55,7 @@ class ChannelCreateForm extends React.Component {
             <input 
               type="text"
               className='channel-create-input' 
+              placeholder='e.g. plan-herculean-tasks'
               value={this.state.name}
               onChange={this.updateField('name')}
             />
@@ -58,14 +63,22 @@ class ChannelCreateForm extends React.Component {
           </div>
           <div className='channel-create-type'>
             <div className='channel-create-description'>
-              <h4>Channel Type</h4>
-              <p>By setting a channel is set to private, it can only be viewed or joined by invitation.</p>
+              <h4>Make Private</h4>
+              <p>
+                {
+                  this.state.isPrivate ? 
+                    'This can’t be undone. A private channel cannot be made public later on.' 
+                    : 
+                    'By setting a channel to private, it can only be viewed or joined by invitation.'
+                }
+              </p>
             </div>
             <div className='channel-type-selector'>
-              <select value={this.state.isPrivate} onChange={this.toggleChannelType}>
+              {/* <select value={this.state.isPrivate} onChange={this.toggleChannelType}>
                 <option selected value="false">Public</option>
                 <option value="true">Private</option>
-            </select>
+            </select> */}
+            <Switch isPrivate={this.state.isPrivate} toggleChannelType={this.toggleChannelType} />
             </div>
           </div>
           <div className='create-channel-button'>

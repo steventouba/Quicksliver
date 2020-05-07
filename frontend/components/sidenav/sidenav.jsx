@@ -14,7 +14,7 @@ class Sidenav extends React.Component {
   }
 
   openModal(e) { 
-    debugger
+
     e.preventDefault; 
     this.props.createChannel('createChannel'); 
   }
@@ -45,7 +45,7 @@ class Sidenav extends React.Component {
               Channels
             </div>
             <div className='open-channel-modal'>
-              <button onClick={this.openModal}><i class="fas fa-plus"></i></button>
+              <button onClick={this.openModal}><i className="fas fa-plus"></i></button>
             </div>
           </div>
           <ChannelHeaders channels={chats.channels}  userId={this.props.currentUser.id}/> 
@@ -57,7 +57,7 @@ class Sidenav extends React.Component {
               Direct Messages 
             </div>
             <div className='open-channel-modal'>
-              <button onClick={this.openModal}><i class="fas fa-plus"></i></button>
+              <button onClick={this.openModal}><i className="fas fa-plus"></i></button>
             </div>
           </div>
           <DirectMessageHeaders channels={chats.directMessages} userId={this.props.currentUser.id}/> 

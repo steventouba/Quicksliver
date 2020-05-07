@@ -11,7 +11,16 @@ class Listener extends React.Component {
       .then((channels) => this.createSubscriptions(channels))
   }
 
+  componentDidUpdate(prevProps) { 
+    if ( prevProps.channels.length !== 0 && prevProps.channels.length < this.props.channels.length) {
+      const newChannel = { channels: { channels: this.props.channels[this.props.channels.length - 1]}}
+      debugger
+      this.createSubscriptions(newChannel); 
+    }
+  }
+
   createSubscriptions(channels) { 
+    debugger
     Object.values(channels.channels).map(channel => (
       App.cable.subscriptions.create(
         {channel: 'ChatChannel', room: channel.id}, 

@@ -9,7 +9,7 @@ const channelsReducer = (state={}, action) => {
     case RECEIVE_CHANNELS:
       return {...action.channels}
     case RECEIVE_CHANNEL:
-      return {...state, ...action.channel}
+      return {...state, [action.channel.id]: action.channel}
     case RECEIVE_CURRENT_USER: 
       return action.user.channels
     default:

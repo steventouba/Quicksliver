@@ -429,6 +429,7 @@ var App = function App() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _switch_switch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../switch/switch */ "./frontend/components/switch/switch.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -452,6 +453,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -500,17 +502,15 @@ var ChannelCreateForm = /*#__PURE__*/function (_React$Component) {
           isPrivate: !prevState.isPrivate
         };
       });
-      debugger;
     }
   }, {
     key: "render",
     value: function render() {
-      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "channel-create-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "channel-create-header"
-      }, "Create a channel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, this.state.isPrivate ? 'Create a private channel' : 'Create a channel'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "channel-create-fluff"
       }, "Channels are where your team communicates. They\u2019re best when organized around a topic \u2014 #Titans, for example."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         className: "channel-create-form",
@@ -520,23 +520,19 @@ var ChannelCreateForm = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Channel Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         className: "channel-create-input",
+        placeholder: "e.g. plan-herculean-tasks",
         value: this.state.name,
         onChange: this.updateField('name')
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "channel-create-type"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "channel-create-description"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Channel Type"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "By setting a channel is set to private, it can only be viewed or joined by invitation.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Make Private"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.isPrivate ? 'This can’t be undone. A private channel cannot be made public later on.' : 'By setting a channel to private, it can only be viewed or joined by invitation.')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "channel-type-selector"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-        value: this.state.isPrivate,
-        onChange: this.toggleChannelType
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        selected: true,
-        value: "false"
-      }, "Public"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
-        value: "true"
-      }, "Private")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_switch_switch__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        isPrivate: this.state.isPrivate,
+        toggleChannelType: this.toggleChannelType
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "create-channel-button"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Create Channel"))));
     }
@@ -747,10 +743,24 @@ var Listener = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (prevProps.channels.length !== 0 && prevProps.channels.length < this.props.channels.length) {
+        var newChannel = {
+          channels: {
+            channels: this.props.channels[this.props.channels.length - 1]
+          }
+        };
+        debugger;
+        this.createSubscriptions(newChannel);
+      }
+    }
+  }, {
     key: "createSubscriptions",
     value: function createSubscriptions(channels) {
       var _this2 = this;
 
+      debugger;
       Object.values(channels.channels).map(function (channel) {
         return App.cable.subscriptions.create({
           channel: 'ChatChannel',
@@ -1268,8 +1278,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _channel_channel_create_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../channel/channel_create-form */ "./frontend/components/channel/channel_create-form.jsx");
+/* harmony import */ var _actions_channel_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/channel_actions */ "./frontend/actions/channel_actions.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _channel_channel_create_form__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../channel/channel_create-form */ "./frontend/components/channel/channel_create-form.jsx");
+
 
 
 
@@ -1278,8 +1290,8 @@ __webpack_require__.r(__webpack_exports__);
 var Modal = function Modal(_ref) {
   var modal = _ref.modal,
       closeModal = _ref.closeModal,
+      createChannel = _ref.createChannel,
       currentUser = _ref.currentUser;
-  debugger;
 
   if (!modal) {
     return null;
@@ -1289,8 +1301,9 @@ var Modal = function Modal(_ref) {
 
   switch (modal) {
     case 'createChannel':
-      component = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_channel_channel_create_form__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      component = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_channel_channel_create_form__WEBPACK_IMPORTED_MODULE_4__["default"], {
         currentUserId: currentUser.id,
+        createChannel: createChannel,
         closeModal: closeModal
       });
       break;
@@ -1322,11 +1335,14 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     closeModal: function closeModal() {
       return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_1__["closeModal"])());
+    },
+    createChannel: function createChannel(channel) {
+      return dispatch(Object(_actions_channel_actions__WEBPACK_IMPORTED_MODULE_2__["createChannel"])(channel));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(Modal));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, mapDispatchToProps)(Modal));
 
 /***/ }),
 
@@ -1690,7 +1706,6 @@ var Sidenav = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "openModal",
     value: function openModal(e) {
-      debugger;
       e.preventDefault;
       this.props.createChannel('createChannel');
     }
@@ -1725,7 +1740,7 @@ var Sidenav = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.openModal
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        "class": "fas fa-plus"
+        className: "fas fa-plus"
       })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ChannelHeaders, {
         channels: chats.channels,
         userId: this.props.currentUser.id
@@ -1740,7 +1755,7 @@ var Sidenav = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.openModal
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        "class": "fas fa-plus"
+        className: "fas fa-plus"
       })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(DirectMessageHeaders, {
         channels: chats.directMessages,
         userId: this.props.currentUser.id
@@ -1941,6 +1956,41 @@ var splash = function splash() {
 
 /***/ }),
 
+/***/ "./frontend/components/switch/switch.jsx":
+/*!***********************************************!*\
+  !*** ./frontend/components/switch/switch.jsx ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var Switch = function Switch(props) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    checked: props.isPrivate,
+    onChange: props.toggleChannelType,
+    className: "react-switch-checkbox",
+    id: "react-switch-new",
+    type: "checkbox"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    style: {
+      background: props.isPrivate && '#06D6A0'
+    },
+    className: "react-switch-label",
+    htmlFor: "react-switch-new"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "react-switch-button"
+  })));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Switch);
+
+/***/ }),
+
 /***/ "./frontend/index.jsx":
 /*!****************************!*\
   !*** ./frontend/index.jsx ***!
@@ -2069,7 +2119,7 @@ var channelsReducer = function channelsReducer() {
       return _objectSpread({}, action.channels);
 
     case _actions_channel_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_CHANNEL"]:
-      return _objectSpread({}, state, {}, action.channel);
+      return _objectSpread({}, state, _defineProperty({}, action.channel.id, action.channel));
 
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_USER"]:
       return action.user.channels;
@@ -2216,7 +2266,6 @@ var modalReducer = function modalReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
   Object.freeze(state);
-  debugger;
 
   switch (action.type) {
     case _actions_modal_actions__WEBPACK_IMPORTED_MODULE_0__["OPEN_MODAL"]:

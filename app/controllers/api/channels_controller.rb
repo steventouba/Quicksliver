@@ -19,9 +19,10 @@ class Api::ChannelsController < ApplicationController
   end
 
   def create 
-    debugger 
+  
     @channel = Channel.new(channel_params)
     if @channel.save 
+      ChannelMembership.create({user_id: @channel.creator_id, channel_id: @channel.id, is_admin: true})
       render '/api/channels/show'
     else
       render json: ['something went wrong'], status: 401
