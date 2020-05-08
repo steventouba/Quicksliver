@@ -386,6 +386,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _splash_splash__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./splash/splash */ "./frontend/components/splash/splash.jsx");
 /* harmony import */ var _channel_channel_show_container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./channel/channel_show_container */ "./frontend/components/channel/channel_show_container.jsx");
 /* harmony import */ var _channel_channel_show__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./channel/channel_show */ "./frontend/components/channel/channel_show.jsx");
+/* harmony import */ var _componentUtils_autocomplete__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./componentUtils/autocomplete */ "./frontend/components/componentUtils/autocomplete.jsx");
+
 
 
 
@@ -414,6 +416,10 @@ var App = function App() {
   })));
 };
 
+{}
+/* <AutoComplete />  */
+//working on autocomplete for direct messages later 
+
 /* harmony default export */ __webpack_exports__["default"] = (App);
 
 /***/ }),
@@ -429,7 +435,7 @@ var App = function App() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _switch_switch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../switch/switch */ "./frontend/components/switch/switch.jsx");
+/* harmony import */ var _componentUtils_switch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../componentUtils/switch */ "./frontend/components/componentUtils/switch.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -529,7 +535,7 @@ var ChannelCreateForm = /*#__PURE__*/function (_React$Component) {
         className: "channel-create-description"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Make Private"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.isPrivate ? 'This can’t be undone. A private channel cannot be made public later on.' : 'By setting a channel to private, it can only be viewed or joined by invitation.')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "channel-type-selector"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_switch_switch__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_componentUtils_switch__WEBPACK_IMPORTED_MODULE_1__["default"], {
         isPrivate: this.state.isPrivate,
         toggleChannelType: this.toggleChannelType
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -681,6 +687,134 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_channel_show__WEBPACK_IMPORTED_MODULE_2__["default"]));
+
+/***/ }),
+
+/***/ "./frontend/components/componentUtils/autocomplete.jsx":
+/*!*************************************************************!*\
+  !*** ./frontend/components/componentUtils/autocomplete.jsx ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+var autocomplete = /*#__PURE__*/function (_React$Component) {
+  _inherits(autocomplete, _React$Component);
+
+  var _super = _createSuper(autocomplete);
+
+  function autocomplete(props) {
+    var _this;
+
+    _classCallCheck(this, autocomplete);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      users: ['joey', 'nick', 'chris', 'john', 'abby'],
+      searchString: ""
+    };
+    _this.updateSearchString = _this.updateSearchString.bind(_assertThisInitialized(_this));
+    _this.updateMatches = _this.updateMatches.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(autocomplete, [{
+    key: "updateSearchString",
+    value: function updateSearchString() {
+      this.setState({
+        searchString: event.target.value
+      });
+    }
+  }, {
+    key: "updateMatches",
+    value: function updateMatches() {
+      if (this.state.searchString.length === 0) return this.state.users;
+      var searchString = new RegExp("\\b".concat(this.state.searchString));
+      var matchedUsers = this.state.users.filter(function (user) {
+        return user.match(searchString);
+      });
+      return matchedUsers.length > 0 ? matchedUsers : ['no matches'];
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var matches = this.updateMatches();
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, "Direct Messages"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        onChange: this.updateSearchString,
+        type: "text",
+        placeholder: "Find or start a conversation"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Go")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, matches.map(function (user) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, user);
+      })));
+    }
+  }]);
+
+  return autocomplete;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (autocomplete);
+
+/***/ }),
+
+/***/ "./frontend/components/componentUtils/switch.jsx":
+/*!*******************************************************!*\
+  !*** ./frontend/components/componentUtils/switch.jsx ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var Switch = function Switch(props) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    checked: props.isPrivate,
+    onChange: props.toggleChannelType,
+    className: "react-switch-checkbox",
+    id: "react-switch-new",
+    type: "checkbox"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    style: {
+      background: props.isPrivate && '#06D6A0'
+    },
+    className: "react-switch-label",
+    htmlFor: "react-switch-new"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "react-switch-button"
+  })));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Switch);
 
 /***/ }),
 
@@ -1951,41 +2085,6 @@ var splash = function splash() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (splash);
-
-/***/ }),
-
-/***/ "./frontend/components/switch/switch.jsx":
-/*!***********************************************!*\
-  !*** ./frontend/components/switch/switch.jsx ***!
-  \***********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-
-var Switch = function Switch(props) {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    checked: props.isPrivate,
-    onChange: props.toggleChannelType,
-    className: "react-switch-checkbox",
-    id: "react-switch-new",
-    type: "checkbox"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    style: {
-      background: props.isPrivate && '#06D6A0'
-    },
-    className: "react-switch-label",
-    htmlFor: "react-switch-new"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "react-switch-button"
-  })));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Switch);
 
 /***/ }),
 
