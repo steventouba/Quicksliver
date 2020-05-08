@@ -72,3 +72,60 @@ A user can create a private channel by toggling the switch
    end
 end
 ```
+
+A listener is used to fetch and create subscriptions to all pre-existing user channels. When a new channel is created the listener will create the resulting subscription along with the custom speak and received methods. 
+
+```javascript 
+import React from 'react';
+
+class Listener extends React.Component { 
+  constructor(props) { 
+    super(props)
+  }
+
+  componentDidMount() { 
+    this.props.fetchChannelMemberships(this.props.currentUser.id)
+    this.props.fetchUserChannels(this.props.currentUser.id) //channels are fetched using an ajax call 
+    // a promise is used to ensure subscriptions are created for all channels 
+      .then((channels) => this.createSubscriptions(channels)) 
+  }
+
+  componentDidUpdate(prevProps) { 
+    if ( prevProps.channels.length !== 0 && prevProps.channels.length < this.props.channels.length) {
+      const newChannel = { channels: { channels: this.props.channels[this.props.channels.length - 1]}}
+      //on an update a subscription will be created for only the most recently created  channel 
+      this.createSubscriptions(newChannel);  
+    }
+  }
+
+  createSubscriptions(channels) { 
+    Object.values(channels.channels).map(channel => (
+      App.cable.subscriptions.create(
+        {channel: 'ChatChannel', room: channel.id}, 
+        { 
+          received: data => { 
+            let messagePayload = { 
+              [data.message.id]: data.message
+            }
+            //action creator that will update redux store everytime a message is broadcast 
+            this.props.receiveMessage(messagePayload) 
+          },
+          speak: function(data) { 
+          /*speak is how data(messages) are sent to the Channel controller,
+           perform is an ActionCable method that executes               
+           the speak method on the channel perform(action, data = {})*/ 
+            return this.perform('speak', data)
+          }
+        }
+      )
+
+    ))
+  }
+
+  render() { 
+    return(
+      null
+    )
+  }
+}
+```
