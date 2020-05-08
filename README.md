@@ -1,4 +1,5 @@
-# Quicksliver 
+# Quicksliver  
+<img src="app/assets/images/logo.png" />
 
 [Live Demo](https://quicksilver1.herokuapp.com/#/)
 
