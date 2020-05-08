@@ -58,7 +58,8 @@ A user can create a private channel by toggling the switch
      )
 
      socket = { message: 
-       {id: message.id, authorId: message.author_id, 
+       {id: message.id, 
+         authorId: message.author_id, 
          body: message.body, 
          channelId: message.channel_id, 
          createdAt: message.created_at
