@@ -25,7 +25,7 @@ A user can create a private channel by toggling the switch
 
  ActionCable was introduced around 2015 in Rails version 5. It allows for the creation of multiple Pub/Sub connections per websocket connection. A user can subscribe to and broadcast from multiple instances of a channel at the same time. When a user publishes information, it sent back to the channel "controller" using a custom defined method on the client side. From there the message is saved to the database and broadcast back to the appropriate channel instance. 
  
-  **Code has been intentionally commented to provide insight**
+  **Code has been commented to provide background**
 ```javascript
   handleSubmit() {
     event.preventDefault();
