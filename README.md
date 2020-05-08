@@ -1,24 +1,19 @@
-# README
+# Quicksliver 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[Live Demo](https://quicksilver1.herokuapp.com/#/)
 
-Things you may want to cover:
+## Description
+Quicksilver is a single page messaging app, inspired by slack and greek mytholgoy. It allows user to create, send, and receive messages in realtime. 
 
-* Ruby version
+## Technologies Used 
+  * Backend: Ruby on Rails / PostgreSQL
+  * Frontend: React / Redux / jquery 
+  * Hosting: Heroku 
+  * Websockets: ActionCable 
+  
+## Features 
 
-* System dependencies
+**Channels** 
+A user can have multiple channels that they either create or are shared with them. 
 
-* Configuration
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
