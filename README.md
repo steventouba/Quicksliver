@@ -19,3 +19,4 @@ A user can have multiple channels that they either create or are shared with the
 
 A user can create a private channel by toggling the switch 
 ![channel create](app/assets/images/channel-create.png)
+![channel private](app/assets/images/private-channel.png)
