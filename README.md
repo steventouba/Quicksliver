@@ -16,4 +16,4 @@ Quicksilver is a single page messaging app, inspired by slack and greek mytholgo
 **Channels** 
 A user can have multiple channels that they either create or are shared with them. 
 
-![channel show](/Users/steventouba/Desktop/channel-show)
+
