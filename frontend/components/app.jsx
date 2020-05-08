@@ -20,6 +20,6 @@ const App = () => (
   </div>
 
 )
+{/* <AutoComplete />  //working on autocomplete for direct messages later  */}
 
-{/* <AutoComplete />  */} //working on autocomplete for direct messages later 
 export default App; 
