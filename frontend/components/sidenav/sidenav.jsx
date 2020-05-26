@@ -12,7 +12,7 @@ class Sidenav extends React.Component {
     e.preventDefault; 
     this.props.logOut(); 
   }
-
+  
   openModal(e) { 
 
     e.preventDefault; 
@@ -102,7 +102,7 @@ const DirectMessageHeaders = ({channels, userId, deleteChannel }) => {
     elements = channels.map(channel => (
       <Link key={channel.id} to={`/main/channels/${channel.id}`}>
         <div className='channel-item'>
-          <span className='channel-item-gutter'></span>
+          {/* <span className='channel-item-gutter'></span> */}
           {channel.name}
           <div onClick={() => deleteChannel(channel.id)}>x</div>
         </div>

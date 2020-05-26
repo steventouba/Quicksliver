@@ -7,7 +7,6 @@ import {
 
 
 const channelsReducer = (state={}, action) => { 
-  debugger
   Object.freeze(state); 
   
   switch (action.type) {
@@ -16,8 +15,10 @@ const channelsReducer = (state={}, action) => {
     case RECEIVE_CHANNEL:
       return {...state, [action.channel.id]: action.channel};
     case REMOVE_CHANNEL: 
-      delete state[action.channel.id]
-      return state;
+      const newState = Object.assign({},state); 
+      const channelId = action.channel.id; 
+      delete newState[channelId]
+      return newState;
     case RECEIVE_CURRENT_USER: 
       return action.user.channels
     default:

@@ -67,7 +67,12 @@
 .channel-item { 
   display: flex;
   justify-content: space-between;
-  padding: 3px 0;
+  padding: 3px 0 0 5px;
+}
+
+.channel-item div:last-of-type { 
+  padding-right: 3px;
+  color: red;
 }
 
 .channel-item:hover { 

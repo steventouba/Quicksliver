@@ -1951,9 +1951,7 @@ var DirectMessageHeaders = function DirectMessageHeaders(_ref2) {
         to: "/main/channels/".concat(channel.id)
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "channel-item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "channel-item-gutter"
-      }), channel.name, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, channel.name, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onClick: function onClick() {
           return deleteChannel(channel.id);
         }
@@ -2024,6 +2022,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state) {
+  debugger;
   return {
     chats: Object(_reducers_chats_selector__WEBPACK_IMPORTED_MODULE_3__["default"])(state.entities.channels),
     currentUser: state.session.currentUser
@@ -2235,7 +2234,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var channelsReducer = function channelsReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
-  debugger;
   Object.freeze(state);
 
   switch (action.type) {
@@ -2246,8 +2244,10 @@ var channelsReducer = function channelsReducer() {
       return _objectSpread({}, state, _defineProperty({}, action.channel.id, action.channel));
 
     case _actions_channel_actions__WEBPACK_IMPORTED_MODULE_1__["REMOVE_CHANNEL"]:
-      delete state[action.channel.id];
-      return state;
+      var newState = Object.assign({}, state);
+      var channelId = action.channel.id;
+      delete newState[channelId];
+      return newState;
 
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_USER"]:
       return action.user.channels;

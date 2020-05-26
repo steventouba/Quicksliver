@@ -6,6 +6,7 @@ import {openModal} from '../../actions/modal_actions'
 import { deleteChannel } from "../../actions/channel_actions";
 
 const mapStateToProps = (state) => {
+  debugger 
   return {
     chats: chatsSelector(state.entities.channels), 
     currentUser: state.session.currentUser
