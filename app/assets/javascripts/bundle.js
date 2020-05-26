@@ -924,9 +924,7 @@ var Listener = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return (// <div></div>
-        null
-      );
+      return null;
     }
   }]);
 
