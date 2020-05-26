@@ -40,7 +40,6 @@ class Listener extends React.Component {
 
   render() { 
     return(
-      // <div></div>
       null
     )
   }
