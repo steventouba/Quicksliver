@@ -30,9 +30,10 @@ class Api::ChannelsController < ApplicationController
   end 
 
   def destroy 
-    @channel = channel.find_by(id: params[:id])
+    @channel = Channel.find_by(id: params[:id])
     if @channel 
       @channel.destroy
+      render :show
    else 
     render json: ['unathorized'], status: 404 
    end 

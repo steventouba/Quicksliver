@@ -48,7 +48,10 @@ class Sidenav extends React.Component {
               <button onClick={this.openModal}><i className="fas fa-plus"></i></button>
             </div>
           </div>
-          <ChannelHeaders channels={chats.channels}  userId={this.props.currentUser.id}/> 
+          <ChannelHeaders deleteChannel={this.props.deleteChannel} 
+            channels={chats.channels}  
+            userId={this.props.currentUser.id}
+          /> 
         </div>
         <div className='sidenav-directmessages'>
           <div className='directmessage-header'>
@@ -60,22 +63,26 @@ class Sidenav extends React.Component {
               <button onClick={this.openModal}><i className="fas fa-plus"></i></button>
             </div>
           </div>
-          <DirectMessageHeaders channels={chats.directMessages} userId={this.props.currentUser.id}/> 
+          <DirectMessageHeaders  deleteChannel={this.props.deleteChannel}
+            channels={chats.directMessages} 
+            userId={this.props.currentUser.id}
+          /> 
         </div>
       </div>
     )
   }
 }
 
-const ChannelHeaders = ({channels, userId }) => { 
+const ChannelHeaders = ({channels, userId, deleteChannel}) => { 
   let elements; 
   
   try {
     elements = channels.map(channel => (
       <Link key={channel.id} to={`/main/channels/${channel.id}`}>
         <div className='channel-item'>
-          <span className='channel-item-gutter'></span>
+          {/* <span className='channel-item-gutter'></span> */}
           # {channel.name}
+         <div onClick={() => deleteChannel(channel.id)}>x</div>
         </div>
       </Link>
     ))
@@ -88,7 +95,7 @@ const ChannelHeaders = ({channels, userId }) => {
   )
 }
 
-const DirectMessageHeaders = ({channels, userId }) => { 
+const DirectMessageHeaders = ({channels, userId, deleteChannel }) => { 
   let elements; 
 
   try {
@@ -97,6 +104,7 @@ const DirectMessageHeaders = ({channels, userId }) => {
         <div className='channel-item'>
           <span className='channel-item-gutter'></span>
           {channel.name}
+          <div onClick={() => deleteChannel(channel.id)}>x</div>
         </div>
       </Link>
     ))

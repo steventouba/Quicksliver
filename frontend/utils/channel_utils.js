@@ -13,3 +13,10 @@ export const createChannel = (payload) => (
     data: {channel: payload}
   })
 )
+
+export const deleteChannel = (channelId) => (
+  $.ajax({
+    url: `/api/channels/${channelId}`, 
+    method: 'DELETE',
+  })
+)

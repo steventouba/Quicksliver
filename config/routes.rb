@@ -4,10 +4,11 @@ Rails.application.routes.draw do
       resources :channels, only: [:index, :show]
       resources :channelmemberships, only: [:index]
     end 
-    resources :channels, only: [:index, :create, :edit, :delete] 
-    resources :channelmemberships, only: [:show]
+    
+    resources :channels, only: [:index, :create, :edit, :destroy] 
+    resources :channelmemberships, only: [:show, :destroy]
 
-    resources :messages, only: [:index, :post, :delete, :patch]
+    resources :messages, only: [:index, :post, :destroy, :patch]
     resource :session, only: [:create, :destroy]
   end 
 

@@ -9,3 +9,4 @@ export const fetchChannelMembership = (ChannelId) => (
     url: `/api/users/channelmemberships`,
     method: 'GET'
   }))
+

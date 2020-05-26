@@ -3,8 +3,7 @@ import { logOut } from '../../actions/session_actions';
 import Sidenav from './sidenav'; 
 import chatsSelector from "../../reducers/chats_selector";
 import {openModal} from '../../actions/modal_actions'
-// import { fetchUserChannels } from "../../actions/channel_actions";
-// import { fetchChannelMemberships } from "../../actions/channel_memberships_actions";
+import { deleteChannel } from "../../actions/channel_actions";
 
 const mapStateToProps = (state) => {
   return {
@@ -16,7 +15,8 @@ const mapStateToProps = (state) => {
 const MapDispatchToProps = (dispatch) => {
   return {
     logOut: () => dispatch(logOut()),
-    createChannel: (formAction) => dispatch(openModal(formAction))
+    createChannel: (formAction) => dispatch(openModal(formAction)),
+    deleteChannel: (channelId) => dispatch(deleteChannel(channelId))
   }
 };
 

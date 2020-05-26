@@ -90,19 +90,22 @@
 /*!*********************************************!*\
   !*** ./frontend/actions/channel_actions.js ***!
   \*********************************************/
-/*! exports provided: RECEIVE_CHANNELS, RECEIVE_CHANNEL, fetchUserChannels, createChannel */
+/*! exports provided: RECEIVE_CHANNELS, RECEIVE_CHANNEL, REMOVE_CHANNEL, fetchUserChannels, createChannel, deleteChannel */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_CHANNELS", function() { return RECEIVE_CHANNELS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_CHANNEL", function() { return RECEIVE_CHANNEL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_CHANNEL", function() { return REMOVE_CHANNEL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUserChannels", function() { return fetchUserChannels; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createChannel", function() { return createChannel; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteChannel", function() { return deleteChannel; });
 /* harmony import */ var _utils_channel_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/channel_utils */ "./frontend/utils/channel_utils.js");
 
 var RECEIVE_CHANNELS = 'RECEIVE_CHANNELS';
 var RECEIVE_CHANNEL = 'RECEIVE_CHANNEL';
+var REMOVE_CHANNEL = 'REMOVE_CHANNEL';
 
 var receiveChannels = function receiveChannels(channels) {
   return {
@@ -118,22 +121,32 @@ var receiveChannel = function receiveChannel(channel) {
   };
 };
 
+var removeChannel = function removeChannel(channel) {
+  return {
+    type: REMOVE_CHANNEL,
+    channel: channel
+  };
+};
+
 var fetchUserChannels = function fetchUserChannels() {
   return function (dispatch) {
     return _utils_channel_utils__WEBPACK_IMPORTED_MODULE_0__["fetchUserChannels"]().then(function (channels) {
       return dispatch(receiveChannels(channels));
-    }, function (errors) {
-      return dispatch(receiveErrors(errors.responseJSON));
-    });
+    }, console.log);
   };
 };
 var createChannel = function createChannel(payload) {
   return function (dispatch) {
     return _utils_channel_utils__WEBPACK_IMPORTED_MODULE_0__["createChannel"](payload).then(function (channel) {
       return dispatch(receiveChannel(channel));
-    }, function (errors) {
-      return dispatch(receiveErrors(errors.responseJSON));
-    });
+    }, console.log);
+  };
+};
+var deleteChannel = function deleteChannel(channelId) {
+  return function (dispatch) {
+    return _utils_channel_utils__WEBPACK_IMPORTED_MODULE_0__["deleteChannel"](channelId).then(function (channel) {
+      return dispatch(removeChannel(channel));
+    }, console.log);
   };
 };
 
@@ -400,7 +413,20 @@ __webpack_require__.r(__webpack_exports__);
 var App = function App() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "app-body"
-  });
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_utils__WEBPACK_IMPORTED_MODULE_2__["ProtectedRoute"], {
+    path: "/main/channels/:channelId",
+    component: _channel_channel_show_container__WEBPACK_IMPORTED_MODULE_6__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_utils__WEBPACK_IMPORTED_MODULE_2__["AuthRoute"], {
+    path: "/signup",
+    component: _session_signup_form_container__WEBPACK_IMPORTED_MODULE_4__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_utils_route_utils__WEBPACK_IMPORTED_MODULE_2__["AuthRoute"], {
+    path: "/login",
+    component: _session_login_form_container__WEBPACK_IMPORTED_MODULE_3__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    exact: true,
+    path: "/",
+    component: _splash_splash__WEBPACK_IMPORTED_MODULE_5__["default"]
+  })));
 };
 
 {
@@ -1860,6 +1886,7 @@ var Sidenav = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fas fa-plus"
       })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ChannelHeaders, {
+        deleteChannel: this.props.deleteChannel,
         channels: chats.channels,
         userId: this.props.currentUser.id
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1875,6 +1902,7 @@ var Sidenav = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fas fa-plus"
       })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(DirectMessageHeaders, {
+        deleteChannel: this.props.deleteChannel,
         channels: chats.directMessages,
         userId: this.props.currentUser.id
       })));
@@ -1886,7 +1914,8 @@ var Sidenav = /*#__PURE__*/function (_React$Component) {
 
 var ChannelHeaders = function ChannelHeaders(_ref) {
   var channels = _ref.channels,
-      userId = _ref.userId;
+      userId = _ref.userId,
+      deleteChannel = _ref.deleteChannel;
   var elements;
 
   try {
@@ -1896,9 +1925,11 @@ var ChannelHeaders = function ChannelHeaders(_ref) {
         to: "/main/channels/".concat(channel.id)
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "channel-item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "channel-item-gutter"
-      }), "# ", channel.name));
+      }, "# ", channel.name, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        onClick: function onClick() {
+          return deleteChannel(channel.id);
+        }
+      }, "x")));
     });
   } catch (error) {
     elements = null;
@@ -1909,7 +1940,8 @@ var ChannelHeaders = function ChannelHeaders(_ref) {
 
 var DirectMessageHeaders = function DirectMessageHeaders(_ref2) {
   var channels = _ref2.channels,
-      userId = _ref2.userId;
+      userId = _ref2.userId,
+      deleteChannel = _ref2.deleteChannel;
   var elements;
 
   try {
@@ -1921,7 +1953,11 @@ var DirectMessageHeaders = function DirectMessageHeaders(_ref2) {
         className: "channel-item"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "channel-item-gutter"
-      }), channel.name));
+      }), channel.name, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        onClick: function onClick() {
+          return deleteChannel(channel.id);
+        }
+      }, "x")));
     });
   } catch (error) {
     elements = null;
@@ -1979,12 +2015,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _sidenav__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./sidenav */ "./frontend/components/sidenav/sidenav.jsx");
 /* harmony import */ var _reducers_chats_selector__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../reducers/chats_selector */ "./frontend/reducers/chats_selector.js");
 /* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
+/* harmony import */ var _actions_channel_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/channel_actions */ "./frontend/actions/channel_actions.js");
 
 
 
 
- // import { fetchUserChannels } from "../../actions/channel_actions";
-// import { fetchChannelMemberships } from "../../actions/channel_memberships_actions";
+
+
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
@@ -2000,6 +2037,9 @@ var MapDispatchToProps = function MapDispatchToProps(dispatch) {
     },
     createChannel: function createChannel(formAction) {
       return dispatch(Object(_actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__["openModal"])(formAction));
+    },
+    deleteChannel: function deleteChannel(channelId) {
+      return dispatch(Object(_actions_channel_actions__WEBPACK_IMPORTED_MODULE_5__["deleteChannel"])(channelId));
     }
   };
 };
@@ -2195,6 +2235,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var channelsReducer = function channelsReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
+  debugger;
   Object.freeze(state);
 
   switch (action.type) {
@@ -2203,6 +2244,10 @@ var channelsReducer = function channelsReducer() {
 
     case _actions_channel_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_CHANNEL"]:
       return _objectSpread({}, state, _defineProperty({}, action.channel.id, action.channel));
+
+    case _actions_channel_actions__WEBPACK_IMPORTED_MODULE_1__["REMOVE_CHANNEL"]:
+      delete state[action.channel.id];
+      return state;
 
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_USER"]:
       return action.user.channels;
@@ -2581,13 +2626,14 @@ var fetchChannelMembership = function fetchChannelMembership(ChannelId) {
 /*!*****************************************!*\
   !*** ./frontend/utils/channel_utils.js ***!
   \*****************************************/
-/*! exports provided: fetchUserChannels, createChannel */
+/*! exports provided: fetchUserChannels, createChannel, deleteChannel */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUserChannels", function() { return fetchUserChannels; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createChannel", function() { return createChannel; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteChannel", function() { return deleteChannel; });
 var fetchUserChannels = function fetchUserChannels(userId) {
   return $.ajax({
     url: "/api/users/".concat(userId, "/channels"),
@@ -2601,6 +2647,12 @@ var createChannel = function createChannel(payload) {
     data: {
       channel: payload
     }
+  });
+};
+var deleteChannel = function deleteChannel(channelId) {
+  return $.ajax({
+    url: "/api/channels/".concat(channelId),
+    method: 'DELETE'
   });
 };
 
