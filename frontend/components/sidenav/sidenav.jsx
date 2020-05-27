@@ -80,9 +80,9 @@ const ChannelHeaders = ({channels, userId, deleteChannel}) => {
     elements = channels.map(channel => (
       <Link key={channel.id} to={`/main/channels/${channel.id}`}>
         <div className='channel-item'>
-          {/* <span className='channel-item-gutter'></span> */}
           # {channel.name}
-         <div onClick={() => deleteChannel(channel.id)}>x</div>
+          {(channel.id !== 1 && channel.id !== 2) && 
+         <div onClick={() => deleteChannel(channel.id)}>x</div>}
         </div>
       </Link>
     ))
