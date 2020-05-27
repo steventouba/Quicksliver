@@ -737,15 +737,15 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var autocomplete = /*#__PURE__*/function (_React$Component) {
-  _inherits(autocomplete, _React$Component);
+var AutoComplete = /*#__PURE__*/function (_React$Component) {
+  _inherits(AutoComplete, _React$Component);
 
-  var _super = _createSuper(autocomplete);
+  var _super = _createSuper(AutoComplete);
 
-  function autocomplete(props) {
+  function AutoComplete(props) {
     var _this;
 
-    _classCallCheck(this, autocomplete);
+    _classCallCheck(this, AutoComplete);
 
     _this = _super.call(this, props);
     _this.state = {
@@ -757,7 +757,7 @@ var autocomplete = /*#__PURE__*/function (_React$Component) {
     return _this;
   }
 
-  _createClass(autocomplete, [{
+  _createClass(AutoComplete, [{
     key: "updateSearchString",
     value: function updateSearchString() {
       this.setState({
@@ -788,10 +788,10 @@ var autocomplete = /*#__PURE__*/function (_React$Component) {
     }
   }]);
 
-  return autocomplete;
+  return AutoComplete;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (autocomplete);
+/* harmony default export */ __webpack_exports__["default"] = (AutoComplete);
 
 /***/ }),
 
@@ -1449,6 +1449,9 @@ var Modal = function Modal(_ref) {
         closeModal: closeModal
       });
       break;
+
+    case 'createDirectMessage':
+      return null;
 
     default:
       return null;

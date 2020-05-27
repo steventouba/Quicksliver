@@ -2,7 +2,8 @@ import React from 'react';
 import { closeModal } from '../../actions/modal_actions'; 
 import { createChannel } from '../../actions/channel_actions'; 
 import { connect } from 'react-redux';
-import ChannelCreateFrom from '../channel/channel_create-form'; 
+import ChannelCreateForm from '../channel/channel_create-form'; 
+import DirectMessageCreateForm from '../channel/direct_message_create-form';
 
 
 const Modal = ({modal, closeModal, createChannel, currentUser}) => { 
@@ -13,14 +14,19 @@ const Modal = ({modal, closeModal, createChannel, currentUser}) => {
   let component; 
   switch (modal) {
     case 'createChannel':
-      component = <ChannelCreateFrom 
+      component = <ChannelCreateForm 
         currentUserId={currentUser.id}  
         createChannel={createChannel}
         closeModal={closeModal}
-      /> 
+      />;
       break 
     case 'createDirectMessage': 
-      return null; 
+      component = <DirectMessageCreateForm
+        currentUserId={currentUser.id}  
+        users={users}
+        createChannel={createChannel}
+        closeModal={closeModal}
+      />; 
     default:
       return null;  //returning null here because on refresh modal is an empty object {}; 
   }
@@ -37,7 +43,8 @@ const Modal = ({modal, closeModal, createChannel, currentUser}) => {
 const mapStateToProps = (state) => { 
   return { 
     modal: state.ui.modal, 
-    currentUser: state.session.currentUser
+    currentUser: state.session.currentUser, 
+    users: state.entities.users,
   }; 
 }
 
