@@ -11,10 +11,11 @@ class DirectMessageCreate extends React.Component {
         creatorId: this.props.currentUserId, 
         channelType: 1
       }, 
-      users: this.props.users,
+      users: Object.values(this.props.users),
       searchString: "",
     }; 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.updateSearchString = this.updateSearchString.bind(this); 
   }
 
   handleSubmit() { 
@@ -27,9 +28,14 @@ class DirectMessageCreate extends React.Component {
     if (this.state.searchString.length === 0) return this.state.users;
 
     const searchString = new RegExp(`\\b${this.state.searchString}`)
-    const matchedUsers = this.state.users.filter(user => user.match(searchString));
+    const matchedUsers = this.state.users.filter(
+      user => user.username.match(searchString));
 
     return matchedUsers.length > 0 ? matchedUsers : ['no matches']
+  }
+
+  updateSearchString() { 
+    this.setState({searchString: event.target.value}, this.updateMatches)
   }
 
   updateChannelName() { 
@@ -38,7 +44,6 @@ class DirectMessageCreate extends React.Component {
 
   render() {
     const matches = this.updateMatches(); 
-  
     return (
       <div>
         <header>Direct Messages</header>
@@ -52,7 +57,7 @@ class DirectMessageCreate extends React.Component {
         </div>
         <ul>
           {
-            matches.map(user => <li key={user.id}>{user}</li>)
+            matches.map(user => <li key={user.id}>{user.username}</li>)
           }
         </ul>
       </div>

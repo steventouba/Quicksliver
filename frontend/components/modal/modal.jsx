@@ -6,18 +6,19 @@ import ChannelCreateForm from '../channel/channel_create-form';
 import DirectMessageCreateForm from '../channel/direct_message_create-form';
 
 
-const Modal = ({modal, closeModal, createChannel, currentUser}) => { 
+const Modal = ({modal, closeModal, createChannel, currentUser, users}) => { 
   if (!modal) { 
     return null; 
   }
 
   let component; 
+
   switch (modal) {
     case 'createChannel':
       component = <ChannelCreateForm 
-        currentUserId={currentUser.id}  
-        createChannel={createChannel}
-        closeModal={closeModal}
+      currentUserId={currentUser.id}  
+      createChannel={createChannel}
+      closeModal={closeModal}
       />;
       break 
     case 'createDirectMessage': 
@@ -27,6 +28,7 @@ const Modal = ({modal, closeModal, createChannel, currentUser}) => {
         createChannel={createChannel}
         closeModal={closeModal}
       />; 
+      break
     default:
       return null;  //returning null here because on refresh modal is an empty object {}; 
   }

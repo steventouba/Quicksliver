@@ -755,10 +755,11 @@ var DirectMessageCreate = /*#__PURE__*/function (_React$Component) {
         creatorId: _this.props.currentUserId,
         channelType: 1
       },
-      users: _this.props.users,
+      users: Object.values(_this.props.users),
       searchString: ""
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.updateSearchString = _this.updateSearchString.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -775,9 +776,16 @@ var DirectMessageCreate = /*#__PURE__*/function (_React$Component) {
       if (this.state.searchString.length === 0) return this.state.users;
       var searchString = new RegExp("\\b".concat(this.state.searchString));
       var matchedUsers = this.state.users.filter(function (user) {
-        return user.match(searchString);
+        return user.username.match(searchString);
       });
       return matchedUsers.length > 0 ? matchedUsers : ['no matches'];
+    }
+  }, {
+    key: "updateSearchString",
+    value: function updateSearchString() {
+      this.setState({
+        searchString: event.target.value
+      }, this.updateMatches);
     }
   }, {
     key: "updateChannelName",
@@ -799,7 +807,7 @@ var DirectMessageCreate = /*#__PURE__*/function (_React$Component) {
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Go")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, matches.map(function (user) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           key: user.id
-        }, user);
+        }, user.username);
       })));
     }
   }]);
@@ -1544,7 +1552,8 @@ var Modal = function Modal(_ref) {
   var modal = _ref.modal,
       closeModal = _ref.closeModal,
       createChannel = _ref.createChannel,
-      currentUser = _ref.currentUser;
+      currentUser = _ref.currentUser,
+      users = _ref.users;
 
   if (!modal) {
     return null;
@@ -1568,6 +1577,7 @@ var Modal = function Modal(_ref) {
         createChannel: createChannel,
         closeModal: closeModal
       });
+      break;
 
     default:
       return null;
@@ -1974,6 +1984,8 @@ var Sidenav = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       var chats = this.props.chats;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "main-channel-sidenav"
@@ -2000,7 +2012,9 @@ var Sidenav = /*#__PURE__*/function (_React$Component) {
       }, "Channels"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "open-channel-modal"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.openModal
+        onClick: function onClick() {
+          return _this2.props.createChannel('createChannel');
+        }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fas fa-plus"
       })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ChannelHeaders, {
@@ -2016,7 +2030,9 @@ var Sidenav = /*#__PURE__*/function (_React$Component) {
       }, "Direct Messages"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "open-channel-modal"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.openModal
+        onClick: function onClick() {
+          return _this2.props.createChannel('createDirectMessage');
+        }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fas fa-plus"
       })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(DirectMessageHeaders, {
@@ -2140,7 +2156,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state) {
-  debugger;
   return {
     chats: Object(_reducers_chats_selector__WEBPACK_IMPORTED_MODULE_3__["default"])(state.entities.channels),
     currentUser: state.session.currentUser
