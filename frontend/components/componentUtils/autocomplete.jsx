@@ -1,6 +1,6 @@
 import React from 'react'; 
 
-class autocomplete extends React.Component {
+class AutoComplete extends React.Component {
   constructor(props) { 
     super(props) 
     this.state = {
@@ -16,7 +16,7 @@ class autocomplete extends React.Component {
     this.updateSearchString = this.updateSearchString.bind(this);
     this.updateMatches = this.updateMatches.bind(this);
   }
-
+   
   updateSearchString() { 
     this.setState({searchString: event.target.value})
   }
@@ -53,4 +53,4 @@ class autocomplete extends React.Component {
   }
 } 
 
-export default autocomplete; 
+export default AutoComplete; 

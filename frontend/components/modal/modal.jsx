@@ -4,6 +4,7 @@ import { createChannel } from '../../actions/channel_actions';
 import { connect } from 'react-redux';
 import ChannelCreateFrom from '../channel/channel_create-form'; 
 
+
 const Modal = ({modal, closeModal, createChannel, currentUser}) => { 
   if (!modal) { 
     return null; 
@@ -18,7 +19,8 @@ const Modal = ({modal, closeModal, createChannel, currentUser}) => {
         closeModal={closeModal}
       /> 
       break 
-  
+    case 'createDirectMessage': 
+      return null; 
     default:
       return null;  //returning null here because on refresh modal is an empty object {}; 
   }
