@@ -90,6 +90,24 @@
   padding: 20px 20px;
 }
 
+#channel-input {
+  border: 1px solid rgba($color: lightgray, $alpha: 0.25);
+  border-radius: 5px;
+  background-color: #363636;
+  //min-height: 10px;
+  min-height: 35px;
+  width: 80%;
+  padding: 10px;
+  font-size: 16px;
+  outline: none;
+}
+
+.direct-message-create-input { 
+  display: inline-block;
+  width: 100%;
+  outline: none;
+}
+
 .direct-message-create-button {
   cursor: pointer;
   margin-left: 10px;
@@ -107,7 +125,7 @@
   overflow-y: auto;
 }
 
-.matched-users > li { 
+.matched-users > span { 
   overflow: auto;
   display: flex;
   margin: 0 20px;
@@ -117,6 +135,6 @@
   justify-content: left;
   align-items: flex-end;
 }
-.matched-users > li:hover { 
+.matched-users > span:hover { 
   background-color: #363636;
 }

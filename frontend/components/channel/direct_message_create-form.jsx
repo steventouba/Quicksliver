@@ -16,6 +16,7 @@ class DirectMessageCreate extends React.Component {
     }; 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateSearchString = this.updateSearchString.bind(this); 
+    this.handleSelect = this.handleSelect.bind(this); 
   }
 
   handleSubmit() { 
@@ -42,23 +43,37 @@ class DirectMessageCreate extends React.Component {
     return e => this.setState([channelInfo[name]].push(e.target.value))
   }
 
+  handleSelect() {
+    // const parent = document.getElementById("test")
+    // const child = document.createElement("span")
+    // const childText = document.createTextNode(event.target.innerText)
+    // child.appendChild(childText); 
+    
+    debugger
+    parent.prepend(child)
+  }
+
   render() {
     const matches = this.updateMatches(); 
     return (
       <div className="channel-create-container">
         <header className="channel-create-header">Direct Messages</header>
         <div className="direct-message-create-form ">
-          <input
-            className="channel-create-input"
-            onChange={this.updateSearchString}
-            type="text"
-            placeholder="Find or start a conversation"
-          />
+          <div id="channel-input">
+            <div id='test'></div>
+            <input   
+              className="direct-message-create-input"
+              onChange={this.updateSearchString}
+              type="text"
+              placeholder="Find or start a conversation"
+            />
+          </div>
           <button className="direct-message-create-button">Go</button>
         </div>
         <ul className="matched-users">
           {
-            matches.map(user => <li key={user.id}>{user.username}</li>)
+            matches.map(user => <span 
+              key={user.id}onClick={this.handleSelect}>{user.username}</span>)
           }
         </ul>
       </div>

@@ -760,6 +760,7 @@ var DirectMessageCreate = /*#__PURE__*/function (_React$Component) {
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.updateSearchString = _this.updateSearchString.bind(_assertThisInitialized(_this));
+    _this.handleSelect = _this.handleSelect.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -797,8 +798,20 @@ var DirectMessageCreate = /*#__PURE__*/function (_React$Component) {
       };
     }
   }, {
+    key: "handleSelect",
+    value: function handleSelect() {
+      // const parent = document.getElementById("test")
+      // const child = document.createElement("span")
+      // const childText = document.createTextNode(event.target.innerText)
+      // child.appendChild(childText); 
+      debugger;
+      parent.prepend(child);
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       var matches = this.updateMatches();
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "channel-create-container"
@@ -806,18 +819,23 @@ var DirectMessageCreate = /*#__PURE__*/function (_React$Component) {
         className: "channel-create-header"
       }, "Direct Messages"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "direct-message-create-form "
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        className: "channel-create-input",
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "channel-input"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "test"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "direct-message-create-input",
         onChange: this.updateSearchString,
         type: "text",
         placeholder: "Find or start a conversation"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "direct-message-create-button"
       }, "Go")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "matched-users"
       }, matches.map(function (user) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          key: user.id
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          key: user.id,
+          onClick: _this3.handleSelect
         }, user.username);
       })));
     }
