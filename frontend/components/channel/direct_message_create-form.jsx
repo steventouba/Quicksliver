@@ -45,17 +45,18 @@ class DirectMessageCreate extends React.Component {
   render() {
     const matches = this.updateMatches(); 
     return (
-      <div>
-        <header>Direct Messages</header>
-        <div>
+      <div className="channel-create-container">
+        <header className="channel-create-header">Direct Messages</header>
+        <div className="direct-message-create-form ">
           <input
+            className="channel-create-input"
             onChange={this.updateSearchString}
             type="text"
             placeholder="Find or start a conversation"
           />
-          <button>Go</button>
+          <button className="direct-message-create-button">Go</button>
         </div>
-        <ul>
+        <ul className="matched-users">
           {
             matches.map(user => <li key={user.id}>{user.username}</li>)
           }

@@ -83,3 +83,40 @@
   width: 100px;
   height: 50px;
 }
+
+.direct-message-create-form { 
+  display: flex;
+  width: 100%;
+  padding: 20px 20px;
+}
+
+.direct-message-create-button {
+  cursor: pointer;
+  margin-left: 10px;
+  border: 1px solid #072d91;
+  background-color: #072d91;
+  border-radius: 7px;
+  width: 60px;
+  height: 35px;
+  font-size: 16px;
+}
+
+.matched-users { 
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.matched-users > li { 
+  overflow: auto;
+  display: flex;
+  margin: 0 20px;
+  width: 90%;
+  height: 50px;
+  border-bottom: solid rgba($color: whitesmoke, $alpha: 0.05);
+  justify-content: left;
+  align-items: flex-end;
+}
+.matched-users > li:hover { 
+  background-color: #363636;
+}
