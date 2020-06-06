@@ -6,7 +6,7 @@ class DirectMessageCreate extends React.Component {
 
     this.state = {
       channelInfo: {
-        name: [], 
+        name: {}, 
         isPrivate: true, 
         creatorId: this.props.currentUserId, 
         channelType: 1
@@ -40,17 +40,24 @@ class DirectMessageCreate extends React.Component {
   }
 
   updateChannelName() { 
-    return e => this.setState([channelInfo[name]].push(e.target.value))
+    // debugger
+    // return e => this.setState([channelInfo[name]].push(e.target.value))
   }
 
   handleSelect() {
-    // const parent = document.getElementById("test")
-    // const child = document.createElement("span")
-    // const childText = document.createTextNode(event.target.innerText)
-    // child.appendChild(childText); 
-    
-    debugger
+    const updateChannelInfo = { ...this.state.channelInfo }
+    const { name } = updateChannelInfo;  
+    const userId = event.target.dataset.user; 
+    name[userId] = userId; 
+    updateChannelInfo.name = name; 
+    const parent = document.getElementById("channel-input")
+    const child = document.createElement("span")
+    child.setAttribute("class", "dm-display-name")
+    child.innerText = event.target.innerText;
+    child.dataset.user = userId;
     parent.prepend(child)
+    this.setState({ channelInfo: updateChannelInfo})
+    debugger
   }
 
   render() {
@@ -60,20 +67,19 @@ class DirectMessageCreate extends React.Component {
         <header className="channel-create-header">Direct Messages</header>
         <div className="direct-message-create-form ">
           <div id="channel-input">
-            <div id='test'></div>
-            <input   
-              className="direct-message-create-input"
-              onChange={this.updateSearchString}
-              type="text"
-              placeholder="Find or start a conversation"
-            />
+          <input   
+            className="direct-message-create-input"
+            onChange={this.updateSearchString}
+            type="text"
+            placeholder="Find or start a conversation"
+          />
           </div>
           <button className="direct-message-create-button">Go</button>
         </div>
         <ul className="matched-users">
           {
-            matches.map(user => <span 
-              key={user.id}onClick={this.handleSelect}>{user.username}</span>)
+            matches.map(user => <span data-user={user.id}
+              key={user.id} onClick={this.handleSelect}>{user.username}</span>)
           }
         </ul>
       </div>

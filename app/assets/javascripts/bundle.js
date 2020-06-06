@@ -715,6 +715,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -750,7 +756,7 @@ var DirectMessageCreate = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = {
       channelInfo: {
-        name: [],
+        name: {},
         isPrivate: true,
         creatorId: _this.props.currentUserId,
         channelType: 1
@@ -790,27 +796,33 @@ var DirectMessageCreate = /*#__PURE__*/function (_React$Component) {
     }
   }, {
     key: "updateChannelName",
-    value: function updateChannelName() {
-      var _this2 = this;
-
-      return function (e) {
-        return _this2.setState([channelInfo[name]].push(e.target.value));
-      };
+    value: function updateChannelName() {// debugger
+      // return e => this.setState([channelInfo[name]].push(e.target.value))
     }
   }, {
     key: "handleSelect",
     value: function handleSelect() {
-      // const parent = document.getElementById("test")
-      // const child = document.createElement("span")
-      // const childText = document.createTextNode(event.target.innerText)
-      // child.appendChild(childText); 
-      debugger;
+      var updateChannelInfo = _objectSpread({}, this.state.channelInfo);
+
+      var name = updateChannelInfo.name;
+      var userId = event.target.dataset.user;
+      name[userId] = userId;
+      updateChannelInfo.name = name;
+      var parent = document.getElementById("channel-input");
+      var child = document.createElement("span");
+      child.setAttribute("class", "dm-display-name");
+      child.innerText = event.target.innerText;
+      child.dataset.user = userId;
       parent.prepend(child);
+      this.setState({
+        channelInfo: updateChannelInfo
+      });
+      debugger;
     }
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this2 = this;
 
       var matches = this.updateMatches();
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -821,9 +833,7 @@ var DirectMessageCreate = /*#__PURE__*/function (_React$Component) {
         className: "direct-message-create-form "
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "channel-input"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "test"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "direct-message-create-input",
         onChange: this.updateSearchString,
         type: "text",
@@ -834,8 +844,9 @@ var DirectMessageCreate = /*#__PURE__*/function (_React$Component) {
         className: "matched-users"
       }, matches.map(function (user) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          "data-user": user.id,
           key: user.id,
-          onClick: _this3.handleSelect
+          onClick: _this2.handleSelect
         }, user.username);
       })));
     }
