@@ -6,9 +6,11 @@ import {openModal} from '../../actions/modal_actions'
 import { deleteChannel } from "../../actions/channel_actions";
 
 const mapStateToProps = (state) => {
+  const { currentUser } = state.session
+  const { channels, users } = state.entities
   return {
-    chats: chatsSelector(state.entities.channels), 
-    currentUser: state.session.currentUser
+    chats: chatsSelector(channels, users, currentUser), 
+    currentUser
   }
 };
 

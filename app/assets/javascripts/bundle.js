@@ -754,11 +754,14 @@ var DirectMessageCreate = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, DirectMessageCreate);
 
     _this = _super.call(this, props);
+    var creatorId = _this.props.currentUserId;
     _this.state = {
       channelInfo: {
-        name: {},
+        name: {
+          creatorId: creatorId
+        },
         isPrivate: true,
-        creatorId: _this.props.currentUserId,
+        creatorId: creatorId,
         channelType: 1
       },
       users: Object.values(_this.props.users),
@@ -2220,9 +2223,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state) {
+  var currentUser = state.session.currentUser;
+  var _state$entities = state.entities,
+      channels = _state$entities.channels,
+      users = _state$entities.users;
   return {
-    chats: Object(_reducers_chats_selector__WEBPACK_IMPORTED_MODULE_3__["default"])(state.entities.channels),
-    currentUser: state.session.currentUser
+    chats: Object(_reducers_chats_selector__WEBPACK_IMPORTED_MODULE_3__["default"])(channels, users, currentUser),
+    currentUser: currentUser
   };
 };
 
@@ -2467,14 +2474,32 @@ var channelsReducer = function channelsReducer() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var chatsSelector = function chatsSelector(chats) {
+var structureChatName = function structureChatName(directMessageChannel, users, currentUser) {
+  var userIds = directMessageChannel.name.split('.');
+  var currentUserId = currentUser.id;
+  var channelName = '';
+
+  for (var index = 1; index < userIds.length; index++) {
+    var id = parseInt(userIds[index]);
+
+    if (users[id] && id !== currentUserId) {
+      var userName = users[id].username;
+      channelName += !channelName ? "".concat(userName) : ",".concat(userName);
+    }
+  }
+
+  directMessageChannel.name = channelName ? channelName : directMessageChannel.name;
+  return directMessageChannel;
+};
+
+var chatsSelector = function chatsSelector(chats, users, currentUser) {
   var directMessages = [];
   var channels = [];
   Object.values(chats).map(function (chat) {
     if (chat.channelType === 0) {
       channels.push(chat);
     } else {
-      directMessages.push(chat);
+      directMessages.push(structureChatName(chat, users, currentUser));
     }
   });
   return {

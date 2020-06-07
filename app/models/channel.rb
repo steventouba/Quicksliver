@@ -25,7 +25,8 @@ class Channel < ApplicationRecord
 
   has_many :channel_memberships, 
     foreign_key: :channel_id, 
-    class_name: :ChannelMembership
+    class_name: :ChannelMembership, 
+    dependent: :destroy 
 
   has_many :subscribers, 
     through: :channel_memberships, 

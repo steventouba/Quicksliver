@@ -3,12 +3,12 @@ import React from 'react';
 class DirectMessageCreate extends React.Component { 
   constructor(props) { 
     super(props)
-
+    const creatorId = this.props.currentUserId
     this.state = {
       channelInfo: {
-        name: {}, 
+        name: { creatorId, }, 
         isPrivate: true, 
-        creatorId: this.props.currentUserId, 
+        creatorId,
         channelType: 1
       }, 
       users: Object.values(this.props.users),
