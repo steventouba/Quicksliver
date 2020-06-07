@@ -19,9 +19,11 @@ class Api::ChannelsController < ApplicationController
   end
 
   def create 
-  
     @channel = Channel.new(channel_params)
-    if @channel.save 
+    if @channel.channel_type == 1
+      structure_channel_name(params[:channel][:name])
+    end 
+    if @channel.save!
       ChannelMembership.create({user_id: @channel.creator_id, channel_id: @channel.id, is_admin: true})
       render '/api/channels/show'
     else
@@ -47,6 +49,13 @@ class Api::ChannelsController < ApplicationController
 
   def selected_user
     User.find_by(id: params[:user_id])
+  end 
+
+  def structure_channel_name(user_ids) 
+    users = user_ids.values 
+    prefix = users.join.hash.to_s
+    users.each { |user| prefix << ".#{user}"}
+    @channel.name = prefix
   end 
 end
 

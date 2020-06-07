@@ -4,10 +4,13 @@ class Api::ChannelmembershipsController < ApplicationController
     @memberships = selected_user.channel_memberships
     render :index 
   end 
-end
 
+def create 
+  
+end 
 
  private 
   def selected_user
     User.find_by(id: params[:user_id])
   end 
+end

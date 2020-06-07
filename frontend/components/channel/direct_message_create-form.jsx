@@ -22,7 +22,8 @@ class DirectMessageCreate extends React.Component {
 
   handleSubmit() { 
     event.preventDefault(); 
-    this.props.createChannel(this.state)
+    this.props.createChannel(this.state.channelInfo)
+      .then((channel) => alert(channel))
     this.props.closeModal();
   }
 
@@ -90,7 +91,7 @@ class DirectMessageCreate extends React.Component {
               placeholder="Find or start a conversation"
             />
           </div>
-          <button className="direct-message-create-button">Go</button>
+          <button onClick={this.handleSubmit} className="direct-message-create-button">Go</button>
         </div>
         <ul className="matched-users">
           {

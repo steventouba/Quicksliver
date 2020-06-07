@@ -775,7 +775,9 @@ var DirectMessageCreate = /*#__PURE__*/function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit() {
       event.preventDefault();
-      this.props.createChannel(this.state);
+      this.props.createChannel(this.state.channelInfo).then(function (channel) {
+        return alert(channel);
+      });
       this.props.closeModal();
     }
   }, {
@@ -862,6 +864,7 @@ var DirectMessageCreate = /*#__PURE__*/function (_React$Component) {
         type: "text",
         placeholder: "Find or start a conversation"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.handleSubmit,
         className: "direct-message-create-button"
       }, "Go")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "matched-users"
