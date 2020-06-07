@@ -5,10 +5,7 @@ class Api::ChannelmembershipsController < ApplicationController
     render :index 
   end 
 
-def create 
   
-end 
-
  private 
   def selected_user
     User.find_by(id: params[:user_id])

@@ -52,7 +52,7 @@ class DirectMessageCreate extends React.Component {
     const parent = document.getElementById("display-user-names")
     const child = document.createElement("span")
     child.setAttribute("class", "dm-display-name")
-    child.innerText = event.target.innerText;
+    child.innerText = `${event.target.innerText} X`;
     child.dataset.user = userId;
     parent.prepend(child)
     const searchBar = document.getElementById("dm-create-user-search-bar")
@@ -93,10 +93,10 @@ class DirectMessageCreate extends React.Component {
           </div>
           <button onClick={this.handleSubmit} className="direct-message-create-button">Go</button>
         </div>
-        <ul className="matched-users">
+        <ul  onClick={this.handleSelect} className="matched-users">
           {
             matches.map(user => <span data-user={user.id}
-              key={user.id} onClick={this.handleSelect}>{user.username}</span>)
+              key={user.id}>{user.username}</span>)
           }
         </ul>
       </div>

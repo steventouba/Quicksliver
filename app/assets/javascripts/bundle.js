@@ -810,7 +810,7 @@ var DirectMessageCreate = /*#__PURE__*/function (_React$Component) {
       var parent = document.getElementById("display-user-names");
       var child = document.createElement("span");
       child.setAttribute("class", "dm-display-name");
-      child.innerText = event.target.innerText;
+      child.innerText = "".concat(event.target.innerText, " X");
       child.dataset.user = userId;
       parent.prepend(child);
       var searchBar = document.getElementById("dm-create-user-search-bar");
@@ -842,8 +842,6 @@ var DirectMessageCreate = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
-
       var matches = this.updateMatches();
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "channel-create-container"
@@ -867,12 +865,12 @@ var DirectMessageCreate = /*#__PURE__*/function (_React$Component) {
         onClick: this.handleSubmit,
         className: "direct-message-create-button"
       }, "Go")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        onClick: this.handleSelect,
         className: "matched-users"
       }, matches.map(function (user) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           "data-user": user.id,
-          key: user.id,
-          onClick: _this2.handleSelect
+          key: user.id
         }, user.username);
       })));
     }

@@ -25,6 +25,7 @@ class Api::ChannelsController < ApplicationController
     end 
     if @channel.save!
       ChannelMembership.create({user_id: @channel.creator_id, channel_id: @channel.id, is_admin: true})
+      enroll_users(@users)
       render '/api/channels/show'
     else
       render json: ['something went wrong'], status: 401
@@ -52,10 +53,17 @@ class Api::ChannelsController < ApplicationController
   end 
 
   def structure_channel_name(user_ids) 
-    users = user_ids.values 
-    prefix = users.join.hash.to_s
-    users.each { |user| prefix << ".#{user}"}
+    @users = user_ids.values
+    prefix = @users.join.hash.to_s
+    @users.each { |user| prefix << ".#{user}"}
     @channel.name = prefix
   end 
+
+  def enroll_users(users) 
+    users.each do |user| 
+      ChannelMembership.create({user_id: user, channel_id: @channel.id, is_admin: true})
+    end
+  end 
+
 end
 
