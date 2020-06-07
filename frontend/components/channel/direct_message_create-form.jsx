@@ -23,7 +23,6 @@ class DirectMessageCreate extends React.Component {
   handleSubmit() { 
     event.preventDefault(); 
     this.props.createChannel(this.state.channelInfo)
-      .then((channel) => alert(channel))
     this.props.closeModal();
   }
 

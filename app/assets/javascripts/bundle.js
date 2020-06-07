@@ -778,9 +778,7 @@ var DirectMessageCreate = /*#__PURE__*/function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit() {
       event.preventDefault();
-      this.props.createChannel(this.state.channelInfo).then(function (channel) {
-        return alert(channel);
-      });
+      this.props.createChannel(this.state.channelInfo);
       this.props.closeModal();
     }
   }, {
