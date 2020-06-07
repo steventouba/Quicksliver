@@ -40,11 +40,6 @@ class DirectMessageCreate extends React.Component {
     this.setState({searchString: event.target.value}, this.updateMatches)
   }
 
-  updateChannelName() { 
-    // debugger
-    // return e => this.setState([channelInfo[name]].push(e.target.value))
-  }
-
   handleSelect() {
     const updateChannelInfo = { ...this.state.channelInfo }
     const { name } = updateChannelInfo;  

@@ -796,11 +796,6 @@ var DirectMessageCreate = /*#__PURE__*/function (_React$Component) {
       }, this.updateMatches);
     }
   }, {
-    key: "updateChannelName",
-    value: function updateChannelName() {// debugger
-      // return e => this.setState([channelInfo[name]].push(e.target.value))
-    }
-  }, {
     key: "handleSelect",
     value: function handleSelect() {
       var updateChannelInfo = _objectSpread({}, this.state.channelInfo);
