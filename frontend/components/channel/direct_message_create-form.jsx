@@ -50,7 +50,7 @@ class DirectMessageCreate extends React.Component {
     const { name } = updateChannelInfo;  
     const userId = event.target.dataset.user; 
     if (name[userId]) return null;  
-    
+
     name[userId] = userId; 
     updateChannelInfo.name = name; 
     const parent = document.getElementById("display-user-names")
@@ -75,6 +75,7 @@ class DirectMessageCreate extends React.Component {
         <div className="direct-message-create-form ">
           <div id="channel-input">
             <div id='display-user-names' onClick={this.handleDelete}></div>
+            <div id='display-user-names-2' onClick={this.handleDelete}></div>
             <input id='dm-create-user-search-bar' 
               className="direct-message-create-input"
               onChange={this.updateSearchString}

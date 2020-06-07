@@ -134,7 +134,23 @@
   border-bottom: solid rgba($color: whitesmoke, $alpha: 0.05);
   justify-content: left;
   align-items: flex-end;
+  cursor: pointer;
 }
 .matched-users > span:hover { 
   background-color: #363636;
+}
+
+#display-user-names { 
+  max-width: 385px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.dm-display-name { 
+  background-color: green;
+  min-width: 70px;
+  padding: 2px;
+  border-radius: 3px;
+  margin: 0 0 1px 3px;
+  cursor: pointer;
 }

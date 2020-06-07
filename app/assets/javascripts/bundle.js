@@ -844,6 +844,9 @@ var DirectMessageCreate = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "display-user-names",
         onClick: this.handleDelete
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "display-user-names-2",
+        onClick: this.handleDelete
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "dm-create-user-search-bar",
         className: "direct-message-create-input",
