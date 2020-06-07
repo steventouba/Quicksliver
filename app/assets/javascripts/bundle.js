@@ -825,7 +825,22 @@ var DirectMessageCreate = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleDelete",
     value: function handleDelete() {
-      debugger;
+      if (event.target.nodeName === "SPAN") {
+        var child = event.target;
+
+        var updateChannelInfo = _objectSpread({}, this.state.channelInfo);
+
+        var name = updateChannelInfo.name;
+        var userId = event.target.dataset.user;
+        delete name[userId];
+        updateChannelInfo.name = name;
+        child.parentNode.removeChild(child);
+        this.setState({
+          channelInfo: updateChannelInfo
+        });
+      } else {
+        return null;
+      }
     }
   }, {
     key: "render",
@@ -843,9 +858,6 @@ var DirectMessageCreate = /*#__PURE__*/function (_React$Component) {
         id: "channel-input"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "display-user-names",
-        onClick: this.handleDelete
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "display-user-names-2",
         onClick: this.handleDelete
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "dm-create-user-search-bar",

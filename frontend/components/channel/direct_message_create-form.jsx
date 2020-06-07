@@ -64,7 +64,19 @@ class DirectMessageCreate extends React.Component {
   }
 
   handleDelete() { 
-    debugger
+    if (event.target.nodeName === "SPAN") { 
+      const child = event.target; 
+      const updateChannelInfo = { ...this.state.channelInfo }
+      const { name } = updateChannelInfo;
+      const userId = event.target.dataset.user; 
+      delete name[userId]
+      updateChannelInfo.name = name; 
+
+      child.parentNode.removeChild(child)
+      this.setState({ channelInfo: updateChannelInfo })
+    } else { 
+      return null; 
+    }
   }
 
   render() {
@@ -75,7 +87,6 @@ class DirectMessageCreate extends React.Component {
         <div className="direct-message-create-form ">
           <div id="channel-input">
             <div id='display-user-names' onClick={this.handleDelete}></div>
-            <div id='display-user-names-2' onClick={this.handleDelete}></div>
             <input id='dm-create-user-search-bar' 
               className="direct-message-create-input"
               onChange={this.updateSearchString}
