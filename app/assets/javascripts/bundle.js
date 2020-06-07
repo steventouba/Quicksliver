@@ -767,6 +767,7 @@ var DirectMessageCreate = /*#__PURE__*/function (_React$Component) {
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.updateSearchString = _this.updateSearchString.bind(_assertThisInitialized(_this));
     _this.handleSelect = _this.handleSelect.bind(_assertThisInitialized(_this));
+    _this.handleDelete = _this.handleDelete.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -806,17 +807,24 @@ var DirectMessageCreate = /*#__PURE__*/function (_React$Component) {
 
       var name = updateChannelInfo.name;
       var userId = event.target.dataset.user;
+      if (name[userId]) return null;
       name[userId] = userId;
       updateChannelInfo.name = name;
-      var parent = document.getElementById("channel-input");
+      var parent = document.getElementById("display-user-names");
       var child = document.createElement("span");
       child.setAttribute("class", "dm-display-name");
       child.innerText = event.target.innerText;
       child.dataset.user = userId;
       parent.prepend(child);
+      var searchBar = document.getElementById("dm-create-user-search-bar");
       this.setState({
-        channelInfo: updateChannelInfo
+        channelInfo: updateChannelInfo,
+        searchString: ""
       });
+    }
+  }, {
+    key: "handleDelete",
+    value: function handleDelete() {
       debugger;
     }
   }, {
@@ -833,9 +841,14 @@ var DirectMessageCreate = /*#__PURE__*/function (_React$Component) {
         className: "direct-message-create-form "
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "channel-input"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "display-user-names",
+        onClick: this.handleDelete
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "dm-create-user-search-bar",
         className: "direct-message-create-input",
         onChange: this.updateSearchString,
+        value: this.state.searchString,
         type: "text",
         placeholder: "Find or start a conversation"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {

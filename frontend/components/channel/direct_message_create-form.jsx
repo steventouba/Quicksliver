@@ -17,6 +17,7 @@ class DirectMessageCreate extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateSearchString = this.updateSearchString.bind(this); 
     this.handleSelect = this.handleSelect.bind(this); 
+    this.handleDelete = this.handleDelete.bind(this); 
   }
 
   handleSubmit() { 
@@ -48,15 +49,21 @@ class DirectMessageCreate extends React.Component {
     const updateChannelInfo = { ...this.state.channelInfo }
     const { name } = updateChannelInfo;  
     const userId = event.target.dataset.user; 
+    if (name[userId]) return null;  
+    
     name[userId] = userId; 
     updateChannelInfo.name = name; 
-    const parent = document.getElementById("channel-input")
+    const parent = document.getElementById("display-user-names")
     const child = document.createElement("span")
     child.setAttribute("class", "dm-display-name")
     child.innerText = event.target.innerText;
     child.dataset.user = userId;
     parent.prepend(child)
-    this.setState({ channelInfo: updateChannelInfo})
+    const searchBar = document.getElementById("dm-create-user-search-bar")
+    this.setState({ channelInfo: updateChannelInfo, searchString: "" })
+  }
+
+  handleDelete() { 
     debugger
   }
 
@@ -67,12 +74,14 @@ class DirectMessageCreate extends React.Component {
         <header className="channel-create-header">Direct Messages</header>
         <div className="direct-message-create-form ">
           <div id="channel-input">
-          <input   
-            className="direct-message-create-input"
-            onChange={this.updateSearchString}
-            type="text"
-            placeholder="Find or start a conversation"
-          />
+            <div id='display-user-names' onClick={this.handleDelete}></div>
+            <input id='dm-create-user-search-bar' 
+              className="direct-message-create-input"
+              onChange={this.updateSearchString}
+              value={this.state.searchString}
+              type="text"
+              placeholder="Find or start a conversation"
+            />
           </div>
           <button className="direct-message-create-button">Go</button>
         </div>
