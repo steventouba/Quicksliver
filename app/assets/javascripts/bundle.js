@@ -1215,6 +1215,7 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
 
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.test = _this.test.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -1244,18 +1245,31 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
+    key: "test",
+    value: function test() {
+      event.preventDefault();
+      var notification = document.getElementById('message-notification');
+      notification.style.display = "block";
+      setTimeout(function () {
+        return notification.style.display = "none";
+      }, 1000);
+    }
+  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "main-channel-message-input"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "message-notification"
+      }, "Message body must contain content"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "message-input",
         type: "text",
         value: this.state.body,
         onChange: this.update("body"),
         placeholder: "type message here",
+        onInvalid: this.test,
         required: true
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "message-button"

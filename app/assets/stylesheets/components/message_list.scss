@@ -80,3 +80,23 @@
   font-size: 14px;
 }
 
+#message-notification { 
+  display: none;
+  position: relative;
+  border: 1px solid black;
+  background-color: black;
+  border-radius: 5px;
+  width: 150px;
+  padding: 5px;
+}
+
+#message-notification:before {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 30px;
+  top: 61px;
+  border: 10px solid;
+  border-color: black transparent transparent black;
+}

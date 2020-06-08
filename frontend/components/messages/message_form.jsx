@@ -9,6 +9,7 @@ class MessageForm extends React.Component {
       // userId: props.currentUser.id 
     }
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.test = this.test.bind(this)
   }
 
   update(field) {
@@ -26,15 +27,24 @@ class MessageForm extends React.Component {
     this.setState({ body: "" });
   }
 
+  test() { 
+    event.preventDefault(); 
+    const notification = document.getElementById('message-notification'); 
+    notification.style.display = "block"
+    setTimeout(() => notification.style.display="none", 1000)
+  }
+
   render() {
     return (
       <div className='main-channel-message-input'>
         <form onSubmit={this.handleSubmit}>
+          <div id="message-notification">Message body must contain content</div>
           <input className='message-input'
             type="text"
             value={this.state.body}
             onChange={this.update("body")}
             placeholder='type message here'
+            onInvalid={this.test}
             required
           />
           <button className='message-button'>
