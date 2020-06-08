@@ -492,6 +492,7 @@ var ChannelCreateForm = /*#__PURE__*/function (_React$Component) {
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.toggleChannelType = _this.toggleChannelType.bind(_assertThisInitialized(_this));
+    _this.preventSubmit = _this.preventSubmit.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -501,6 +502,16 @@ var ChannelCreateForm = /*#__PURE__*/function (_React$Component) {
       event.preventDefault();
       this.props.createChannel(this.state);
       this.props.closeModal();
+    }
+  }, {
+    key: "preventSubmit",
+    value: function preventSubmit() {
+      event.preventDefault();
+      var notification = document.getElementById('channel-notification');
+      notification.style.display = "inline";
+      setTimeout(function () {
+        return notification.style.display = "none";
+      }, 1000);
     }
   }, {
     key: "updateField",
@@ -534,12 +545,16 @@ var ChannelCreateForm = /*#__PURE__*/function (_React$Component) {
         onSubmit: this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "channel-create-name"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Channel Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Channel Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "channel-notification"
+      }, "Channels must have a name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         className: "channel-create-input",
         placeholder: "e.g. plan-herculean-tasks",
         value: this.state.name,
-        onChange: this.updateField('name')
+        onChange: this.updateField('name'),
+        onInvalid: this.preventSubmit,
+        required: true
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "channel-create-type"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
