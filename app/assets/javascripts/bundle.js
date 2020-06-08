@@ -1516,7 +1516,7 @@ var MessageListItem = /*#__PURE__*/function (_React$Component) {
     value: function formatDate(dateTimeString) {
       var time = new Date(dateTimeString);
       var hours = time.getHours();
-      var minutes = time.getMinutes();
+      var minutes = time.getMinutes().toString();
       var merides = 'AM';
 
       if (hours > 12) {
@@ -1524,6 +1524,7 @@ var MessageListItem = /*#__PURE__*/function (_React$Component) {
         merides = 'PM';
       }
 
+      if (minutes.length < 2) minutes = "0" + minutes;
       var abbreviatedTime = hours + ':' + minutes + " ".concat(merides);
       time = time.toString();
       return [abbreviatedTime, time];

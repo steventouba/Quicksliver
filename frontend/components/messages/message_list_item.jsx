@@ -13,12 +13,14 @@ class MessageListItem extends React.Component {
   formatDate(dateTimeString) { 
     let time = new Date(dateTimeString); 
     let hours = time.getHours(); 
-    let minutes = time.getMinutes(); 
+    let minutes = time.getMinutes().toString(); 
     let merides = 'AM'; 
     if (hours > 12) { 
       hours = hours - 12; 
       merides = 'PM'
     }
+    if (minutes.length < 2) minutes = "0" + minutes; 
+
     let abbreviatedTime =  hours + ':' + minutes + ` ${merides}`; 
     time = time.toString()
     return [abbreviatedTime, time]; 
