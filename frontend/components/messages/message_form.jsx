@@ -35,6 +35,7 @@ class MessageForm extends React.Component {
             value={this.state.body}
             onChange={this.update("body")}
             placeholder='type message here'
+            required
           />
           <button className='message-button'>
             <img src={window.Logo} />

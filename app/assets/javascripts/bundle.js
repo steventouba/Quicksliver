@@ -1255,7 +1255,8 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
         type: "text",
         value: this.state.body,
         onChange: this.update("body"),
-        placeholder: "type message here"
+        placeholder: "type message here",
+        required: true
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "message-button"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
