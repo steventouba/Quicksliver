@@ -1215,7 +1215,7 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
 
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
-    _this.test = _this.test.bind(_assertThisInitialized(_this));
+    _this.preventSubmit = _this.preventSubmit.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -1245,8 +1245,8 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
-    key: "test",
-    value: function test() {
+    key: "preventSubmit",
+    value: function preventSubmit() {
       event.preventDefault();
       var notification = document.getElementById('message-notification');
       notification.style.display = "block";
@@ -1269,7 +1269,7 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
         value: this.state.body,
         onChange: this.update("body"),
         placeholder: "type message here",
-        onInvalid: this.test,
+        onInvalid: this.preventSubmit,
         required: true
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "message-button"

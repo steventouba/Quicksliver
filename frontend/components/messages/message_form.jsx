@@ -9,7 +9,7 @@ class MessageForm extends React.Component {
       // userId: props.currentUser.id 
     }
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.test = this.test.bind(this)
+    this.preventSubmit = this.preventSubmit.bind(this)
   }
 
   update(field) {
@@ -27,7 +27,7 @@ class MessageForm extends React.Component {
     this.setState({ body: "" });
   }
 
-  test() { 
+  preventSubmit() { 
     event.preventDefault(); 
     const notification = document.getElementById('message-notification'); 
     notification.style.display = "block"
@@ -44,7 +44,7 @@ class MessageForm extends React.Component {
             value={this.state.body}
             onChange={this.update("body")}
             placeholder='type message here'
-            onInvalid={this.test}
+            onInvalid={this.preventSubmit}
             required
           />
           <button className='message-button'>
