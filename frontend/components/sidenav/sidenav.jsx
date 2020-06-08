@@ -1,9 +1,11 @@
 import React from 'react'; 
 import { Link } from 'react-router-dom';
 
+
 class Sidenav extends React.Component { 
   constructor(props) { 
     super(props)
+    debugger
     this.handleClick = this.handleClick.bind(this); 
     this.openModal = this.openModal.bind(this); 
   }
@@ -14,13 +16,12 @@ class Sidenav extends React.Component {
   }
   
   openModal(e) { 
-
     e.preventDefault; 
     this.props.createChannel('createChannel'); 
   }
 
   render() { 
-   const chats = this.props.chats;
+   const { chats, history } = this.props;
     return ( 
       <div className='main-channel-sidenav'>
         <div className='sidenav-header'>
@@ -50,6 +51,7 @@ class Sidenav extends React.Component {
           <ChannelHeaders deleteChannel={this.props.deleteChannel} 
             channels={chats.channels}  
             userId={this.props.currentUser.id}
+            history={history}
           /> 
         </div>
         <div className='sidenav-directmessages'>
@@ -65,6 +67,7 @@ class Sidenav extends React.Component {
           <DirectMessageHeaders  deleteChannel={this.props.deleteChannel}
             channels={chats.directMessages} 
             userId={this.props.currentUser.id}
+            history={history}
           /> 
         </div>
       </div>
@@ -72,7 +75,7 @@ class Sidenav extends React.Component {
   }
 }
 
-const ChannelHeaders = ({channels, userId, deleteChannel}) => { 
+const ChannelHeaders = ({ channels, userId, deleteChannel, history }) => { 
   let elements; 
   
   try {
@@ -81,7 +84,8 @@ const ChannelHeaders = ({channels, userId, deleteChannel}) => {
         <div className='channel-item'>
           # {channel.name}
           {(channel.id !== 1 && channel.id !== 2) && 
-         <div onClick={() => deleteChannel(channel.id)}>x</div>}
+         <div onClick={() => deleteChannel(channel.id)
+          .then(() => history.push('/main/channels/1'))}>x</div>}
         </div>
       </Link>
     ))
@@ -94,7 +98,7 @@ const ChannelHeaders = ({channels, userId, deleteChannel}) => {
   )
 }
 
-const DirectMessageHeaders = ({channels, userId, deleteChannel }) => { 
+const DirectMessageHeaders = ({ channels, userId, deleteChannel, history }) => { 
   let elements; 
 
   try {
@@ -103,7 +107,8 @@ const DirectMessageHeaders = ({channels, userId, deleteChannel }) => {
         <div className='channel-item'>
           {/* <span className='channel-item-gutter'></span> */}
           {channel.name}
-          <div onClick={() => deleteChannel(channel.id)}>x</div>
+          <div onClick={() => deleteChannel(channel.id)
+            .then(() => history.push('/main/channels/1'))}>x</div>
         </div>
       </Link>
     ))
@@ -120,33 +125,3 @@ const DirectMessageHeaders = ({channels, userId, deleteChannel }) => {
 
 
 export default Sidenav; 
-
-
-{/* <div className='sidenav-header'>
-  <div className='header-dropdown-button'>
-    <div className='sidenav-header-info'>
-      <div className='sidenav-team-info'>Mount Olympus</div>
-      <div className='sidenav-user-info'>
-        {this.props.currentUser.username}
-      </div>
-    </div>
-    <button
-      onClick={this.handleClick}
-      className='header-dropdown-content'
-    >
-      Logout
-    </button>
-  </div>
-</div> */}
-
-{/* <div className='sidenav-header'>
-  <div className='header-dropdown-button'>
-    {this.props.currentUser.username}
-    <button
-      onClick={this.handleClick}
-      className='header-dropdown-content'
-    >
-      Logout
-            </button>
-  </div>
-</div> */}

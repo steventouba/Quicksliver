@@ -4,6 +4,7 @@ import Sidenav from './sidenav';
 import chatsSelector from "../../reducers/chats_selector";
 import {openModal} from '../../actions/modal_actions'
 import { deleteChannel } from "../../actions/channel_actions";
+import { withRouter } from "react-router-dom";
 
 const mapStateToProps = (state) => {
   const { currentUser } = state.session
@@ -22,7 +23,5 @@ const MapDispatchToProps = (dispatch) => {
   }
 };
 
-export default connect(mapStateToProps, MapDispatchToProps)(Sidenav); 
+export default withRouter(connect(mapStateToProps, MapDispatchToProps)(Sidenav)); 
 
-// fetchUserChannels: (userId) => dispatch(fetchUserChannels(userId)), 
-// fetchChannelMemberships: (userId) => dispatch(fetchChannelMemberships(userId))

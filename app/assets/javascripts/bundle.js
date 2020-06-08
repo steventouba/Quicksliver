@@ -2071,6 +2071,7 @@ var Sidenav = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, Sidenav);
 
     _this = _super.call(this, props);
+    debugger;
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
     _this.openModal = _this.openModal.bind(_assertThisInitialized(_this));
     return _this;
@@ -2093,7 +2094,9 @@ var Sidenav = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      var chats = this.props.chats;
+      var _this$props = this.props,
+          chats = _this$props.chats,
+          history = _this$props.history;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "main-channel-sidenav"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2127,7 +2130,8 @@ var Sidenav = /*#__PURE__*/function (_React$Component) {
       })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ChannelHeaders, {
         deleteChannel: this.props.deleteChannel,
         channels: chats.channels,
-        userId: this.props.currentUser.id
+        userId: this.props.currentUser.id,
+        history: history
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "sidenav-directmessages"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2145,7 +2149,8 @@ var Sidenav = /*#__PURE__*/function (_React$Component) {
       })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(DirectMessageHeaders, {
         deleteChannel: this.props.deleteChannel,
         channels: chats.directMessages,
-        userId: this.props.currentUser.id
+        userId: this.props.currentUser.id,
+        history: history
       })));
     }
   }]);
@@ -2156,7 +2161,8 @@ var Sidenav = /*#__PURE__*/function (_React$Component) {
 var ChannelHeaders = function ChannelHeaders(_ref) {
   var channels = _ref.channels,
       userId = _ref.userId,
-      deleteChannel = _ref.deleteChannel;
+      deleteChannel = _ref.deleteChannel,
+      history = _ref.history;
   var elements;
 
   try {
@@ -2168,7 +2174,9 @@ var ChannelHeaders = function ChannelHeaders(_ref) {
         className: "channel-item"
       }, "# ", channel.name, channel.id !== 1 && channel.id !== 2 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onClick: function onClick() {
-          return deleteChannel(channel.id);
+          return deleteChannel(channel.id).then(function () {
+            return history.push('/main/channels/1');
+          });
         }
       }, "x")));
     });
@@ -2182,7 +2190,8 @@ var ChannelHeaders = function ChannelHeaders(_ref) {
 var DirectMessageHeaders = function DirectMessageHeaders(_ref2) {
   var channels = _ref2.channels,
       userId = _ref2.userId,
-      deleteChannel = _ref2.deleteChannel;
+      deleteChannel = _ref2.deleteChannel,
+      history = _ref2.history;
   var elements;
 
   try {
@@ -2194,7 +2203,9 @@ var DirectMessageHeaders = function DirectMessageHeaders(_ref2) {
         className: "channel-item"
       }, channel.name, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onClick: function onClick() {
-          return deleteChannel(channel.id);
+          return deleteChannel(channel.id).then(function () {
+            return history.push('/main/channels/1');
+          });
         }
       }, "x")));
     });
@@ -2206,37 +2217,6 @@ var DirectMessageHeaders = function DirectMessageHeaders(_ref2) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Sidenav);
-{
-  /* <div className='sidenav-header'>
-   <div className='header-dropdown-button'>
-     <div className='sidenav-header-info'>
-       <div className='sidenav-team-info'>Mount Olympus</div>
-       <div className='sidenav-user-info'>
-         {this.props.currentUser.username}
-       </div>
-     </div>
-     <button
-       onClick={this.handleClick}
-       className='header-dropdown-content'
-     >
-       Logout
-     </button>
-   </div>
-  </div> */
-}
-{
-  /* <div className='sidenav-header'>
-   <div className='header-dropdown-button'>
-     {this.props.currentUser.username}
-     <button
-       onClick={this.handleClick}
-       className='header-dropdown-content'
-     >
-       Logout
-             </button>
-   </div>
-  </div> */
-}
 
 /***/ }),
 
@@ -2255,6 +2235,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _reducers_chats_selector__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../reducers/chats_selector */ "./frontend/reducers/chats_selector.js");
 /* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
 /* harmony import */ var _actions_channel_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/channel_actions */ "./frontend/actions/channel_actions.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
 
 
 
@@ -2287,8 +2269,7 @@ var MapDispatchToProps = function MapDispatchToProps(dispatch) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, MapDispatchToProps)(_sidenav__WEBPACK_IMPORTED_MODULE_2__["default"])); // fetchUserChannels: (userId) => dispatch(fetchUserChannels(userId)), 
-// fetchChannelMemberships: (userId) => dispatch(fetchChannelMemberships(userId))
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, MapDispatchToProps)(_sidenav__WEBPACK_IMPORTED_MODULE_2__["default"])));
 
 /***/ }),
 
