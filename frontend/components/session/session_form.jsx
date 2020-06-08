@@ -29,6 +29,7 @@ class SessionForm extends React.Component {
   }
 
   render() {
+    const { formType } = this.props; 
     return (
       <div className='session-form-container'>
         <header className='session-header'>
@@ -36,11 +37,10 @@ class SessionForm extends React.Component {
               <img className='session-logo' src={window.Logo} />
               <div className='session-logo-text'>QuickSilver </div>
             </Link>
-            <button className='demo-user' onClick={this.submitDemoUser}>DemoUser</button>
         </header>
         <div className='session-form-body' >
-          <RenderErrors errors={this.props.errors} clearErrors={this.props.clearErrors}/> 
           <form onSubmit={this.handleSubmit} className='session-form'>
+            <RenderErrors errors={this.props.errors} clearErrors={this.props.clearErrors}/> 
             <h3>Log into Mount Olympus</h3>
             <p>mount-olympus.quicksilver.com</p>
             <p>Enter your <b>email address</b> and <b>password</b>.</p>
@@ -61,7 +61,7 @@ class SessionForm extends React.Component {
               />
             </label>
             {
-              this.props.formType === 'signup' &&
+              formType === 'signup' &&
                 <>
                   <label>
                     <input className='session-input'
@@ -81,10 +81,17 @@ class SessionForm extends React.Component {
                   </label>
                 </>    
               }
-              <button className='session-button' 
-                onClick={this.handleSubmit}>{this.props.formType}
-              </button>
+              <div className="session-buttons">
+                <button className='session-button' 
+                  onClick={this.handleSubmit}>{formType}
+                </button>
+                <button className='demo-user' onClick={this.submitDemoUser}>DemoUser</button>
+              </div>
           </form>
+          { formType === "signup" ? 
+           <p className="session-link">already have an account? <Link to="/login">Login</Link></p> 
+            : <p className="session-link">New to QuickSilver? <Link to="/signup">Signup</Link></p>
+          } 
         </div>
         <div className='splash-footer'>
           <a href='https://www.linkedin.com/in/steven-touba-262197bb/' target='_blank'><i className='fab fa-linkedin'></i></a>
@@ -99,7 +106,7 @@ const RenderErrors = ({errors, clearErrors}) => {
   let flag = null; 
   if (errors.length > 0) {
     flag = <ul>
-      {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+      {errors.map((error, idx) => <li className="session-errors" key={idx}>{error}</li>)}
     </ul>
   } 
 

@@ -54,6 +54,7 @@
   justify-content: center;
   font-size: 24px;
   font-size: bold;
+  padding: 5px;
 }
 
 .session-form p {
@@ -80,7 +81,7 @@
   text-transform: uppercase;
   font-weight: bold;
   font-size: 24px;
-  margin: 5px 0;
+  margin: 5px 10px 0 0;
 }
 
 .session-button:hover { 
@@ -101,9 +102,25 @@
   color: white;
   text-transform: uppercase;
   font-weight: bold;
-  cursor: pointer;
+  font-size: 20px;
+  margin: 5px 10px 0 0;
 };
 
 .demo-user:hover { 
   background-color: darken($color: #072d91, $amount: 7%);
 };
+
+.session-errors { 
+  list-style: square;
+  color: red;
+  font-size: 16px;
+}
+
+.session-link { 
+  font-size: 14px;
+}
+
+.session-link > a { 
+  text-decoration: underline;
+  color: #072d91;
+}
