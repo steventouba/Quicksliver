@@ -2071,7 +2071,6 @@ var Sidenav = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, Sidenav);
 
     _this = _super.call(this, props);
-    debugger;
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
     _this.openModal = _this.openModal.bind(_assertThisInitialized(_this));
     return _this;

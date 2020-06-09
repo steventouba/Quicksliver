@@ -25,7 +25,9 @@ class Api::ChannelsController < ApplicationController
     end 
     if @channel.save!
       ChannelMembership.create({user_id: @channel.creator_id, channel_id: @channel.id, is_admin: true})
-      enroll_users(@users)
+      if @users 
+        enroll_users(@users)
+      end 
       render '/api/channels/show'
     else
       render json: ['something went wrong'], status: 401
