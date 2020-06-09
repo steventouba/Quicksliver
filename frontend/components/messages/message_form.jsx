@@ -31,7 +31,7 @@ class MessageForm extends React.Component {
     event.preventDefault(); 
     const notification = document.getElementById('message-notification'); 
     notification.style.display = "block"
-    setTimeout(() => notification.style.display="none", 1000)
+    setTimeout(() => notification.style.display="none", 2000)
   }
 
   render() {

@@ -1267,7 +1267,7 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
       notification.style.display = "block";
       setTimeout(function () {
         return notification.style.display = "none";
-      }, 1000);
+      }, 2000);
     }
   }, {
     key: "render",
@@ -2130,7 +2130,6 @@ var Sidenav = /*#__PURE__*/function (_React$Component) {
       })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ChannelHeaders, {
         deleteChannel: this.props.deleteChannel,
         channels: chats.channels,
-        userId: this.props.currentUser.id,
         history: history
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "sidenav-directmessages"
@@ -2149,7 +2148,6 @@ var Sidenav = /*#__PURE__*/function (_React$Component) {
       })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(DirectMessageHeaders, {
         deleteChannel: this.props.deleteChannel,
         channels: chats.directMessages,
-        userId: this.props.currentUser.id,
         history: history
       })));
     }
@@ -2160,7 +2158,6 @@ var Sidenav = /*#__PURE__*/function (_React$Component) {
 
 var ChannelHeaders = function ChannelHeaders(_ref) {
   var channels = _ref.channels,
-      userId = _ref.userId,
       deleteChannel = _ref.deleteChannel,
       history = _ref.history;
   var elements;
@@ -2189,7 +2186,6 @@ var ChannelHeaders = function ChannelHeaders(_ref) {
 
 var DirectMessageHeaders = function DirectMessageHeaders(_ref2) {
   var channels = _ref2.channels,
-      userId = _ref2.userId,
       deleteChannel = _ref2.deleteChannel,
       history = _ref2.history;
   var elements;

@@ -1,7 +1,6 @@
 import React from 'react'; 
 import { Link } from 'react-router-dom';
 
-
 class Sidenav extends React.Component { 
   constructor(props) { 
     super(props)
@@ -49,8 +48,7 @@ class Sidenav extends React.Component {
             </div>
           </div>
           <ChannelHeaders deleteChannel={this.props.deleteChannel} 
-            channels={chats.channels}  
-            userId={this.props.currentUser.id}
+            channels={chats.channels}
             history={history}
           /> 
         </div>
@@ -65,8 +63,7 @@ class Sidenav extends React.Component {
             </div>
           </div>
           <DirectMessageHeaders  deleteChannel={this.props.deleteChannel}
-            channels={chats.directMessages} 
-            userId={this.props.currentUser.id}
+            channels={chats.directMessages}
             history={history}
           /> 
         </div>
@@ -75,7 +72,7 @@ class Sidenav extends React.Component {
   }
 }
 
-const ChannelHeaders = ({ channels, userId, deleteChannel, history }) => { 
+const ChannelHeaders = ({ channels, deleteChannel, history }) => { 
   let elements; 
   
   try {
@@ -98,7 +95,7 @@ const ChannelHeaders = ({ channels, userId, deleteChannel, history }) => {
   )
 }
 
-const DirectMessageHeaders = ({ channels, userId, deleteChannel, history }) => { 
+const DirectMessageHeaders = ({ channels, deleteChannel, history }) => { 
   let elements; 
 
   try {
