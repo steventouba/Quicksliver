@@ -78,10 +78,10 @@ const ChannelHeaders = ({ channels, deleteChannel, history }) => {
     elements = channels.map(channel => (
       <Link key={channel.id} to={`/main/channels/${channel.id}`}>
         <div className='channel-item'>
-          # {channel.name}
+          <span># {channel.name}</span>
           {(channel.id !== 1 && channel.id !== 2) && 
          <div onClick={() => deleteChannel(channel.id)
-          .then(() => history.push('/main/channels/1'))}>x</div>}
+          .then(() => history.push('/main/channels/1'))}>X</div>}
         </div>
       </Link>
     ))
@@ -102,9 +102,9 @@ const DirectMessageHeaders = ({ channels, deleteChannel, history }) => {
       <Link key={channel.id} to={`/main/channels/${channel.id}`}>
         <div className='channel-item'>
           {/* <span className='channel-item-gutter'></span> */}
-          {channel.name}
+          <span>{channel.name} </span>
           <div onClick={() => deleteChannel(channel.id)
-            .then(() => history.push('/main/channels/1'))}>x</div>
+            .then(() => history.push('/main/channels/1'))}>X</div>
         </div>
       </Link>
     ))

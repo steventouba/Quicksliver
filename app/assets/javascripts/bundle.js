@@ -2177,13 +2177,13 @@ var ChannelHeaders = function ChannelHeaders(_ref) {
         to: "/main/channels/".concat(channel.id)
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "channel-item"
-      }, "# ", channel.name, channel.id !== 1 && channel.id !== 2 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "# ", channel.name), channel.id !== 1 && channel.id !== 2 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onClick: function onClick() {
           return deleteChannel(channel.id).then(function () {
             return history.push('/main/channels/1');
           });
         }
-      }, "x")));
+      }, "X")));
     });
   } catch (error) {
     elements = null;
@@ -2205,13 +2205,13 @@ var DirectMessageHeaders = function DirectMessageHeaders(_ref2) {
         to: "/main/channels/".concat(channel.id)
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "channel-item"
-      }, channel.name, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, channel.name, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onClick: function onClick() {
           return deleteChannel(channel.id).then(function () {
             return history.push('/main/channels/1');
           });
         }
-      }, "x")));
+      }, "X")));
     });
   } catch (error) {
     elements = null;

@@ -70,7 +70,13 @@
   padding: 3px 0 0 5px;
 }
 
+.channel-item > span { 
+  width: 180px;
+  overflow: hidden;
+}
+
 .channel-item div:last-of-type { 
+  display: none;
   padding-right: 3px;
   color: red;
 }
@@ -78,4 +84,14 @@
 .channel-item:hover { 
   background-color: #363636;
   width: 100%;
+}
+
+.channel-item:hover div:last-of-type { 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 5px;
+  padding-bottom: 3px;
+  color: oldlace;
+  font-weight: bolder;
 }
