@@ -2100,11 +2100,10 @@ var Sidenav = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
-
       var _this$props = this.props,
           chats = _this$props.chats,
-          history = _this$props.history;
+          history = _this$props.history,
+          createChannel = _this$props.createChannel;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "main-channel-sidenav"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2131,7 +2130,7 @@ var Sidenav = /*#__PURE__*/function (_React$Component) {
         className: "open-channel-modal"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
-          return _this2.props.createChannel('createChannel');
+          return createChannel('createChannel');
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fas fa-plus"
@@ -2149,7 +2148,7 @@ var Sidenav = /*#__PURE__*/function (_React$Component) {
         className: "open-channel-modal"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
-          return _this2.props.createChannel('createDirectMessage');
+          return createChannel('createDirectMessage');
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fas fa-plus"

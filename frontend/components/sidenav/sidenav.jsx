@@ -19,7 +19,7 @@ class Sidenav extends React.Component {
   }
 
   render() { 
-   const { chats, history } = this.props;
+   const { chats, history, createChannel } = this.props;
     return ( 
       <div className='main-channel-sidenav'>
         <div className='sidenav-header'>
@@ -43,7 +43,7 @@ class Sidenav extends React.Component {
               Channels
             </div>
             <div className='open-channel-modal'>
-              <button onClick={() => this.props.createChannel('createChannel')}><i className="fas fa-plus"></i></button>
+              <button onClick={() => createChannel('createChannel')}><i className="fas fa-plus"></i></button>
             </div>
           </div>
           <ChannelHeaders deleteChannel={this.props.deleteChannel} 
@@ -58,7 +58,7 @@ class Sidenav extends React.Component {
               Direct Messages 
             </div>
             <div className='open-channel-modal'>
-              <button onClick={() => this.props.createChannel('createDirectMessage')}><i className="fas fa-plus"></i></button>
+              <button onClick={() => createChannel('createDirectMessage')}><i className="fas fa-plus"></i></button>
             </div>
           </div>
           <DirectMessageHeaders  deleteChannel={this.props.deleteChannel}
