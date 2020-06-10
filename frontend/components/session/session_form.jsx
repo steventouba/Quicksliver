@@ -24,8 +24,15 @@ class SessionForm extends React.Component {
   }
 
   submitDemoUser(e) { 
-    e.preventDefault() 
-    this.props.demoLogIn()
+    e.preventDefault()
+    this.setState({ 
+      username: 'Hades',
+      password: '123456',
+      email: 'Hades@hades.com',
+      phoneNumber: '863 - 379 - 6753',
+    }, () => setTimeout(this.props.demoLogIn, 300))
+    
+    // this.props.demoLogIn()
   }
 
   render() {
@@ -46,7 +53,7 @@ class SessionForm extends React.Component {
             <p>Enter your <b>email address</b> and <b>password</b>.</p>
             <label>
               <input className='session-input'
-                type="text"
+                type="email"
                 value={this.state.email}
                 onChange={this.handleInput("email")}
                 placeholder="you@example.com"

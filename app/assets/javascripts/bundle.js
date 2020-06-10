@@ -1864,8 +1864,17 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "submitDemoUser",
     value: function submitDemoUser(e) {
+      var _this3 = this;
+
       e.preventDefault();
-      this.props.demoLogIn();
+      this.setState({
+        username: 'Hades',
+        password: '123456',
+        email: 'Hades@hades.com',
+        phoneNumber: '863 - 379 - 6753'
+      }, function () {
+        return setTimeout(_this3.props.demoLogIn, 300);
+      }); // this.props.demoLogIn()
     }
   }, {
     key: "render",
@@ -1893,7 +1902,7 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
         clearErrors: this.props.clearErrors
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Log into Mount Olympus"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "mount-olympus.quicksilver.com"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Enter your ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "email address"), " and ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("b", null, "password"), "."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "session-input",
-        type: "text",
+        type: "email",
         value: this.state.email,
         onChange: this.handleInput("email"),
         placeholder: "you@example.com"
