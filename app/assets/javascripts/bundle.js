@@ -1632,10 +1632,12 @@ var MessageListItem = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       var messages = this.StructureMessages();
-      debugger;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, !!messages.length ? messages : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "no-messages"
-      }, "This is the very beginning of your message history"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: window.Logo,
+        alt: ""
+      }), "This is the very beginning of your message history"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         ref: this.bottom
       }));
     }
