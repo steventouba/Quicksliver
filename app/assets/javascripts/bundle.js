@@ -1414,56 +1414,36 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
     };
     _this.bottom = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
     return _this;
-  } // componentDidMount() { 
-  //   //this.props.fetchMessages()
-  //   //this.props.fetchUsers()
-  // }
-  // componentDidUpdate(prevProps) { 
-  //   debugger
-  // //  if (prevProps.messages && prevProps.messages.length < this.props.messages.length) { 
-  // //    this.setState({messages: [...this.props.messages]})
-  // //  }
-  //   if (this.props.currentChannel && this.messages.length > 0) { 
-  //     this.bottom.current.scrollIntoView()
-  //   }
-  // }
-
+  }
 
   _createClass(MessageList, [{
     key: "render",
     value: function render() {
       var _this2 = this;
 
-      // this.messages = []; 
-      // this.props.messages.map(message => {
-      //   if (parseInt(this.props.currentChannel.id) === message.channelId) {
-      //     this.messages.push(<div className ='message-list-item' key={[message.id]}>
-      //       {message.body}
-      //       <div ref={this.bottom}/>
-      //     </div>)
-      //   }
-      // })
-      {
-        /* {this.messages} */
-      }
+      var _this$props = this.props,
+          messages = _this$props.messages,
+          currentChannel = _this$props.currentChannel,
+          users = _this$props.users,
+          currentUser = _this$props.currentUser;
       this.messages = [];
-      this.props.messages.map(function (message) {
-        if (_this2.props.currentChannel && parseInt(_this2.props.currentChannel.id) === message.channelId) {
+      messages.map(function (message) {
+        if (currentChannel && parseInt(currentChannel.id) === message.channelId) {
           _this2.messages.push(message);
         }
       });
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, this.props.currentChannel && this.props.users && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, currentChannel && users && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "main-channel-message-list"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "message-list-header"
-      }, this.props.currentChannel.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, currentChannel.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "spacing-div"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_message_list_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
         messages: this.messages,
-        users: this.props.users
+        users: users
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_message_form__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        currentChannel: this.props.currentChannel.id,
-        currentUser: this.props.currentUser
+        currentChannel: currentChannel.id,
+        currentUser: currentUser
       })));
     }
   }]);
@@ -1508,8 +1488,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     fetchMessages: function fetchMessages() {
       return dispatch(Object(_actions_message_actions__WEBPACK_IMPORTED_MODULE_1__["fetchMessages"])());
-    } //fetchUsers: () => dispatch(fetchUsers())
-
+    }
   };
 };
 
@@ -1653,7 +1632,10 @@ var MessageListItem = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       var messages = this.StructureMessages();
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, messages === null ? "" : messages, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      debugger;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, !!messages.length ? messages : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "no-messages"
+      }, "This is the very beginning of your message history"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         ref: this.bottom
       }));
     }

@@ -82,10 +82,13 @@ class MessageListItem extends React.Component {
   render() { 
 
     let messages = this.StructureMessages();
-
+    debugger
     return( 
       <>
-        {messages === null ? "" : messages}
+        {
+          !!messages.length ? messages 
+          : <div className='no-messages'>This is the very beginning of your message history</div>
+        }
         <div ref={this.bottom} />
       </>
     )

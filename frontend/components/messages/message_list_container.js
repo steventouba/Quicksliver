@@ -17,7 +17,6 @@ const mapDispatchToProps = (dispatch) => {
 
   return{
     fetchMessages: () => dispatch(fetchMessages())
-    //fetchUsers: () => dispatch(fetchUsers())
   }
 }
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MessageList))

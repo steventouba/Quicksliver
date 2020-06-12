@@ -11,50 +11,25 @@ class MessageList extends React.Component {
     this.bottom = React.createRef();
   }  
 
-  // componentDidMount() { 
-  //   //this.props.fetchMessages()
-  //   //this.props.fetchUsers()
-  // }
-  
-  // componentDidUpdate(prevProps) { 
-  //   debugger
-  // //  if (prevProps.messages && prevProps.messages.length < this.props.messages.length) { 
-  // //    this.setState({messages: [...this.props.messages]})
-  // //  }
-  //   if (this.props.currentChannel && this.messages.length > 0) { 
-      
-  //     this.bottom.current.scrollIntoView()
-  //   }
-  // }
-
   render () {
-    // this.messages = []; 
-    // this.props.messages.map(message => {
-    //   if (parseInt(this.props.currentChannel.id) === message.channelId) {
-    //     this.messages.push(<div className ='message-list-item' key={[message.id]}>
-    //       {message.body}
-    //       <div ref={this.bottom}/>
-    //     </div>)
-    //   }
-    // })
-    {/* {this.messages} */}
-
+    const { messages, currentChannel, users, currentUser } = this.props
     this.messages = []; 
-    this.props.messages.map(message => {
-      if ( this.props.currentChannel && parseInt(this.props.currentChannel.id) === message.channelId) {
+    messages.map(message => {
+      if ( currentChannel && parseInt(currentChannel.id) === message.channelId) {
         this.messages.push(message)
       }
     })
+
     return (
       <>
-        {this.props.currentChannel && this.props.users && 
+        {currentChannel && users && 
           <>
             <div className='main-channel-message-list'>
-            <div className='message-list-header'>{this.props.currentChannel.name}</div>
+            <div className='message-list-header'>{currentChannel.name}</div>
             <div className='spacing-div'></div>  
-            <MessageListItem messages={this.messages} users={this.props.users} /> 
+            <MessageListItem messages={this.messages} users={users} /> 
             </div>
-            <MessageForm currentChannel={this.props.currentChannel.id} currentUser={this.props.currentUser} />
+            <MessageForm currentChannel={currentChannel.id} currentUser={currentUser} />
           </>
         }
       </>
