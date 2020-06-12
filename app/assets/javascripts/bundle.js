@@ -1414,56 +1414,36 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
     };
     _this.bottom = react__WEBPACK_IMPORTED_MODULE_0___default.a.createRef();
     return _this;
-  } // componentDidMount() { 
-  //   //this.props.fetchMessages()
-  //   //this.props.fetchUsers()
-  // }
-  // componentDidUpdate(prevProps) { 
-  //   debugger
-  // //  if (prevProps.messages && prevProps.messages.length < this.props.messages.length) { 
-  // //    this.setState({messages: [...this.props.messages]})
-  // //  }
-  //   if (this.props.currentChannel && this.messages.length > 0) { 
-  //     this.bottom.current.scrollIntoView()
-  //   }
-  // }
-
+  }
 
   _createClass(MessageList, [{
     key: "render",
     value: function render() {
       var _this2 = this;
 
-      // this.messages = []; 
-      // this.props.messages.map(message => {
-      //   if (parseInt(this.props.currentChannel.id) === message.channelId) {
-      //     this.messages.push(<div className ='message-list-item' key={[message.id]}>
-      //       {message.body}
-      //       <div ref={this.bottom}/>
-      //     </div>)
-      //   }
-      // })
-      {
-        /* {this.messages} */
-      }
+      var _this$props = this.props,
+          messages = _this$props.messages,
+          currentChannel = _this$props.currentChannel,
+          users = _this$props.users,
+          currentUser = _this$props.currentUser;
       this.messages = [];
-      this.props.messages.map(function (message) {
-        if (_this2.props.currentChannel && parseInt(_this2.props.currentChannel.id) === message.channelId) {
+      messages.map(function (message) {
+        if (currentChannel && parseInt(currentChannel.id) === message.channelId) {
           _this2.messages.push(message);
         }
       });
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, this.props.currentChannel && this.props.users && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, currentChannel && users && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "main-channel-message-list"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "message-list-header"
-      }, this.props.currentChannel.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, currentChannel.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "spacing-div"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_message_list_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
         messages: this.messages,
-        users: this.props.users
+        users: users
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_message_form__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        currentChannel: this.props.currentChannel.id,
-        currentUser: this.props.currentUser
+        currentChannel: currentChannel.id,
+        currentUser: currentUser
       })));
     }
   }]);
@@ -1508,8 +1488,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     fetchMessages: function fetchMessages() {
       return dispatch(Object(_actions_message_actions__WEBPACK_IMPORTED_MODULE_1__["fetchMessages"])());
-    } //fetchUsers: () => dispatch(fetchUsers())
-
+    }
   };
 };
 
@@ -1653,7 +1632,12 @@ var MessageListItem = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       var messages = this.StructureMessages();
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, messages === null ? "" : messages, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, !!messages.length ? messages : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "no-messages"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: window.Logo,
+        alt: ""
+      }), "This is the very beginning of your message history"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         ref: this.bottom
       }));
     }
@@ -2140,6 +2124,7 @@ var Sidenav = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
     _this.openModal = _this.openModal.bind(_assertThisInitialized(_this));
+    _this.toggleActive = _this.toggleActive.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -2154,6 +2139,13 @@ var Sidenav = /*#__PURE__*/function (_React$Component) {
     value: function openModal(e) {
       e.preventDefault;
       this.props.createChannel('createChannel');
+    }
+  }, {
+    key: "toggleActive",
+    value: function toggleActive() {
+      var currentActive = document.getElementsByClassName('active-channel');
+      currentActive[0] ? currentActive[0].classList.remove('active-channel') : null;
+      event.target.parentElement.classList.add('active-channel');
     }
   }, {
     key: "render",
@@ -2172,7 +2164,7 @@ var Sidenav = /*#__PURE__*/function (_React$Component) {
         className: "sidenav-header-info"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "sidenav-team-info"
-      }, "Mount Olympus ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "\u02C5")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Mount Olympus \u02C5")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "sidenav-user-info"
       }, this.props.currentUser.username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "header-dropdown-content"
@@ -2194,6 +2186,7 @@ var Sidenav = /*#__PURE__*/function (_React$Component) {
         className: "fas fa-plus"
       })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ChannelHeaders, {
         deleteChannel: this.props.deleteChannel,
+        toggleActive: this.toggleActive,
         channels: chats.channels,
         history: history
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2212,6 +2205,7 @@ var Sidenav = /*#__PURE__*/function (_React$Component) {
         className: "fas fa-plus"
       })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(DirectMessageHeaders, {
         deleteChannel: this.props.deleteChannel,
+        toggleActive: this.toggleActive,
         channels: chats.directMessages,
         history: history
       })));
@@ -2224,17 +2218,21 @@ var Sidenav = /*#__PURE__*/function (_React$Component) {
 var ChannelHeaders = function ChannelHeaders(_ref) {
   var channels = _ref.channels,
       deleteChannel = _ref.deleteChannel,
-      history = _ref.history;
+      history = _ref.history,
+      toggleActive = _ref.toggleActive;
   var elements;
 
   try {
     elements = channels.map(function (channel) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         key: channel.id,
-        to: "/main/channels/".concat(channel.id)
+        to: "/main/channels/".concat(channel.id),
+        onClick: toggleActive
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "channel-item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "# ", channel.name), channel.id !== 1 && channel.id !== 2 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "channel-tooltip-text"
+      }, channel.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "# ", channel.name), channel.id !== 1 && channel.id !== 2 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onClick: function onClick() {
           return deleteChannel(channel.id).then(function () {
             return history.push('/main/channels/1');
@@ -2252,17 +2250,21 @@ var ChannelHeaders = function ChannelHeaders(_ref) {
 var DirectMessageHeaders = function DirectMessageHeaders(_ref2) {
   var channels = _ref2.channels,
       deleteChannel = _ref2.deleteChannel,
-      history = _ref2.history;
+      history = _ref2.history,
+      toggleActive = _ref2.toggleActive;
   var elements;
 
   try {
     elements = channels.map(function (channel) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         key: channel.id,
-        to: "/main/channels/".concat(channel.id)
+        to: "/main/channels/".concat(channel.id),
+        onClick: toggleActive
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "channel-item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, channel.name, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "channel-tooltip-text"
+      }, channel.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, channel.name, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onClick: function onClick() {
           return deleteChannel(channel.id).then(function () {
             return history.push('/main/channels/1');
@@ -2600,7 +2602,7 @@ var structureChatName = function structureChatName(directMessageChannel, users, 
 
     if (users[id] && id !== currentUserId) {
       var userName = users[id].username;
-      channelName += !channelName ? "".concat(userName) : ",".concat(userName);
+      channelName += !channelName ? "".concat(userName) : ", ".concat(userName);
     }
   }
 

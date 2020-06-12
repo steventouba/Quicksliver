@@ -35,10 +35,9 @@
   width: auto;
   display: flex;
   flex-direction: column;
-  //position: relative;
+  position: relative;
   
 }
-
 
 .main-channel-message-input { 
   grid-column: 2 / 5;
@@ -60,6 +59,7 @@
   font-size: 16px;
   outline: none;
 }
+
 .message-input:focus { 
   border: 1px solid rgba($color: whitesmoke, $alpha: 0.50);
 }

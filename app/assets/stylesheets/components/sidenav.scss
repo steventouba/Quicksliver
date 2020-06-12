@@ -6,6 +6,7 @@
   padding-top: 5px;
   padding-left: 10px;
   position: relative;
+  line-height: 1.5;
 }
 
 .header-dropdown-content { 
@@ -59,6 +60,7 @@
   outline: none;
 }
 
+
 .channel-item-gutter { 
   width: 5px;
   margin: 5px;
@@ -66,14 +68,19 @@
 
 .channel-item { 
   display: flex;
+  position: relative;
   justify-content: space-between;
   padding: 3px 0 0 5px;
   line-height: 2;
+ 
 }
 
 .channel-item > span { 
   width: 180px;
+  white-space: nowrap;
   overflow: hidden;
+  text-overflow: ellipsis;
+  
 }
 
 .channel-item div:last-of-type { 
@@ -96,3 +103,38 @@
   font-weight: bolder;
   font-size: 14px;
 }
+
+.active-channel {
+  background-color: #062474;
+}
+
+.active-channel:hover {
+  background-color: #062474;
+}
+
+.channel-item .channel-tooltip-text { 
+  visibility: hidden;
+  font-size: 12px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px; 
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 60%;
+  right: 10%;
+  width: 150px;
+  overflow-y: visible;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+.channel-item:hover { 
+  .channel-tooltip-text { 
+    visibility: visible;
+    transition: 0.8s all ease;
+    transition-delay: 0.5s;
+  }
+}
+
