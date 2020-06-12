@@ -59,6 +59,10 @@
   outline: none;
 }
 
+.active-channel {
+  background-color: #062474;
+}
+
 .channel-item-gutter { 
   width: 5px;
   margin: 5px;
@@ -96,3 +100,4 @@
   font-weight: bolder;
   font-size: 14px;
 }
+

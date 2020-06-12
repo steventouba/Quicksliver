@@ -6,6 +6,7 @@ class Sidenav extends React.Component {
     super(props)
     this.handleClick = this.handleClick.bind(this); 
     this.openModal = this.openModal.bind(this); 
+    this.toggleActive = this.toggleActive.bind(this);
   }
 
   handleClick(e) { 
@@ -16,6 +17,12 @@ class Sidenav extends React.Component {
   openModal(e) { 
     e.preventDefault; 
     this.props.createChannel('createChannel'); 
+  }
+
+  toggleActive() {
+    const currentActive = document.getElementsByClassName('active-channel')
+    currentActive[0] ? currentActive[0].classList.remove('active-channel') : null;
+    event.target.parentElement.classList.add('active-channel')
   }
 
   render() { 
@@ -47,6 +54,7 @@ class Sidenav extends React.Component {
             </div>
           </div>
           <ChannelHeaders deleteChannel={this.props.deleteChannel} 
+            toggleActive={this.toggleActive}
             channels={chats.channels}
             history={history}
           /> 
@@ -62,6 +70,7 @@ class Sidenav extends React.Component {
             </div>
           </div>
           <DirectMessageHeaders  deleteChannel={this.props.deleteChannel}
+            toggleActive={this.toggleActive}
             channels={chats.directMessages}
             history={history}
           /> 
@@ -71,13 +80,13 @@ class Sidenav extends React.Component {
   }
 }
 
-const ChannelHeaders = ({ channels, deleteChannel, history }) => { 
+const ChannelHeaders = ({ channels, deleteChannel, history, toggleActive }) => { 
   let elements; 
   
   try {
     elements = channels.map(channel => (
-      <Link key={channel.id} to={`/main/channels/${channel.id}`}>
-        <div className='channel-item'>
+      <Link key={channel.id} to={`/main/channels/${channel.id}`} onClick={toggleActive}>
+        <div className='channel-item' id={`channel-${channel.id}`}>
           <span># {channel.name}</span>
           {(channel.id !== 1 && channel.id !== 2) && 
          <div onClick={() => deleteChannel(channel.id)
@@ -94,12 +103,12 @@ const ChannelHeaders = ({ channels, deleteChannel, history }) => {
   )
 }
 
-const DirectMessageHeaders = ({ channels, deleteChannel, history }) => { 
+const DirectMessageHeaders = ({ channels, deleteChannel, history, toggleActive }) => { 
   let elements; 
 
   try {
     elements = channels.map(channel => (
-      <Link key={channel.id} to={`/main/channels/${channel.id}`}>
+      <Link key={channel.id} to={`/main/channels/${channel.id}`} onClick={toggleActive}>
         <div className='channel-item'>
           {/* <span className='channel-item-gutter'></span> */}
           <span>{channel.name} </span>
