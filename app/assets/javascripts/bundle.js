@@ -739,6 +739,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
+/* harmony import */ var _utils_channel_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/channel_utils */ "./frontend/utils/channel_utils.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -769,6 +771,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+
 var DirectMessageCreate = /*#__PURE__*/function (_React$Component) {
   _inherits(DirectMessageCreate, _React$Component);
 
@@ -780,7 +784,9 @@ var DirectMessageCreate = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, DirectMessageCreate);
 
     _this = _super.call(this, props);
-    var creatorId = _this.props.currentUserId;
+    var _this$props = _this.props,
+        creatorId = _this$props.currentUserId,
+        users = _this$props.users;
     _this.state = {
       channelInfo: {
         name: {
@@ -790,7 +796,7 @@ var DirectMessageCreate = /*#__PURE__*/function (_React$Component) {
         creatorId: creatorId,
         channelType: 1
       },
-      users: Object.values(_this.props.users),
+      users: Object.values(users),
       searchString: ""
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
@@ -803,9 +809,15 @@ var DirectMessageCreate = /*#__PURE__*/function (_React$Component) {
   _createClass(DirectMessageCreate, [{
     key: "handleSubmit",
     value: function handleSubmit() {
+      var _this$props2 = this.props,
+          closeModal = _this$props2.closeModal,
+          createChannel = _this$props2.createChannel;
       event.preventDefault();
-      this.props.createChannel(this.state.channelInfo);
-      this.props.closeModal();
+      createChannel(this.state.channelInfo).then(function () {
+        return closeModal();
+      }, function (err) {
+        return console.log(err);
+      });
     }
   }, {
     key: "updateMatches",
@@ -870,13 +882,18 @@ var DirectMessageCreate = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       var matches = this.updateMatches();
+      var errors = this.props.errors.channels;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "channel-create-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
         className: "channel-create-header"
       }, "Direct Messages"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "direct-message-create-form "
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, !$.isEmptyObject(errors) && errors.map(function (error, idx) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          key: idx
+        }, error);
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "channel-input"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "display-user-names",

@@ -1,9 +1,11 @@
 import React from 'react'; 
+import { closeModal } from '../../actions/modal_actions';
+import { createChannel } from '../../utils/channel_utils';
 
 class DirectMessageCreate extends React.Component { 
   constructor(props) { 
     super(props)
-    const creatorId = this.props.currentUserId
+    const { currentUserId: creatorId, users, }  = this.props;
     this.state = {
       channelInfo: {
         name: { creatorId, }, 
@@ -11,7 +13,7 @@ class DirectMessageCreate extends React.Component {
         creatorId,
         channelType: 1
       }, 
-      users: Object.values(this.props.users),
+      users: Object.values(users),
       searchString: "",
     }; 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -21,9 +23,14 @@ class DirectMessageCreate extends React.Component {
   }
 
   handleSubmit() { 
+    const { closeModal, createChannel } = this.props;
     event.preventDefault(); 
-    this.props.createChannel(this.state.channelInfo)
-    this.props.closeModal();
+    createChannel(this.state.channelInfo)
+    .then(
+      () => closeModal(), 
+      (err) => console.log(err)
+    )
+    
   }
 
   updateMatches() {
@@ -76,10 +83,14 @@ class DirectMessageCreate extends React.Component {
 
   render() {
     const matches = this.updateMatches(); 
+    const errors = this.props.errors.channels;
     return (
       <div className="channel-create-container">
         <header className="channel-create-header">Direct Messages</header>
         <div className="direct-message-create-form ">
+          {
+            !$.isEmptyObject(errors) && errors.map((error, idx) => <li key={idx}>{error}</li>)
+          }
           <div id="channel-input">
             <div id='display-user-names' onClick={this.handleDelete}></div>
             <input id='dm-create-user-search-bar' 
