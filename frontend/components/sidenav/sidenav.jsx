@@ -32,7 +32,7 @@ class Sidenav extends React.Component {
         <div className='sidenav-header'>
           <div className='header-dropdown-button'>
             <div className='sidenav-header-info'>
-              <div className='sidenav-team-info'>Mount Olympus <strong>˅</strong></div>
+              <div className='sidenav-team-info'><strong>Mount Olympus ˅</strong></div>
               <div className='sidenav-user-info'>
                 {this.props.currentUser.username}
               </div>
