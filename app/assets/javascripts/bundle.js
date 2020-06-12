@@ -2245,9 +2245,10 @@ var ChannelHeaders = function ChannelHeaders(_ref) {
         to: "/main/channels/".concat(channel.id),
         onClick: toggleActive
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "channel-item",
-        id: "channel-".concat(channel.id)
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "# ", channel.name), channel.id !== 1 && channel.id !== 2 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "channel-item"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "channel-tooltip-text"
+      }, channel.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "# ", channel.name), channel.id !== 1 && channel.id !== 2 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onClick: function onClick() {
           return deleteChannel(channel.id).then(function () {
             return history.push('/main/channels/1');
@@ -2277,7 +2278,9 @@ var DirectMessageHeaders = function DirectMessageHeaders(_ref2) {
         onClick: toggleActive
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "channel-item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, channel.name, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "channel-tooltip-text"
+      }, channel.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, channel.name, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onClick: function onClick() {
           return deleteChannel(channel.id).then(function () {
             return history.push('/main/channels/1');
@@ -2615,7 +2618,7 @@ var structureChatName = function structureChatName(directMessageChannel, users, 
 
     if (users[id] && id !== currentUserId) {
       var userName = users[id].username;
-      channelName += !channelName ? "".concat(userName) : ",".concat(userName);
+      channelName += !channelName ? "".concat(userName) : ", ".concat(userName);
     }
   }
 

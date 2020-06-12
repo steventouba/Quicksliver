@@ -86,7 +86,8 @@ const ChannelHeaders = ({ channels, deleteChannel, history, toggleActive }) => {
   try {
     elements = channels.map(channel => (
       <Link key={channel.id} to={`/main/channels/${channel.id}`} onClick={toggleActive}>
-        <div className='channel-item' id={`channel-${channel.id}`}>
+        <div className="channel-item">
+          <span className='channel-tooltip-text'>{channel.name}</span>
           <span># {channel.name}</span>
           {(channel.id !== 1 && channel.id !== 2) && 
          <div onClick={() => deleteChannel(channel.id)
@@ -110,7 +111,7 @@ const DirectMessageHeaders = ({ channels, deleteChannel, history, toggleActive }
     elements = channels.map(channel => (
       <Link key={channel.id} to={`/main/channels/${channel.id}`} onClick={toggleActive}>
         <div className='channel-item'>
-          {/* <span className='channel-item-gutter'></span> */}
+          <span className='channel-tooltip-text'>{channel.name}</span>
           <span>{channel.name} </span>
           <div onClick={() => deleteChannel(channel.id)
             .then(() => history.push('/main/channels/1'))}>X</div>

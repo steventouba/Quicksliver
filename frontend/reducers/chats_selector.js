@@ -9,7 +9,7 @@ const structureChatName = (directMessageChannel, users, currentUser) => {
     const id = parseInt(userIds[index]);
     if (users[id] && id !== currentUserId) { 
       const userName = users[id].username
-      channelName +=  !channelName ? `${userName}` : `,${userName}`;
+      channelName +=  !channelName ? `${userName}` : `, ${userName}`;
     }
   }
   directMessageChannel.name = channelName ? channelName : directMessageChannel.name;
