@@ -811,19 +811,20 @@ var DirectMessageCreate = /*#__PURE__*/function (_React$Component) {
     value: function handleSubmit() {
       var _this$props2 = this.props,
           closeModal = _this$props2.closeModal,
-          createChannel = _this$props2.createChannel;
+          createChannel = _this$props2.createChannel,
+          clearErrors = _this$props2.clearErrors;
       event.preventDefault();
       createChannel(this.state.channelInfo).then(function () {
         return closeModal();
-      }, function (err) {
-        return console.log(err);
+      }, function () {
+        return setTimeout(clearErrors, 2200);
       });
     }
   }, {
     key: "updateMatches",
     value: function updateMatches() {
       if (this.state.searchString.length === 0) return this.state.users;
-      var searchString = new RegExp("\\b".concat(this.state.searchString));
+      var searchString = new RegExp("\\b".concat(this.state.searchString), 'i');
       var matchedUsers = this.state.users.filter(function (user) {
         return user.username.match(searchString);
       });
@@ -890,7 +891,8 @@ var DirectMessageCreate = /*#__PURE__*/function (_React$Component) {
       }, "Direct Messages"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "direct-message-create-form "
       }, !$.isEmptyObject(errors) && errors.map(function (error, idx) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "channel-errors",
           key: idx
         }, error);
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1665,6 +1667,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _channel_channel_create_form__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../channel/channel_create-form */ "./frontend/components/channel/channel_create-form.jsx");
 /* harmony import */ var _channel_direct_message_create_form__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../channel/direct_message_create-form */ "./frontend/components/channel/direct_message_create-form.jsx");
+/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
+
 
 
 
@@ -1678,7 +1682,8 @@ var Modal = function Modal(_ref) {
       createChannel = _ref.createChannel,
       currentUser = _ref.currentUser,
       users = _ref.users,
-      errors = _ref.errors;
+      errors = _ref.errors,
+      clearErrors = _ref.clearErrors;
 
   if (!modal) {
     return null;
@@ -1691,6 +1696,7 @@ var Modal = function Modal(_ref) {
       component = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_channel_channel_create_form__WEBPACK_IMPORTED_MODULE_4__["default"], {
         currentUserId: currentUser.id,
         createChannel: createChannel,
+        clearErrors: clearErrors,
         closeModal: closeModal,
         errors: errors
       });
@@ -1702,6 +1708,7 @@ var Modal = function Modal(_ref) {
         users: users,
         createChannel: createChannel,
         closeModal: closeModal,
+        clearErrors: clearErrors,
         errors: errors
       });
       break;
@@ -1738,6 +1745,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     createChannel: function createChannel(channel) {
       return dispatch(Object(_actions_channel_actions__WEBPACK_IMPORTED_MODULE_2__["createChannel"])(channel));
+    },
+    clearErrors: function clearErrors() {
+      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_6__["clearErrors"])());
     }
   };
 };

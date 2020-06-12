@@ -23,12 +23,12 @@ class DirectMessageCreate extends React.Component {
   }
 
   handleSubmit() { 
-    const { closeModal, createChannel } = this.props;
+    const { closeModal, createChannel, clearErrors } = this.props;
     event.preventDefault(); 
     createChannel(this.state.channelInfo)
     .then(
       () => closeModal(), 
-      (err) => console.log(err)
+      () => setTimeout(clearErrors, 2200)
     )
     
   }
@@ -36,7 +36,7 @@ class DirectMessageCreate extends React.Component {
   updateMatches() {
     if (this.state.searchString.length === 0) return this.state.users;
 
-    const searchString = new RegExp(`\\b${this.state.searchString}`)
+    const searchString = new RegExp(`\\b${this.state.searchString}`, 'i')
     const matchedUsers = this.state.users.filter(
       user => user.username.match(searchString));
 
@@ -89,7 +89,8 @@ class DirectMessageCreate extends React.Component {
         <header className="channel-create-header">Direct Messages</header>
         <div className="direct-message-create-form ">
           {
-            !$.isEmptyObject(errors) && errors.map((error, idx) => <li key={idx}>{error}</li>)
+            !$.isEmptyObject(errors) 
+            && errors.map((error, idx) => <div className="channel-errors" key={idx}>{error}</div>)
           }
           <div id="channel-input">
             <div id='display-user-names' onClick={this.handleDelete}></div>

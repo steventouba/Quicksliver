@@ -180,3 +180,18 @@
   border: 10px solid;
   border-color: black transparent transparent black;
 }
+
+.channel-errors {
+  position: absolute;
+  display: flex;
+  top: 21%;
+  left: 4.3%;
+  background-color: #222629;
+  color: oldlace;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 380px; 
+  height: 60px;
+  justify-content: center;
+  align-items: center;
+}

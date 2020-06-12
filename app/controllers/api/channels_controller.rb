@@ -30,7 +30,7 @@ class Api::ChannelsController < ApplicationController
       end 
       render '/api/channels/show'
     else
-      render json: ['can\'t have two channels with the same name'], status: 401
+      render json: ['this channel already exists, check the sidebar'], status: 401
     end 
   end 
 

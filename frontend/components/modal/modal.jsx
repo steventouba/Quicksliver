@@ -4,9 +4,10 @@ import { createChannel } from '../../actions/channel_actions';
 import { connect } from 'react-redux';
 import ChannelCreateForm from '../channel/channel_create-form'; 
 import DirectMessageCreateForm from '../channel/direct_message_create-form';
+import { clearErrors } from '../../actions/session_actions';
 
 
-const Modal = ({modal, closeModal, createChannel, currentUser, users, errors}) => { 
+const Modal = ({modal, closeModal, createChannel, currentUser, users, errors, clearErrors}) => { 
   if (!modal) { 
     return null; 
   }
@@ -18,6 +19,7 @@ const Modal = ({modal, closeModal, createChannel, currentUser, users, errors}) =
       component = <ChannelCreateForm 
       currentUserId={currentUser.id}  
       createChannel={createChannel}
+      clearErrors={clearErrors}
       closeModal={closeModal}
       errors={errors}
       />;
@@ -28,6 +30,7 @@ const Modal = ({modal, closeModal, createChannel, currentUser, users, errors}) =
         users={users}
         createChannel={createChannel}
         closeModal={closeModal}
+        clearErrors={clearErrors}
         errors={errors}
       />; 
       break
@@ -58,7 +61,8 @@ const mapDispatchToProps = (dispatch) => {
 
   return { 
     closeModal: () => dispatch(closeModal()), 
-    createChannel: (channel) => dispatch(createChannel(channel))
+    createChannel: (channel) => dispatch(createChannel(channel)), 
+    clearErrors: () => dispatch(clearErrors()),
   }; 
 }
 
