@@ -71,11 +71,15 @@
   justify-content: space-between;
   padding: 3px 0 0 5px;
   line-height: 2;
-  white-space: nowrap;
+ 
 }
 
 .channel-item > span { 
   width: 180px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
 }
 
 .channel-item div:last-of-type { 
