@@ -5,7 +5,6 @@ const channelErrors = (state = {}, action) => {
 
   switch (action.type) {
     case RECEIVE_CHANNEL_ERRORS:
-      debugger
       return action.errors
     case CLEAR_ERRORS: 
       return []; 

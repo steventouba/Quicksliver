@@ -131,7 +131,6 @@ var removeChannel = function removeChannel(channel) {
 };
 
 var receiveChannelErrors = function receiveChannelErrors(errors) {
-  debugger;
   return {
     type: RECEIVE_CHANNEL_ERRORS,
     errors: errors
@@ -809,15 +808,31 @@ var DirectMessageCreate = /*#__PURE__*/function (_React$Component) {
   _createClass(DirectMessageCreate, [{
     key: "handleSubmit",
     value: function handleSubmit() {
+      var _this2 = this;
+
       var _this$props2 = this.props,
           closeModal = _this$props2.closeModal,
           createChannel = _this$props2.createChannel,
-          clearErrors = _this$props2.clearErrors;
+          clearErrors = _this$props2.clearErrors,
+          creatorId = _this$props2.currentUserId;
       event.preventDefault();
       createChannel(this.state.channelInfo).then(function () {
         return closeModal();
       }, function () {
-        return setTimeout(clearErrors, 2200);
+        var parent = document.getElementById('display-user-names');
+
+        var updateChannelInfo = _objectSpread({}, _this2.state.channelInfo);
+
+        updateChannelInfo.name = {
+          creatorId: creatorId
+        };
+        $(parent).empty();
+
+        _this2.setState({
+          channelInfo: updateChannelInfo
+        }, function () {
+          return setTimeout(clearErrors, 2200);
+        });
       });
     }
   }, {
@@ -2502,7 +2517,6 @@ var channelErrors = function channelErrors() {
 
   switch (action.type) {
     case _actions_channel_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CHANNEL_ERRORS"]:
-      debugger;
       return action.errors;
 
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_1__["CLEAR_ERRORS"]:

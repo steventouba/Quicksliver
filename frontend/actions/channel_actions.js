@@ -20,11 +20,10 @@ const removeChannel = (channel) => ({
     channel
 });
 
-const receiveChannelErrors = (errors) => {
-  debugger
-  return {type: RECEIVE_CHANNEL_ERRORS, 
-  errors}
-}
+const receiveChannelErrors = (errors) => ({
+  type: RECEIVE_CHANNEL_ERRORS, 
+  errors
+})
 
 
 export const fetchUserChannels = () => dispatch => ChannelUtils.fetchUserChannels()

@@ -55,8 +55,9 @@ class Api::ChannelsController < ApplicationController
   end 
 
   def structure_channel_name(user_ids) 
-    @users = user_ids.values.sort!
+    @users = user_ids.values.sort!    
     prefix = @users.join.hash.to_s
+
     @users.each { |user| prefix << ".#{user}"}
     @channel.name = prefix
   end 

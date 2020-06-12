@@ -23,14 +23,19 @@ class DirectMessageCreate extends React.Component {
   }
 
   handleSubmit() { 
-    const { closeModal, createChannel, clearErrors } = this.props;
+    const { closeModal, createChannel, clearErrors, currentUserId: creatorId } = this.props;
     event.preventDefault(); 
     createChannel(this.state.channelInfo)
     .then(
       () => closeModal(), 
-      () => setTimeout(clearErrors, 2200)
+      () => {
+        const parent = document.getElementById('display-user-names'); 
+        const updateChannelInfo = { ...this.state.channelInfo } 
+        updateChannelInfo.name = { creatorId }; 
+        $(parent).empty();
+        this.setState({ channelInfo: updateChannelInfo }, () => setTimeout(clearErrors, 2200))
+      }
     )
-    
   }
 
   updateMatches() {
@@ -84,6 +89,7 @@ class DirectMessageCreate extends React.Component {
   render() {
     const matches = this.updateMatches(); 
     const errors = this.props.errors.channels;
+
     return (
       <div className="channel-create-container">
         <header className="channel-create-header">Direct Messages</header>
