@@ -10,5 +10,5 @@ export const fetchChannelMemberships = (userId) => dispatch => (
   membershipUtils.fetchUserMemberships(userId)
 ).then(
   (memberships) => dispatch(receiveChannelMemberships(memberships)),
-  errors => dispatch(receiveErrors(errors.responseJSON))
+  (errors) => dispatch(receiveErrors(errors.responseJSON))
 )

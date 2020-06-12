@@ -6,7 +6,7 @@ import ChannelCreateForm from '../channel/channel_create-form';
 import DirectMessageCreateForm from '../channel/direct_message_create-form';
 
 
-const Modal = ({modal, closeModal, createChannel, currentUser, users}) => { 
+const Modal = ({modal, closeModal, createChannel, currentUser, users, errors}) => { 
   if (!modal) { 
     return null; 
   }
@@ -19,6 +19,7 @@ const Modal = ({modal, closeModal, createChannel, currentUser, users}) => {
       currentUserId={currentUser.id}  
       createChannel={createChannel}
       closeModal={closeModal}
+      errors={errors}
       />;
       break 
     case 'createDirectMessage': 
@@ -27,6 +28,7 @@ const Modal = ({modal, closeModal, createChannel, currentUser, users}) => {
         users={users}
         createChannel={createChannel}
         closeModal={closeModal}
+        errors={errors}
       />; 
       break
     default:
@@ -43,10 +45,12 @@ const Modal = ({modal, closeModal, createChannel, currentUser, users}) => {
 }
 
 const mapStateToProps = (state) => { 
+  
   return { 
     modal: state.ui.modal, 
     currentUser: state.session.currentUser, 
     users: state.entities.users,
+    errors: state.errors, 
   }; 
 }
 

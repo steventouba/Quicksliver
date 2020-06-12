@@ -90,7 +90,7 @@
 /*!*********************************************!*\
   !*** ./frontend/actions/channel_actions.js ***!
   \*********************************************/
-/*! exports provided: RECEIVE_CHANNELS, RECEIVE_CHANNEL, REMOVE_CHANNEL, fetchUserChannels, createChannel, deleteChannel */
+/*! exports provided: RECEIVE_CHANNELS, RECEIVE_CHANNEL, REMOVE_CHANNEL, RECEIVE_CHANNEL_ERRORS, fetchUserChannels, createChannel, deleteChannel */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -98,6 +98,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_CHANNELS", function() { return RECEIVE_CHANNELS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_CHANNEL", function() { return RECEIVE_CHANNEL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_CHANNEL", function() { return REMOVE_CHANNEL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_CHANNEL_ERRORS", function() { return RECEIVE_CHANNEL_ERRORS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUserChannels", function() { return fetchUserChannels; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createChannel", function() { return createChannel; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteChannel", function() { return deleteChannel; });
@@ -106,6 +107,7 @@ __webpack_require__.r(__webpack_exports__);
 var RECEIVE_CHANNELS = 'RECEIVE_CHANNELS';
 var RECEIVE_CHANNEL = 'RECEIVE_CHANNEL';
 var REMOVE_CHANNEL = 'REMOVE_CHANNEL';
+var RECEIVE_CHANNEL_ERRORS = 'RECEIVE_CHANNEL_ERRORS';
 
 var receiveChannels = function receiveChannels(channels) {
   return {
@@ -128,6 +130,14 @@ var removeChannel = function removeChannel(channel) {
   };
 };
 
+var receiveChannelErrors = function receiveChannelErrors(errors) {
+  debugger;
+  return {
+    type: RECEIVE_CHANNEL_ERRORS,
+    errors: errors
+  };
+};
+
 var fetchUserChannels = function fetchUserChannels() {
   return function (dispatch) {
     return _utils_channel_utils__WEBPACK_IMPORTED_MODULE_0__["fetchUserChannels"]().then(function (channels) {
@@ -139,7 +149,9 @@ var createChannel = function createChannel(payload) {
   return function (dispatch) {
     return _utils_channel_utils__WEBPACK_IMPORTED_MODULE_0__["createChannel"](payload).then(function (channel) {
       return dispatch(receiveChannel(channel));
-    }, console.log);
+    }, function (err) {
+      return dispatch(receiveChannelErrors(err.responseJSON));
+    });
   };
 };
 var deleteChannel = function deleteChannel(channelId) {
@@ -1648,7 +1660,8 @@ var Modal = function Modal(_ref) {
       closeModal = _ref.closeModal,
       createChannel = _ref.createChannel,
       currentUser = _ref.currentUser,
-      users = _ref.users;
+      users = _ref.users,
+      errors = _ref.errors;
 
   if (!modal) {
     return null;
@@ -1661,7 +1674,8 @@ var Modal = function Modal(_ref) {
       component = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_channel_channel_create_form__WEBPACK_IMPORTED_MODULE_4__["default"], {
         currentUserId: currentUser.id,
         createChannel: createChannel,
-        closeModal: closeModal
+        closeModal: closeModal,
+        errors: errors
       });
       break;
 
@@ -1670,7 +1684,8 @@ var Modal = function Modal(_ref) {
         currentUserId: currentUser.id,
         users: users,
         createChannel: createChannel,
-        closeModal: closeModal
+        closeModal: closeModal,
+        errors: errors
       });
       break;
 
@@ -1694,7 +1709,8 @@ var mapStateToProps = function mapStateToProps(state) {
   return {
     modal: state.ui.modal,
     currentUser: state.session.currentUser,
-    users: state.entities.users
+    users: state.entities.users,
+    errors: state.errors
   };
 };
 
@@ -2439,6 +2455,41 @@ var channelMembershipsReducer = function channelMembershipsReducer() {
 
 /***/ }),
 
+/***/ "./frontend/reducers/channels_errors_reducer.js":
+/*!******************************************************!*\
+  !*** ./frontend/reducers/channels_errors_reducer.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_channel_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/channel_actions */ "./frontend/actions/channel_actions.js");
+/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/session_actions */ "./frontend/actions/session_actions.js");
+
+
+
+var channelErrors = function channelErrors() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _actions_channel_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CHANNEL_ERRORS"]:
+      debugger;
+      return action.errors;
+
+    case _actions_session_actions__WEBPACK_IMPORTED_MODULE_1__["CLEAR_ERRORS"]:
+      return [];
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (channelErrors);
+
+/***/ }),
+
 /***/ "./frontend/reducers/channels_reducer.js":
 /*!***********************************************!*\
   !*** ./frontend/reducers/channels_reducer.js ***!
@@ -2576,10 +2627,13 @@ var entitiesReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _session_errors_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./session_errors_reducer */ "./frontend/reducers/session_errors_reducer.js");
+/* harmony import */ var _channels_errors_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./channels_errors_reducer */ "./frontend/reducers/channels_errors_reducer.js");
+
 
 
 var errorsReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  session: _session_errors_reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
+  session: _session_errors_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  channels: _channels_errors_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (errorsReducer);
 

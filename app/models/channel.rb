@@ -12,6 +12,7 @@
 #
 class Channel < ApplicationRecord
   validates :name, :creator_id, :channel_type, presence: true 
+  validates :name, uniqueness: true
   validates :channel_type, inclusion: {in: [0, 1]}
   validates :is_private, inclusion: {in: [true, false]}
 

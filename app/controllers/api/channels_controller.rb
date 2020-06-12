@@ -23,14 +23,14 @@ class Api::ChannelsController < ApplicationController
     if @channel.channel_type == 1
       structure_channel_name(params[:channel][:name])
     end 
-    if @channel.save!
+    if @channel.save
       ChannelMembership.create({user_id: @channel.creator_id, channel_id: @channel.id, is_admin: true})
       if @users 
         enroll_users(@users)
       end 
       render '/api/channels/show'
     else
-      render json: ['something went wrong'], status: 401
+      render json: ['can\'t have two channels with the same name'], status: 401
     end 
   end 
 
@@ -55,7 +55,7 @@ class Api::ChannelsController < ApplicationController
   end 
 
   def structure_channel_name(user_ids) 
-    @users = user_ids.values
+    @users = user_ids.values.sort!
     prefix = @users.join.hash.to_s
     @users.each { |user| prefix << ".#{user}"}
     @channel.name = prefix
