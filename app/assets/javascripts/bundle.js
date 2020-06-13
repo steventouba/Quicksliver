@@ -382,9 +382,9 @@ var receiveUsers = function receiveUsers(users) {
   };
 };
 
-var fetchUsers = function fetchUsers() {
+var fetchUsers = function fetchUsers(currentUserId) {
   return function (dispatch) {
-    return _utils_user_utils__WEBPACK_IMPORTED_MODULE_0__["fetchUsers"]().then(function (users) {
+    return _utils_user_utils__WEBPACK_IMPORTED_MODULE_0__["fetchUsers"](currentUserId).then(function (users) {
       return dispatch(receiveUsers(users));
     });
   };
@@ -643,21 +643,19 @@ var ChannelShow = /*#__PURE__*/function (_React$Component) {
   function ChannelShow(props) {
     _classCallCheck(this, ChannelShow);
 
-    return _super.call(this, props); //this.state = {messages: [...props.messages]};
+    return _super.call(this, props);
   }
 
   _createClass(ChannelShow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.fetchUsers();
-      this.props.fetchMessages(); //this.props.fetchUserChannels(this.props.currentUser.id)
-    } // componentDidUpdate(prevprops) { 
-    //   if (prevprops.channelId !== this.props.channelId) { 
-    //     this.props.fetchMessages(this.props.channelId)
-    //     this.setState({messages: [...this.props.messages]})
-    //   }
-    // }
-
+      var _this$props = this.props,
+          fetchUsers = _this$props.fetchUsers,
+          fetchMessages = _this$props.fetchMessages,
+          currentUser = _this$props.currentUser;
+      fetchUsers(currentUser.id);
+      fetchMessages(); //this.props.fetchUserChannels(this.props.currentUser.id)
+    }
   }, {
     key: "render",
     value: function render() {
@@ -717,8 +715,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     fetchUserChannels: function fetchUserChannels(currentUserId) {
       return Object(_actions_channel_actions__WEBPACK_IMPORTED_MODULE_4__["fetchUserChannels"])(currentUserId);
     },
-    fetchUsers: function fetchUsers() {
-      return dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_5__["fetchUsers"])());
+    fetchUsers: function fetchUsers(currentUserId) {
+      return dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_5__["fetchUsers"])(currentUserId));
     }
   };
 };
@@ -810,6 +808,7 @@ var DirectMessageCreate = /*#__PURE__*/function (_React$Component) {
     value: function handleSubmit() {
       var _this2 = this;
 
+      if (Object.values(this.state.channelInfo.name).length === 1) return this.preventSubmit();
       var _this$props2 = this.props,
           closeModal = _this$props2.closeModal,
           createChannel = _this$props2.createChannel,
@@ -895,6 +894,16 @@ var DirectMessageCreate = /*#__PURE__*/function (_React$Component) {
       }
     }
   }, {
+    key: "preventSubmit",
+    value: function preventSubmit() {
+      event.preventDefault();
+      var notification = document.getElementById('dm-notification');
+      notification.style.display = "inline";
+      setTimeout(function () {
+        return notification.style.display = "none";
+      }, 1200);
+    }
+  }, {
     key: "render",
     value: function render() {
       var matches = this.updateMatches();
@@ -905,7 +914,9 @@ var DirectMessageCreate = /*#__PURE__*/function (_React$Component) {
         className: "channel-create-header"
       }, "Direct Messages"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "direct-message-create-form "
-      }, !$.isEmptyObject(errors) && errors.map(function (error, idx) {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "dm-notification"
+      }, "You need friends to chat!"), !$.isEmptyObject(errors) && errors.map(function (error, idx) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "channel-errors",
           key: idx
@@ -914,7 +925,8 @@ var DirectMessageCreate = /*#__PURE__*/function (_React$Component) {
         id: "channel-input"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "display-user-names",
-        onClick: this.handleDelete
+        onClick: this.handleDelete,
+        required: true
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "dm-create-user-search-bar",
         className: "direct-message-create-input",
@@ -2414,17 +2426,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _utils_session_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils/session_utils */ "./frontend/utils/session_utils.js");
-/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./actions/session_actions */ "./frontend/actions/session_actions.js");
-/* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store/store */ "./frontend/store/store.js");
-/* harmony import */ var _components_root__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/root */ "./frontend/components/root.jsx");
-/* harmony import */ var _actions_channel_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./actions/channel_actions */ "./frontend/actions/channel_actions.js");
-/* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./actions/message_actions */ "./frontend/actions/message_actions.js");
+/* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/store */ "./frontend/store/store.js");
+/* harmony import */ var _components_root__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/root */ "./frontend/components/root.jsx");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-
-
 
 
 
@@ -2443,21 +2447,13 @@ document.addEventListener("DOMContentLoaded", function () {
         currentUser: window.currentUser
       }
     };
-    store = Object(_store_store__WEBPACK_IMPORTED_MODULE_4__["default"])(preloadedState);
+    store = Object(_store_store__WEBPACK_IMPORTED_MODULE_2__["default"])(preloadedState);
     delete window.currentUser;
   } else {
-    store = Object(_store_store__WEBPACK_IMPORTED_MODULE_4__["default"])();
-  } //Testing Start
+    store = Object(_store_store__WEBPACK_IMPORTED_MODULE_2__["default"])();
+  }
 
-
-  window.utils = _utils_session_utils__WEBPACK_IMPORTED_MODULE_2__;
-  window.createChannel = _actions_channel_actions__WEBPACK_IMPORTED_MODULE_6__["createChannel"];
-  window.getState = store.getState;
-  window.dispatch = store.dispatch;
-  window.fetchMessages = _actions_message_actions__WEBPACK_IMPORTED_MODULE_7__["fetchMessages"];
-  window.logOut = _actions_session_actions__WEBPACK_IMPORTED_MODULE_3__["logOut"]; //Testing End 
-
-  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_root__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_root__WEBPACK_IMPORTED_MODULE_3__["default"], {
     store: store
   }), root);
 });
@@ -3148,10 +3144,13 @@ var deleteSession = function deleteSession() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUsers", function() { return fetchUsers; });
-var fetchUsers = function fetchUsers() {
+var fetchUsers = function fetchUsers(currentUserId) {
   return $.ajax({
     url: '/api/users',
-    method: 'GET'
+    method: 'GET',
+    data: {
+      currentUserId: currentUserId
+    }
   });
 };
 

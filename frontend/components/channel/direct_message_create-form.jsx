@@ -23,8 +23,10 @@ class DirectMessageCreate extends React.Component {
   }
 
   handleSubmit() { 
+    if (Object.values(this.state.channelInfo.name).length === 1) return this.preventSubmit(); 
     const { closeModal, createChannel, clearErrors, currentUserId: creatorId } = this.props;
     event.preventDefault(); 
+
     createChannel(this.state.channelInfo)
     .then(
       () => closeModal(), 
@@ -86,6 +88,13 @@ class DirectMessageCreate extends React.Component {
     }
   }
 
+  preventSubmit() {
+    event.preventDefault();
+    const notification = document.getElementById('dm-notification');
+    notification.style.display = "inline"
+    setTimeout(() => notification.style.display = "none", 1200)
+  }
+
   render() {
     const matches = this.updateMatches(); 
     const errors = this.props.errors.channels;
@@ -94,12 +103,13 @@ class DirectMessageCreate extends React.Component {
       <div className="channel-create-container">
         <header className="channel-create-header">Direct Messages</header>
         <div className="direct-message-create-form ">
+          <div id="dm-notification">You need friends to chat!</div>
           {
             !$.isEmptyObject(errors) 
             && errors.map((error, idx) => <div className="channel-errors" key={idx}>{error}</div>)
           }
           <div id="channel-input">
-            <div id='display-user-names' onClick={this.handleDelete}></div>
+            <div id='display-user-names' onClick={this.handleDelete} required></div>
             <input id='dm-create-user-search-bar' 
               className="direct-message-create-input"
               onChange={this.updateSearchString}

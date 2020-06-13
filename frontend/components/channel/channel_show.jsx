@@ -9,21 +9,16 @@ import Modal from '../modal/modal';
 class ChannelShow extends React.Component { 
   constructor(props) { 
     super(props) 
-    //this.state = {messages: [...props.messages]};
   }
 
   componentDidMount () { 
-    this.props.fetchUsers()
-    this.props.fetchMessages()
+    const { fetchUsers, fetchMessages, currentUser } = this.props
+    fetchUsers(currentUser.id)
+    fetchMessages()
     //this.props.fetchUserChannels(this.props.currentUser.id)
   }
 
-  // componentDidUpdate(prevprops) { 
-  //   if (prevprops.channelId !== this.props.channelId) { 
-  //     this.props.fetchMessages(this.props.channelId)
-  //     this.setState({messages: [...this.props.messages]})
-  //   }
-  // }
+ 
 
   render() { 
     return (

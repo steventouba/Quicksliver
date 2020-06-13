@@ -8,5 +8,5 @@ const receiveUsers = (users) => ({
 }); 
 
 
-export const fetchUsers = () => dispatch => UserUtils.fetchUsers()
+export const fetchUsers = (currentUserId) => dispatch => UserUtils.fetchUsers(currentUserId)
   .then((users) => dispatch(receiveUsers(users)))

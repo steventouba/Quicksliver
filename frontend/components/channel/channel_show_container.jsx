@@ -19,7 +19,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchMessages: () => dispatch(fetchMessages()), 
     fetchUserChannels: (currentUserId) => fetchUserChannels(currentUserId), 
-    fetchUsers: () => dispatch(fetchUsers())
+    fetchUsers: (currentUserId) => dispatch(fetchUsers(currentUserId))
   }
 }
 

@@ -28,7 +28,7 @@ class Api::UsersController < ApplicationController
   end 
 
   def index 
-    @users = User.all 
+    @users = User.where.not(id: params[:current_user_id])
   end 
 
   def destroy 
