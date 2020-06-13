@@ -47,7 +47,7 @@ class DirectMessageCreate extends React.Component {
     const matchedUsers = this.state.users.filter(
       user => user.username.match(searchString));
 
-    return matchedUsers.length > 0 ? matchedUsers : ['no matches']
+    return matchedUsers.length > 0 ? matchedUsers : null;
   }
 
   updateSearchString() { 
@@ -55,6 +55,7 @@ class DirectMessageCreate extends React.Component {
   }
 
   handleSelect() {
+    if (event.target.nodeName !== "SPAN") return null;
     const updateChannelInfo = { ...this.state.channelInfo }
     const { name } = updateChannelInfo;  
     const userId = event.target.dataset.user; 
@@ -98,7 +99,7 @@ class DirectMessageCreate extends React.Component {
   render() {
     const matches = this.updateMatches(); 
     const errors = this.props.errors.channels;
-
+ 
     return (
       <div className="channel-create-container">
         <header className="channel-create-header">Direct Messages</header>
@@ -122,8 +123,9 @@ class DirectMessageCreate extends React.Component {
         </div>
         <ul  onClick={this.handleSelect} className="matched-users">
           {
-            matches.map(user => <span data-user={user.id}
-              key={user.id}>{user.username}</span>)
+            matches ? 
+              matches.map(user => <span data-user={user.id}key={user.id}>{user.username}</span>)
+              : <div className='no-matches'> <img src={window.HermesAvatar} alt=""/> I'm sorry, I couldn't find that user</div>
           }
         </ul>
       </div>

@@ -842,7 +842,7 @@ var DirectMessageCreate = /*#__PURE__*/function (_React$Component) {
       var matchedUsers = this.state.users.filter(function (user) {
         return user.username.match(searchString);
       });
-      return matchedUsers.length > 0 ? matchedUsers : ['no matches'];
+      return matchedUsers.length > 0 ? matchedUsers : null;
     }
   }, {
     key: "updateSearchString",
@@ -854,6 +854,8 @@ var DirectMessageCreate = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleSelect",
     value: function handleSelect() {
+      if (event.target.nodeName !== "SPAN") return null;
+
       var updateChannelInfo = _objectSpread({}, this.state.channelInfo);
 
       var name = updateChannelInfo.name;
@@ -940,12 +942,17 @@ var DirectMessageCreate = /*#__PURE__*/function (_React$Component) {
       }, "Go")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         onClick: this.handleSelect,
         className: "matched-users"
-      }, matches.map(function (user) {
+      }, matches ? matches.map(function (user) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           "data-user": user.id,
           key: user.id
         }, user.username);
-      })));
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "no-matches"
+      }, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: window.HermesAvatar,
+        alt: ""
+      }), " I'm sorry, I couldn't find that user")));
     }
   }]);
 
