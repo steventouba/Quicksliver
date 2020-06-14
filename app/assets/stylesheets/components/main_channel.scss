@@ -28,7 +28,6 @@
   background-color: #191a1b;
 }
 
-
 .main-channel-message-list { 
   grid-column: 2 / 5;
   overflow-y: auto;
@@ -48,29 +47,39 @@
   flex-direction: column;
 }
 
-.message-input { 
+.message-input-background { 
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: relative;
   border: 1px solid rgba($color: lightgray, $alpha: 0.25);
   border-radius: 5px;
   background-color: #363636;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+.message-input { 
   min-height: 10px;
   height: 35px;
-  width: 90%;
-  padding: 10px;
+  padding-left: 10px;
+  width: 100%;
   font-size: 16px;
   outline: none;
 }
 
-.message-input:focus { 
+.message-input-background:focus-within { 
   border: 1px solid rgba($color: whitesmoke, $alpha: 0.50);
 }
 
 .message-button > img { 
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
 }
 
 .message-button { 
-  padding-left: 7px;
+  padding: 3px 7px;
   outline: none;
   cursor: pointer;
 }

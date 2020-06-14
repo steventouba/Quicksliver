@@ -37,7 +37,7 @@ class MessageForm extends React.Component {
   render() {
     return (
       <div className='main-channel-message-input'>
-        <form onSubmit={this.handleSubmit}>
+        <form className='message-input-background' onSubmit={this.handleSubmit}>
           <div id="message-notification">Message body must contain content</div>
           <input className='message-input'
             type="text"
