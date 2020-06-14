@@ -26,11 +26,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
   cursor: pointer;
 }
 
 .header-dropdown-content:hover  { 
   background-color: #363636;
+  width: 100%;
   cursor: pointer;
 }
 
