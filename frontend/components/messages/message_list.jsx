@@ -25,7 +25,16 @@ class MessageList extends React.Component {
         {currentChannel && users && 
           <>
             <div className='main-channel-message-list'>
-            <div className='message-list-header'>{currentChannel.name}</div>
+            <div className='message-list-header'>
+              <div className='message-list-header-name'>{ currentChannel.name}</div>
+              <div className='message-list-header-users'>
+                <i className="fas fa-users"></i>
+                {
+                  currentChannel.channelType === 0 ? Object.values(users).length + 1 
+                  : currentChannel.name.split(",").length + 1
+                }
+              </div>
+            </div>
             <div className='spacing-div'></div>  
             <MessageListItem messages={this.messages} users={users} /> 
             </div>

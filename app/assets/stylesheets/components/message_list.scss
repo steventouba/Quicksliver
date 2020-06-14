@@ -6,10 +6,27 @@
   border: 1px solid rgba($color: lightgray, $alpha: 0.25);
   background-color: #222629;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   z-index: 1;
-  //text-align: center;
+}
+
+.message-list-header > div { 
+  margin-left: 15px;
+  line-height: 1.1;
+}
+
+.message-list-header-name { 
+  font-weight: bold;
+}
+
+.message-list-header-users { 
+  padding-top: 5px;
+}
+
+.message-list-header-users > i { 
+  padding-right: 5px;
 }
 
 .spacing-div { 

@@ -600,11 +600,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _sidenav_sidenav_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../sidenav/sidenav_container */ "./frontend/components/sidenav/sidenav_container.js");
-/* harmony import */ var _messages_message_list__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../messages/message_list */ "./frontend/components/messages/message_list.jsx");
-/* harmony import */ var _messages_message_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../messages/message_form */ "./frontend/components/messages/message_form.jsx");
-/* harmony import */ var _listener_listener_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../listener/listener_container */ "./frontend/components/listener/listener_container.js");
-/* harmony import */ var _messages_message_list_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../messages/message_list_container */ "./frontend/components/messages/message_list_container.js");
-/* harmony import */ var _modal_modal__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../modal/modal */ "./frontend/components/modal/modal.jsx");
+/* harmony import */ var _listener_listener_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../listener/listener_container */ "./frontend/components/listener/listener_container.js");
+/* harmony import */ var _messages_message_list_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../messages/message_list_container */ "./frontend/components/messages/message_list_container.js");
+/* harmony import */ var _modal_modal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../modal/modal */ "./frontend/components/modal/modal.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -633,8 +631,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-
-
 var ChannelShow = /*#__PURE__*/function (_React$Component) {
   _inherits(ChannelShow, _React$Component);
 
@@ -654,7 +650,7 @@ var ChannelShow = /*#__PURE__*/function (_React$Component) {
           fetchMessages = _this$props.fetchMessages,
           currentUser = _this$props.currentUser;
       fetchUsers(currentUser.id);
-      fetchMessages(); //this.props.fetchUserChannels(this.props.currentUser.id)
+      fetchMessages();
     }
   }, {
     key: "render",
@@ -665,7 +661,7 @@ var ChannelShow = /*#__PURE__*/function (_React$Component) {
         className: "main-channel-header"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_sidenav_sidenav_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
         className: "main-channel-sidenav"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_messages_message_list_container__WEBPACK_IMPORTED_MODULE_5__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_listener_listener_container__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modal_modal__WEBPACK_IMPORTED_MODULE_6__["default"], null));
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_messages_message_list_container__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_listener_listener_container__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_modal_modal__WEBPACK_IMPORTED_MODULE_4__["default"], null));
     }
   }]);
 
@@ -1455,7 +1451,13 @@ var MessageList = /*#__PURE__*/function (_React$Component) {
         className: "main-channel-message-list"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "message-list-header"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "message-list-header-name"
       }, currentChannel.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "message-list-header-users"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-users"
+      }), currentChannel.channelType === 0 ? Object.values(users).length + 1 : currentChannel.name.split(",").length + 1)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "spacing-div"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_message_list_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
         messages: this.messages,
