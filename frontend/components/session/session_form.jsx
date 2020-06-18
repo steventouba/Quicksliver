@@ -57,6 +57,7 @@ class SessionForm extends React.Component {
                 value={this.state.email}
                 onChange={this.handleInput("email")}
                 placeholder="you@example.com"
+                autoComplete="email"
               />
             </label>
             <label>
@@ -65,6 +66,7 @@ class SessionForm extends React.Component {
                 value={this.state.password}
                 onChange={this.handleInput("password")}
                 placeholder="password"
+                autoComplete="current-password"
               />
             </label>
             {
@@ -76,6 +78,7 @@ class SessionForm extends React.Component {
                       value={this.state.username}
                       onChange={this.handleInput("username")}
                       placeholder="username"
+                      autoComplete="username"
                     />
                   </label>
                   <label>
@@ -84,6 +87,7 @@ class SessionForm extends React.Component {
                       value={this.state.phoneNumber}
                       onChange={this.handleInput("phoneNumber")}
                       placeholder="phone number optional"
+                      autoComplete="tel-national"
                     />
                   </label>
                 </>    
