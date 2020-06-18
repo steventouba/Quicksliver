@@ -26,7 +26,7 @@ const splash = () => {
           <h1>QuickSilver brings the team together, wherever you are</h1>
           <p>
             With all of your communication and tools in one place, 
-            remote teams will stay productive no matter where your're working from.
+            remote teams will stay productive no matter where you're working from.
           </p>
       </div>
       <div className='splash-main-right'>
